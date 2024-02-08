@@ -16,9 +16,9 @@ build:
 prettier:
   stage: test
   script:
-    - ./node_modules/.bin/prettier --check src/* test/*
+    - matsmart/node_modules/.bin/prettier --check src/* test/*
 
 typescript:
   stage: test
   script:
-    - ./node_modules/.bin/tsc --noEmit --skipLibCheck
+    - matsmart/node_modules/.bin/tsc --noEmit --skipLibCheck
