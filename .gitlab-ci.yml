@@ -7,6 +7,7 @@ stages:
 build:
   stage: build
   script:
+    - cd matsmart
     - npm install
   artifacts:
     paths:
