@@ -1,4 +1,4 @@
-image: maven:eclipse-temurin
+image: node:latest
 
 stages:
   - build
