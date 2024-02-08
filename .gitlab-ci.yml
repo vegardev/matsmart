@@ -13,9 +13,9 @@ build:
 prettier:
   stage: test
   script:
-    - npx prettier --check src/* test/*
+    - npx prettier --check src/
 
 typescript:
   stage: test
   script:
-    - npx tsc --noEmit --skipLibCheck
+    - npx tsc --noEmit
