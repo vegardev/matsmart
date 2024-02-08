@@ -9,6 +9,9 @@ build:
   script:
     - cd matsmart
     - npm install
+  artifacts:
+    paths:
+      - ./node_modules
 
 prettier:
   stage: test
