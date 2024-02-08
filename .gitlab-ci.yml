@@ -9,16 +9,13 @@ build:
   script:
     - cd matsmart
     - npm install
-  artifacts:
-    paths:
-      - node_modules
 
 prettier:
   stage: test
   script:
-    - ./node_modules/.bin/prettier --check src/* test/*
+    - npx prettier --check src/
 
 typescript:
   stage: test
   script:
-    - ./node_modules/.bin/tsc --noEmit --skipLibCheck
+    - npx tsc --noEmit
