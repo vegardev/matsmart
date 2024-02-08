@@ -13,7 +13,7 @@ build:
 prettier:
   stage: test
   script:
-    - npx prettier --check src/
+    - npx prettier --check ./src
 
 typescript:
   stage: test
