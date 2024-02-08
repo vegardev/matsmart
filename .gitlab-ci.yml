@@ -9,22 +9,18 @@ build:
   script:
     - cd matsmart
     - npm install
-    - pwd
-    - ls
   artifacts:
     paths:
-      - ./node_modules
+      - matsmart/node_modules
 
 prettier:
   stage: test
   script:
-    - pwd
-    - ls
+    - cd matsmart
     - npx prettier --check ./src
 
 typescript:
   stage: test
   script:
-    - pwd
-    - ls
+    - cd matsmart
     - npx tsc --noEmit
