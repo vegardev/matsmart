@@ -4,19 +4,19 @@ cache:
   paths:
     - matsmart/node_modules/
 
-
-build:
-  stage: build
-  script:
-    - cd matsmart
-    - npm install
-
 lint:
   stage: .pre
   script:
     - cd matsmart
     - npm install
     - npm run lint
+
+build:
+  stage: build
+  script:
+    - cd matsmart
+    - npm install
+    - npm run build
 
 prettier:
   stage: test
