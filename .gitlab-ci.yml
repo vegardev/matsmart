@@ -1,14 +1,22 @@
 image: node:latest
 
-stages:
-  - build
-  - test
+cache:
+  paths:
+    - matsmart/node_modules/
+
 
 build:
   stage: build
   script:
     - cd matsmart
     - npm install
+
+lint:
+  stage: .pre
+  script:
+    - cd matsmart
+    - npm install
+    - npm run lint
 
 prettier:
   stage: test
