@@ -2,21 +2,27 @@ import {
   BriefcaseIcon,
   HomeIcon,
   ShoppingCartIcon,
+  BookOpenIcon,
 } from "@heroicons/react/20/solid";
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-  { name: "Home", href: "/homepage", icon: HomeIcon },
+  { name: "Home", href: "/home", icon: HomeIcon },
   {
     name: "Shopping List",
-    href: "/homepage/ShoppingList",
+    href: "/shoppinglist",
     icon: ShoppingCartIcon,
   },
   {
     name: "Inventory",
-    href: "/homepage/Inventory",
+    href: "/inventory",
     icon: BriefcaseIcon,
+  },
+  {
+    name: "Recipes",
+    href: "/recipes",
+    icon: BookOpenIcon,
   },
 ];
 
