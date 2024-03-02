@@ -6,7 +6,6 @@ import {
   ShoppingCartIcon,
   BookOpenIcon,
 } from "@heroicons/react/20/solid";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 

@@ -1,4 +1,3 @@
-import { Card } from "@/src/app/ui/home/cards";
 import CloseToExpire from "@/src/app/ui/home/closestToExpire";
 
 interface CloseToExpire {

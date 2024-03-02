@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUturnLeftIcon, LinkIcon } from "@heroicons/react/20/solid";
+import { ArrowUturnLeftIcon } from "@heroicons/react/20/solid";
 
 export default function InventoryLayout({
   children,

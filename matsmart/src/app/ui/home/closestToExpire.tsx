@@ -1,12 +1,11 @@
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
-import Image from "next/image";
 import { CloseToExpire } from "@/src/app/backend/definitions";
 
-export default async function CloseToExpire({
-  CloseToExpire,
+export default async function CloseToExpireItems({
+  CloseToExpireItems,
 }: {
-  CloseToExpire: CloseToExpire[];
+  CloseToExpireItems: CloseToExpire[];
 }) {
   return (
     <div className="flex w-full flex-col md:col-span-4">
@@ -20,40 +19,40 @@ export default async function CloseToExpire({
           </p>
         </div>
         <div className="bg-white px-6">
-          {CloseToExpire.map((expire, i) => {
+          {CloseToExpireItems.map((item, i) => {
             return (
               <div
-                key={expire.item_id}
+                key={item.item_id}
                 className={clsx("grid grid-cols-3 items-center py-4", {
                   "border-t": i !== 0,
                 })}
               >
                 <div className="min-w-0">
                   <p className="truncate text-sm font-semibold md:text-base">
-                    {expire.item_name}
+                    {item.item_name}
                   </p>
                   <p className="hidden text-sm text-gray-500 sm:block">
-                    {expire.item_type}
+                    {item.item_type}
                   </p>
                 </div>
                 <p className="text-center text-sm text-gray-500 md:text-base">
-                  {expire.quantity}
+                  {item.quantity}
                 </p>
                 <p
                   className={clsx(
                     "truncate text-sm md:text-base font-semibold text-right",
                     {
                       "text-yellow-400":
-                        expire.expiration_date >= new Date() &&
-                        expire.expiration_date <
+                        item.expiration_date >= new Date() &&
+                        item.expiration_date <
                           new Date(
                             new Date().getTime() + 1000 * 60 * 60 * 24 * 2,
                           ),
-                      "text-red-500": expire.expiration_date < new Date(),
+                      "text-red-500": item.expiration_date < new Date(),
                     },
                   )}
                 >
-                  {expire.expiration_date.toLocaleDateString()}
+                  {item.expiration_date.toLocaleDateString()}
                 </p>
               </div>
             );
