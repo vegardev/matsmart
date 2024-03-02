@@ -1,4 +1,4 @@
-import CloseToExpire from "@/src/app/ui/home/closestToExpire";
+import CloseToExpireItems from "@/src/app/ui/home/closestToExpire";
 
 interface CloseToExpire {
   item_id: number;
@@ -36,7 +36,7 @@ export default function Page() {
     <main>
       <h1 className={`mb-4 text-xl md:text-2xl`}>Dashboard</h1>
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-        <CloseToExpire CloseToExpire={dummyData} />
+        <CloseToExpireItems CloseToExpireItems={dummyData} />
       </div>
     </main>
   );
