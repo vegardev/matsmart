@@ -14,9 +14,7 @@ export default async function CloseToExpire({
       <div className="flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
         <div className="grid grid-cols-3 py-4 mx-3 ">
           <p className="text-sm font-bold md:text-base">Item</p>
-          <p className="text-sm font-bold md:text-base text-center">
-            Quantity
-          </p>
+          <p className="text-sm font-bold md:text-base text-center">Quantity</p>
           <p className="text-sm font-bold md:text-base text-right">
             Expiry date
           </p>
@@ -26,12 +24,9 @@ export default async function CloseToExpire({
             return (
               <div
                 key={expire.item_id}
-                className={clsx(
-                  "grid grid-cols-3 items-center py-4",
-                  {
-                    "border-t": i !== 0,
-                  }
-                )}
+                className={clsx("grid grid-cols-3 items-center py-4", {
+                  "border-t": i !== 0,
+                })}
               >
                 <div className="min-w-0">
                   <p className="truncate text-sm font-semibold md:text-base">
@@ -52,12 +47,10 @@ export default async function CloseToExpire({
                         expire.expiration_date >= new Date() &&
                         expire.expiration_date <
                           new Date(
-                            new Date().getTime() +
-                              1000 * 60 * 60 * 24 * 2
+                            new Date().getTime() + 1000 * 60 * 60 * 24 * 2,
                           ),
-                      "text-red-500":
-                        expire.expiration_date < new Date(),
-                    }
+                      "text-red-500": expire.expiration_date < new Date(),
+                    },
                   )}
                 >
                   {expire.expiration_date.toLocaleDateString()}
@@ -68,9 +61,7 @@ export default async function CloseToExpire({
         </div>
         <div className="flex items-center pb-2 pt-6">
           <ArrowPathIcon className="h-5 w-5 text-gray-500" />
-          <h3 className="ml-2 text-sm text-gray-500 ">
-            Updated just now
-          </h3>
+          <h3 className="ml-2 text-sm text-gray-500 ">Updated just now</h3>
         </div>
       </div>
     </div>
