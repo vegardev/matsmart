@@ -1,13 +1,8 @@
 import Link from "next/link";
-import { query } from "../lib/db"
+import { fetchDatabaseTest } from "@/src/app/backend/databaseCalls";
 
 export default async function Page() {
-//Kjører spørring mot databsen
-  const dbtest = await query({
-    query: "SELECT * FROM item_database",
-    values: [],
-  });
-
+  const databaseTests = await fetchDatabaseTest();
   return (
     <>
       <Link href="inventory/pantry">Pantry</Link>
@@ -18,9 +13,9 @@ export default async function Page() {
       <br />
       <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Add to inventory</a>
 
-    {/* Usikker på hvordan man får vekk den error-markeringen, for det fungerer som det skal */}
+      {/* Usikker på hvordan man får vekk den error-markeringen, for det fungerer som det skal */}
       <div>
-        {dbtest.map(item => (
+        {databaseTests.map((item) => (
           <div key={item.item_id}>{item.item_name}</div>
         ))}
       </div>

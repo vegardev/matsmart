@@ -46,10 +46,10 @@ export default async function CloseToExpireItems({
                         item.expiration_date >= new Date() &&
                         item.expiration_date <
                           new Date(
-                            new Date().getTime() + 1000 * 60 * 60 * 24 * 2
+                            new Date().getTime() + 1000 * 60 * 60 * 24 * 2,
                           ),
                       "text-red-500": item.expiration_date < new Date(),
-                    }
+                    },
                   )}
                 >
                   {item.expiration_date.toLocaleDateString()}
