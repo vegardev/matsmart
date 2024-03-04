@@ -11,3 +11,8 @@ export type Item_database = {
   item_name: string;
   item_quantity_type: string;
 };
+
+export type Groceries = {
+  item_id: number;
+  item_name: string;
+};
