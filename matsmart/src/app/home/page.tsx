@@ -1,5 +1,6 @@
 import CloseToExpireItems from "@/src/app/ui/home/closestToExpire";
 import NewGroceriesItems from "@/src/app/ui/home/newgroceriesItems";
+import RecommendedItems from "../ui/home/recipesRecommended";
 
 interface CloseToExpire {
   item_id: number;
@@ -10,6 +11,11 @@ interface CloseToExpire {
 }
 
 interface Groceries {
+  item_id: number;
+  item_name: string;
+}
+
+interface Recommended {
   item_id: number;
   item_name: string;
 }
@@ -49,6 +55,17 @@ const dummyGroceries: Groceries[] = [
   },
   { item_id: 6, item_name: "Bunnprisburger" },
 ];
+
+const dummyRecommended: Recommended[] = [
+  {
+    item_id: 7,
+    item_name: "Pizza med croissant",
+  },
+  {
+    item_id: 8,
+    item_name: "Bunnprisburger",
+  },
+];
 /* gammel Page
 export default function Page() {
   return (
@@ -67,11 +84,10 @@ export default function Page() {
   return (
     <main className="light-background">
       <h1 className={`mb-4 text-xl md:text-2xl`}>Dashboard</h1>
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-        <CloseToExpireItems CloseToExpireItems={dummyDates} />
-      </div>
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
+      <div className="light-blue flex">
         <NewGroceriesItems NewGroceriesItems={dummyGroceries} />
+        <RecommendedItems RecommendedItems={dummyRecommended} />
+        <CloseToExpireItems CloseToExpireItems={dummyDates} />
       </div>
     </main>
   );

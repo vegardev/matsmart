@@ -16,3 +16,8 @@ export type Groceries = {
   item_id: number;
   item_name: string;
 };
+
+export type Recommended = {
+  item_id: number;
+  item_name: string;
+};
