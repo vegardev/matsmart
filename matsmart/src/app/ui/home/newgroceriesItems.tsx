@@ -9,7 +9,7 @@ export default async function NewGroceriesItems({
 }) {
   return (
     <div className="flex w-full flex-col md:col-span-4">
-      <h2 className={` mb-4 text-xl md:text-2xl`}>Newly Added Groceries</h2>
+      <h2 className="h1-font">Newly Added Groceries</h2>
       <div className="flex grow flex-col justify-between rounded-xl light-blue">
         <div className="grid grid-cols-3 py-4 mx-3 "></div>
         <div className="light-background">

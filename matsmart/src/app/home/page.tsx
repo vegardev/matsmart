@@ -83,7 +83,9 @@ export default function Page() {
 export default function Page() {
   return (
     <main className="light-background">
-      <h1 className={`mb-4 text-xl md:text-2xl`}>Dashboard</h1>
+      <div className="logo-container">
+        <div className="logo"></div>
+      </div>
       <div className="light-blue flex">
         <NewGroceriesItems NewGroceriesItems={dummyGroceries} />
         <RecommendedItems RecommendedItems={dummyRecommended} />
