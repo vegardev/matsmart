@@ -31,7 +31,8 @@ export function Card({
       </div>
       <p
         className={`$
-            truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}>
+            truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+      >
         {value}
       </p>
     </div>
