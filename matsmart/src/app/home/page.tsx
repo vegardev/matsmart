@@ -1,4 +1,6 @@
 import CloseToExpireItems from "@/src/app/ui/home/closestToExpire";
+import NewGroceriesItems from "@/src/app/ui/home/newgroceriesItems";
+import RecommendedItems from "@/src/app/ui/home/recipesRecommended";
 
 interface CloseToExpire {
   item_id: number;
@@ -7,7 +9,18 @@ interface CloseToExpire {
   quantity: number;
   item_type: string;
 }
-const dummyData: CloseToExpire[] = [
+
+interface Groceries {
+  item_id: number;
+  item_name: string;
+}
+
+interface Recommended {
+  item_id: number;
+  item_name: string;
+}
+
+const dummyDates: CloseToExpire[] = [
   {
     item_id: 1,
     item_name: "Milk",
@@ -31,12 +44,52 @@ const dummyData: CloseToExpire[] = [
   },
 ];
 
+const dummyGroceries: Groceries[] = [
+  {
+    item_id: 4,
+    item_name: "Kebab",
+  },
+  {
+    item_id: 5,
+    item_name: "Pizza",
+  },
+  { item_id: 6, item_name: "Bunnprisburger" },
+];
+
+const dummyRecommended: Recommended[] = [
+  {
+    item_id: 7,
+    item_name: "Pizza med croissant",
+  },
+  {
+    item_id: 8,
+    item_name: "Bunnprisburger",
+  },
+];
+/* gammel Page
 export default function Page() {
   return (
     <main>
       <h1 className={`mb-4 text-xl md:text-2xl`}>Dashboard</h1>
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
         <CloseToExpireItems CloseToExpireItems={dummyData} />
+      </div>
+    </main>
+  );
+}
+*/
+
+//ny page
+export default function Page() {
+  return (
+    <main className="light-background">
+      <div className="logo-container">
+        <div className="logo"></div>
+      </div>
+      <div className="light-blue flex">
+        <NewGroceriesItems NewGroceriesItems={dummyGroceries} />
+        <RecommendedItems RecommendedItems={dummyRecommended} />
+        <CloseToExpireItems CloseToExpireItems={dummyDates} />
       </div>
     </main>
   );
