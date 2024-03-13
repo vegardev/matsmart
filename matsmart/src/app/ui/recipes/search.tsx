@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 export function SearchBar({ placeholder }: { placeholder: string }) {
   return (
     <div className="relative flex flex-1 flex-shrink-0">
@@ -14,20 +16,39 @@ export function SearchBar({ placeholder }: { placeholder: string }) {
   );
 }
 
-export function SearchSort() {
+export function SearchSort({
+  tags,
+  setTags,
+}: {
+  tags: string[];
+  setTags: string[];
+}) {
+  const [showMap, setShowMap] = useState(false);
+
   return (
-    <div className="flex ml-auto">
-      <label htmlFor="sort" className="sr-only">
-        Sort
-      </label>
-      <select
-        id="sort"
-        name="sort"
-        className="block rounded-md border border-gray-200 py-[9px] pl-3 text-sm outline-2"
+    <div>
+      <button
+        type="button"
+        className="flex items-center space-x-2 text-sm font-medium text-gray-600 hover:text-gray-900 background-color:grey-100"
+        onClick={() => {
+          setShowMap(!showMap);
+          console.log("hi");
+        }}
       >
-        <option value="newest">Newest</option>
-        <option value="oldest">Oldest</option>
-      </select>
+        Sort by tags
+      </button>
+      {showMap && (
+        <div className="py-2 space-y-2">
+          {tags.map((tag) => (
+            <ul className="py-2 space-y-2">
+              <li>
+                <input type="checkbox" className="flex items-center" />
+                {tag}
+              </li>
+            </ul>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
