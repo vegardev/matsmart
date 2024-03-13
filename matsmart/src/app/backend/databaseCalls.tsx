@@ -1,5 +1,11 @@
 import { query } from "@/src/app/backend/db";
-import { Item_database, Recipe, Recipes_no_content, Recipe_items, Inventory_items } from "@/src/app/backend/definitions";
+import {
+  Item_database,
+  Recipe,
+  Recipes_no_content,
+  Recipe_items,
+  Inventory_items,
+} from "@/src/app/backend/definitions";
 
 //Posts to console if you have connection with the database
 console.log("MYSQL_HOST:", process.env.MYSQL_HOST);
@@ -45,10 +51,13 @@ export async function fetchSingelRecipe(recipe_id: number): Promise<Recipe[]> {
 }
 
 //Fetces info about items needed for a recipe based on a recipe_id value
-export async function fetchRecipeItems(recipe_id: number): Promise<Recipe_items[]> {
+export async function fetchRecipeItems(
+  recipe_id: number,
+): Promise<Recipe_items[]> {
   try {
     const dbquery = await query({
-      query: "SELECT ri.*, id.item_name FROM recipe_items ri RIGHT JOIN item_database id ON (ri.item_id = id.item_id) WHERE ri.recipe_id = ?",
+      query:
+        "SELECT ri.*, id.item_name FROM recipe_items ri RIGHT JOIN item_database id ON (ri.item_id = id.item_id) WHERE ri.recipe_id = ?",
       values: [recipe_id],
     });
     return dbquery as Recipe_items[];
@@ -58,7 +67,9 @@ export async function fetchRecipeItems(recipe_id: number): Promise<Recipe_items[
 }
 
 //Fetches all items in a inventory based on a location value
-export async function fetchInventoryItems(location: string): Promise<Inventory_items[]> {
+export async function fetchInventoryItems(
+  location: string,
+): Promise<Inventory_items[]> {
   try {
     const dbquery = await query({
       query: "SELECT * FROM inventory WHERE location = ?",

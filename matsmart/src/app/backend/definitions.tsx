@@ -44,4 +44,3 @@ export type Inventory_items = {
   item_location: string;
   expiration_date: string;
 };
-
