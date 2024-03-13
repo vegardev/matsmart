@@ -39,14 +39,14 @@ export function SearchSort({
       </button>
       {showMap && (
         <div className="py-2 space-y-2">
-          {tags.map((tag) => (
-            <ul className="py-2 space-y-2">
-              <li>
+          <ul className="py-2 space-y-2">
+            {tags.map((tag) => (
+              <li key={tag}>
                 <input type="checkbox" className="flex items-center" />
                 {tag}
               </li>
-            </ul>
-          ))}
+            ))}
+          </ul>
         </div>
       )}
     </div>
