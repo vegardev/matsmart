@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
+import { Tags } from "@/src/app/backend/definitions";
 
 export function SearchBar({ placeholder }: { placeholder: string }) {
   return (
@@ -16,34 +18,59 @@ export function SearchBar({ placeholder }: { placeholder: string }) {
   );
 }
 
-export function SearchSort({
-  tags,
-  setTags,
-}: {
-  tags: string[];
-  setTags: string[];
-}) {
+export function SearchSort({ tags }: { tags: Tags[] }) {
   const [showMap, setShowMap] = useState(false);
+
+  /*Følgende kode er et produkt av å spør copilot om hjelp til å fikse en error som kom når man lagde en lignende kode under map funksjonen.
+  Promten for å få koden var "I get the error Rendered more hooks than during the previous render."*/
+  const [checkedTags, setCheckedTags] = useState<{ [key: number]: boolean }>(
+    {},
+  );
+  const handleTagClick = (tagId: number) => {
+    setCheckedTags((prevState) => ({
+      ...prevState,
+      [tagId]: !prevState[tagId],
+    }));
+  };
+  //Til hit
 
   return (
     <div>
-      <button
-        type="button"
-        className="flex items-center space-x-2 text-sm font-medium text-gray-600 hover:text-gray-900 background-color:grey-100"
+      <div
+        className="group flex bg-gray-50 rounded-full hover:cursor-pointer"
+        id="sortDropdownMenu"
         onClick={() => {
           setShowMap(!showMap);
-          console.log("hi");
         }}
       >
-        Sort by tags
-      </button>
+        <div className="flex items-center space-x-2 text-sm font-medium  hover:text-gray-900 pl-3">
+          Sort by tags
+        </div>
+        {showMap ? (
+          <ChevronUpIcon className="size-8 flex px-1 mr-1 ml-2 bg-gray-100 rounded-full group-hover:bg-gray-200" />
+        ) : (
+          <ChevronDownIcon className="size-8 flex px-1 mr-1 ml-2 bg-gray-100 rounded-full group-hover:bg-gray-200" />
+        )}
+      </div>
       {showMap && (
-        <div className="py-2 space-y-2">
-          <ul className="py-2 space-y-2">
+        <div className="py-2 flex justify-end">
+          <ul className="py-2 space-y-1">
             {tags.map((tag) => (
-              <li key={tag}>
-                <input type="checkbox" className="flex items-center" />
-                {tag}
+              <li
+                key={tag.tag_id}
+                className="flex bg-gray-100 rounded-full px-2 py-1 justify-end hover:bg-gray-200 cursor-pointer"
+                onClick={() => handleTagClick(tag.tag_id)}
+              >
+                {tag.tag_name}
+                <input
+                  id={"Checkbox_" + tag.tag_id}
+                  type="checkbox"
+                  className="flex ml-3"
+                  checked={checkedTags[tag.tag_id] || false}
+                  onChange={() => {
+                    /* kode til senere når vi skal oppdatere query ved endring */
+                  }}
+                />
               </li>
             ))}
           </ul>
