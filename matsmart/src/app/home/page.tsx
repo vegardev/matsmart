@@ -66,7 +66,7 @@ const dummyRecommended: Recipe[] = [
     title: "Bunnprisburger",
   },
 ];
-
+/*
 export default function Page() {
   return (
     <main className="light-background">
@@ -74,9 +74,34 @@ export default function Page() {
         <div className="logo"></div>
       </div>
       <div className="light-blue flex">
-        <NewGroceriesItems NewGroceriesItems={dummyGroceries} />
-        <RecommendedItems RecommendedItems={dummyRecommended} />
-        <CloseToExpireItems CloseToExpireItems={dummyDates} />
+        <div className="flex grow flex-col justify-between rounded-xl light-blue">
+          <NewGroceriesItems NewGroceriesItems={dummyGroceries} />
+          <RecommendedItems RecommendedItems={dummyRecommended} />
+          <CloseToExpireItems CloseToExpireItems={dummyDates} />
+        </div>
+      </div>
+    </main>
+  );
+}
+*/
+export default function Page() {
+  return (
+    <main className="light-background">
+      <div className="logo-container">
+        <div className="logo"></div>
+      </div>
+      <div className="light-blue flex">
+        <div className="flex grow flex-row rounded-xl light-blue">
+          <div className="home-container">
+            <NewGroceriesItems NewGroceriesItems={dummyGroceries} />
+          </div>
+          <div className="home-container">
+            <RecommendedItems RecommendedItems={dummyRecommended} />
+          </div>
+          <div className="home-container">
+            <CloseToExpireItems CloseToExpireItems={dummyDates} />
+          </div>
+        </div>
       </div>
     </main>
   );
