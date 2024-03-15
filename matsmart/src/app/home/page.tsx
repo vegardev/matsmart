@@ -15,9 +15,9 @@ interface Groceries {
   item_name: string;
 }
 
-interface Recommended {
-  item_id: number;
-  item_name: string;
+interface Recipe {
+  recipe_id: number;
+  title: string;
 }
 
 const dummyDates: CloseToExpire[] = [
@@ -47,23 +47,23 @@ const dummyDates: CloseToExpire[] = [
 const dummyGroceries: Groceries[] = [
   {
     item_id: 4,
-    item_name: "Kebab",
+    item_name: "Egg",
   },
   {
     item_id: 5,
-    item_name: "Pizza",
+    item_name: "Tomato",
   },
-  { item_id: 6, item_name: "Bunnprisburger" },
+  { item_id: 6, item_name: "Protein Nut" },
 ];
 
-const dummyRecommended: Recommended[] = [
+const dummyRecommended: Recipe[] = [
   {
-    item_id: 7,
-    item_name: "Pizza med croissant",
+    recipe_id: 7,
+    title: "Pizza med croissant",
   },
   {
-    item_id: 8,
-    item_name: "Bunnprisburger",
+    recipe_id: 8,
+    title: "Bunnprisburger",
   },
 ];
 
