@@ -1,11 +1,11 @@
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
-import { Groceries } from "@/src/app/backend/definitions";
+import { Inventory_items } from "@/src/app/backend/definitions";
 
 export default async function NewGroceriesItems({
   NewGroceriesItems,
 }: {
-  NewGroceriesItems: Groceries[];
+  NewGroceriesItems: Inventory_items[];
 }) {
   return (
     <div className="flex w-full flex-col md:col-span-4">
