@@ -18,7 +18,7 @@ export function SearchBar({ placeholder }: { placeholder: string }) {
   );
 }
 
-export function SearchSort({ tags }: { tags: Tags[] }) {
+export function SearchByTags({ tags }: { tags: Tags[] }) {
   const [showMap, setShowMap] = useState(false);
 
   /*Følgende kode er et produkt av å spør copilot om hjelp til å fikse en error som kom når man lagde en lignende kode under map funksjonen.

@@ -1,7 +1,11 @@
 "use client";
 
-import { SearchBar, SearchSort } from "@/src/app/ui/recipes/search";
-import { SearchButton } from "@/src/app/ui/recipes/buttons";
+import { SearchBar, SearchByTags } from "@/src/app/ui/recipes/search";
+import {
+  SearchButton,
+  RandomRecipeButton,
+  AddRecipeButton,
+} from "@/src/app/ui/recipes/buttons";
 import { Recipe } from "@/src/app/ui/recipes/recipe";
 
 const tagsDummyData = [
@@ -24,7 +28,7 @@ const recipesDummyData = [
     recipe_time: 30,
     recipe_image:
       "https://images.matprat.no/p8hgg8jg6v-jumbotron/large/fersk_pasta1.jpg",
-    recipe_tags: ["Italian", "Vegetarian"],
+    recipe_tags: ["Italian", "Vegetarian", "Dairy Free", "Nut Free"],
   },
   {
     recipe_id: 2,
@@ -78,18 +82,21 @@ const recipesDummyData = [
 export default function Recipes() {
   return (
     <div>
-      <h1 className={`mb-4 text-xl md:text-2xl`}>Recipes</h1>
-
+      <div className="flex">
+        <h1 className="mb-4 text-xl md:text-2xl">Recipes</h1>
+        <RandomRecipeButton recipes={recipesDummyData} />
+        <AddRecipeButton />
+      </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8 max-w-3xl ">
         <SearchBar placeholder="Search recipes..." />
         <SearchButton />
       </div>
-      <div className="flex justify-between">
+      <div className="flex">
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           <Recipe recipes={recipesDummyData} />
         </div>
-        <div>
-          <SearchSort tags={tagsDummyData} />
+        <div className="lg:ml-10 md:ml-6 sm:ml-3">
+          <SearchByTags tags={tagsDummyData} />
         </div>
       </div>
     </div>
