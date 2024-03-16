@@ -1,11 +1,11 @@
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
-import { Recommended } from "@/src/app/backend/definitions";
+import { Groceries } from "@/src/app/backend/definitions";
 
 export default async function RecommendedItems({
   RecommendedItems,
 }: {
-  RecommendedItems: Recommended[];
+  RecommendedItems: Groceries[];
 }) {
   return (
     <div className="flex w-full flex-col md:col-span-4">
