@@ -63,4 +63,3 @@ export interface Groceries {
   item_id: number;
   item_name: string;
 }
-
