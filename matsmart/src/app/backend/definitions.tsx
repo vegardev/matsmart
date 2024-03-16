@@ -44,3 +44,9 @@ export type Inventory_items = {
   item_location: string;
   expiration_date: string;
 };
+
+// Vet ikke hvorfor vi trenger denne men legger den her foreløpig
+export interface Groceries {
+  item_id: number;
+  item_name: string;
+}

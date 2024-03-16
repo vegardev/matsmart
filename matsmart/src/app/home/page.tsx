@@ -2,18 +2,7 @@ import CloseToExpireItems from "@/src/app/ui/home/closestToExpire";
 import NewGroceriesItems from "@/src/app/ui/home/newgroceriesItems";
 import RecommendedItems from "@/src/app/ui/home/recipesRecommended";
 
-interface CloseToExpire {
-  item_id: number;
-  item_name: string;
-  expiration_date: Date;
-  quantity: number;
-  item_type: string;
-}
-
-interface Groceries {
-  item_id: number;
-  item_name: string;
-}
+import { CloseToExpire, Groceries } from "@/src/app/backend/definitions";
 
 interface Recommended {
   item_id: number;
