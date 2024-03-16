@@ -24,3 +24,43 @@ export type Recipe_Preview = {
   recipe_image: string;
   recipe_tags: string[];
 };
+
+export type Recipe = {
+  recipe_id: number;
+  title: string;
+  content: string;
+  image: string;
+};
+
+export type Recipes_no_content = {
+  recipe_id: number;
+  title: string;
+  content: string;
+  image: string;
+};
+
+export type Recipe_items = {
+  item_id: number;
+  recipe_id: number;
+  item_quantity: number;
+  item_quantity_type: string;
+  item_name: string;
+};
+
+//expiration date burde nok endres type til Date
+export type Inventory_items = {
+  inventory_id: number;
+  item_id: number;
+  item_quantity: number;
+  item_quantity_type: string;
+  item_name: string;
+  item_location: string;
+  expiration_date: string;
+};
+
+// Vet ikke hvorfor vi trenger denne men legger den her foreløpig
+export interface Groceries {
+  item_id: number;
+  item_name: string;
+}
+
