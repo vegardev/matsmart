@@ -2,6 +2,8 @@ import CloseToExpireItems from "@/src/app/ui/home/closestToExpire";
 import NewGroceriesItems from "@/src/app/ui/home/newgroceriesItems";
 import RecommendedItems from "@/src/app/ui/home/recipesRecommended";
 
+// Test data
+
 interface CloseToExpire {
   item_id: number;
   item_name: string;
