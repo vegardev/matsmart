@@ -12,11 +12,11 @@ type TableProps = {
 
 const GroceryTable: React.FC<TableProps> = ({ data }) => {
   const [checkedStates, setCheckedStates] = useState(
-    new Array(data.length).fill(false)
+    new Array(data.length).fill(false),
   );
   const handleCheckboxChange = (
     event: React.ChangeEvent<HTMLInputElement>,
-    index: number
+    index: number,
   ) => {
     // Update the specific checkbox's checked state in the array
     const newCheckedStates = [...checkedStates];
