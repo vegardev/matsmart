@@ -1,11 +1,12 @@
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
-import { Groceries } from "@/src/app/backend/definitions";
+import { Recipe } from "@/src/app/backend/definitions";
+import Link from "next/link";
 
 export default async function RecommendedItems({
   RecommendedItems,
 }: {
-  RecommendedItems: Groceries[];
+  RecommendedItems: Recipe[];
 }) {
   return (
     <div className="flex w-full flex-col md:col-span-4">
@@ -16,13 +17,15 @@ export default async function RecommendedItems({
           {RecommendedItems.map((item, i) => {
             return (
               <div
-                key={item.item_id}
+                key={item.title}
                 className={clsx("grid grid-cols-3 items-center py-4", {
                   "border-t": i !== 0,
                 })}
               >
                 <div className="min-w-0">
-                  <p className="normal-font">{item.item_name}</p>
+                  <Link href="/shoppinglist">
+                    <p className="normal-font">{item.title}</p>
+                  </Link>
                 </div>
               </div>
             );
