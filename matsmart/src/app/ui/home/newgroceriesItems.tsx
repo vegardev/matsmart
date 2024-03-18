@@ -1,12 +1,11 @@
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
-import { Item_database } from "@/src/app/backend/definitions";
-import Link from "next/link";
+import { Groceries } from "@/src/app/backend/definitions";
 
 export default async function NewGroceriesItems({
   NewGroceriesItems,
 }: {
-  NewGroceriesItems: Item_database[];
+  NewGroceriesItems: Groceries[];
 }) {
   return (
     <div className="flex w-full flex-col md:col-span-4">
@@ -23,10 +22,7 @@ export default async function NewGroceriesItems({
                 })}
               >
                 <div className="min-w-0">
-                  <Link href="/shoppinglist">
-                    {" "}
-                    <p className="normal-font">{item.item_name}</p>
-                  </Link>
+                  <p className="normal-font">{item.item_name}</p>
                 </div>
               </div>
             );

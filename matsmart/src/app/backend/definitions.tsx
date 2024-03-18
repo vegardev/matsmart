@@ -12,6 +12,19 @@ export type Item_database = {
   item_quantity_type: string;
 };
 
+export type Tags = {
+  tag_id: number;
+  tag_name: string;
+};
+
+export type Recipe_Preview = {
+  recipe_id: number;
+  recipe_name: string;
+  recipe_time: number;
+  recipe_image: string;
+  recipe_tags: string[];
+};
+
 export type Recipe = {
   recipe_id: number;
   title: string;
@@ -44,3 +57,9 @@ export type Inventory_items = {
   item_location: string;
   expiration_date: string;
 };
+
+// Vet ikke hvorfor vi trenger denne men legger den her foreløpig
+export interface Groceries {
+  item_id: number;
+  item_name: string;
+}
