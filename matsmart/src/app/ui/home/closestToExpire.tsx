@@ -19,8 +19,7 @@ export default async function CloseToExpireItems({
                 key={item.item_id}
                 className={clsx("grid grid-cols-3 items-center py-4", {
                   "border-t": i !== 0,
-                })}
-              >
+                })}>
                 <div className="min-w-0">
                   <p className="normal-font">{item.item_name}</p>
                   <p className="normal-font">{item.item_type}</p>
@@ -34,12 +33,11 @@ export default async function CloseToExpireItems({
                         item.expiration_date >= new Date() &&
                         item.expiration_date <
                           new Date(
-                            new Date().getTime() + 1000 * 60 * 60 * 24 * 2,
+                            new Date().getTime() + 1000 * 60 * 60 * 24 * 2
                           ),
                       "text-red-500": item.expiration_date < new Date(),
-                    },
-                  )}
-                >
+                    }
+                  )}>
                   {item.expiration_date.toLocaleDateString()}
                 </p>
               </div>

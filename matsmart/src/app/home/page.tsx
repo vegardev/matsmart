@@ -7,6 +7,22 @@ import { CloseToExpire, Groceries } from "@/src/app/backend/definitions";
 interface Recommended {
   item_id: number;
   item_name: string;
+<<<<<<< HEAD
+=======
+  expiration_date: Date;
+  quantity: number;
+  item_type: string;
+}
+
+interface Groceries {
+  item_id: number;
+  item_name: string;
+}
+
+interface Recipe {
+  recipe_id: number;
+  title: string;
+>>>>>>> parent of 5e6a2fe (Klarert errors)
 }
 
 const dummyDates: CloseToExpire[] = [
@@ -36,6 +52,7 @@ const dummyDates: CloseToExpire[] = [
 const dummyGroceries: Groceries[] = [
   {
     item_id: 4,
+<<<<<<< HEAD
     item_name: "Kebab",
   },
   {
@@ -43,19 +60,54 @@ const dummyGroceries: Groceries[] = [
     item_name: "Pizza",
   },
   { item_id: 6, item_name: "Bunnprisburger" },
+=======
+    item_name: "Egg",
+  },
+  {
+    item_id: 5,
+    item_name: "Tomato",
+  },
+  { item_id: 6, item_name: "Protein Nut" },
+>>>>>>> parent of 5e6a2fe (Klarert errors)
 ];
 
 const dummyRecommended: Recommended[] = [
   {
+<<<<<<< HEAD
     item_id: 7,
     item_name: "Pizza med croissant",
   },
   {
     item_id: 8,
     item_name: "Bunnprisburger",
+=======
+    recipe_id: 7,
+    title: "Pizza med croissant",
+  },
+  {
+    recipe_id: 8,
+    title: "Bunnprisburger",
+>>>>>>> parent of 5e6a2fe (Klarert errors)
   },
 ];
-
+/*
+export default function Page() {
+  return (
+    <main className="light-background">
+      <div className="logo-container">
+        <div className="logo"></div>
+      </div>
+      <div className="light-blue flex">
+        <div className="flex grow flex-col justify-between rounded-xl light-blue">
+          <NewGroceriesItems NewGroceriesItems={dummyGroceries} />
+          <RecommendedItems RecommendedItems={dummyRecommended} />
+          <CloseToExpireItems CloseToExpireItems={dummyDates} />
+        </div>
+      </div>
+    </main>
+  );
+}
+*/
 export default function Page() {
   return (
     <main className="light-background">
