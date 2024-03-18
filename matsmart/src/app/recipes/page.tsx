@@ -6,7 +6,7 @@ import {
   RandomRecipeButton,
   AddRecipeButton,
 } from "@/src/app/ui/recipes/buttons";
-import { Recipe } from "@/src/app/ui/recipes/recipe";
+import { Recipe } from "@/src/app/ui/recipes/recipePreview";
 
 import { tagsDummyData, recipesDummyData } from "@/src/app/backend/dummyData";
 
