@@ -1,13 +1,15 @@
 import { Recipe_Preview } from "@/src/app/backend/definitions";
 import Image from "next/image";
+import Link from "next/link";
 
 export function Recipe({ recipes }: { recipes: Recipe_Preview[] }) {
   return (
     <>
       {recipes.map((recipe) => (
-        <div
+        <Link
           key={recipe.recipe_id}
-          className="grid-col-4 gap-4 lg:max-w-xs md:max-w-lg"
+          href={"/recipes/" + recipe.recipe_id}
+          className="grid-col-4 gap-4 lg:max-w-xs md:max-w-lg group"
         >
           <div className="rounded-xl bg-gray-50 shadow-sm">
             <Image
@@ -19,7 +21,7 @@ export function Recipe({ recipes }: { recipes: Recipe_Preview[] }) {
             />
             <div className="truncate rounded-xl bg-white">
               <div className="flex p-4">
-                <h2 className="ml-2 text-base font-bold">
+                <h2 className="ml-2 text-base font-bold group-hover:text-blue-400">
                   {recipe.recipe_name}
                 </h2>
               </div>
@@ -54,7 +56,7 @@ export function Recipe({ recipes }: { recipes: Recipe_Preview[] }) {
               </div>
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </>
   );
