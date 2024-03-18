@@ -20,7 +20,8 @@ export default async function RecommendedItems({
                 key={item.title}
                 className={clsx("grid grid-cols-3 items-center py-4", {
                   "border-t": i !== 0,
-                })}>
+                })}
+              >
                 <div className="min-w-0">
                   <Link href="/shoppinglist">
                     <p className="normal-font">{item.title}</p>
