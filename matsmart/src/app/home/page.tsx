@@ -10,7 +10,7 @@ interface CloseToExpire {
   item_type: string;
 }
 
-interface Groceries {
+interface Item_database {
   item_id: number;
   item_name: string;
   item_quantity_type: string;
@@ -47,7 +47,7 @@ const dummyDates: CloseToExpire[] = [
   },
 ];
 
-const dummyGroceries: Groceries[] = [
+const dummyGroceries: Item_database[] = [
   {
     item_id: 4,
     item_name: "Egg",
