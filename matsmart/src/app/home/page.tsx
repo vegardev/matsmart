@@ -22,6 +22,9 @@ interface Groceries {
 interface Recipe {
   recipe_id: number;
   title: string;
+<<<<<<< HEAD
+>>>>>>> parent of 5e6a2fe (Klarert errors)
+=======
 >>>>>>> parent of 5e6a2fe (Klarert errors)
 }
 
@@ -68,6 +71,9 @@ const dummyGroceries: Groceries[] = [
     item_name: "Tomato",
   },
   { item_id: 6, item_name: "Protein Nut" },
+<<<<<<< HEAD
+>>>>>>> parent of 5e6a2fe (Klarert errors)
+=======
 >>>>>>> parent of 5e6a2fe (Klarert errors)
 ];
 
@@ -87,10 +93,33 @@ const dummyRecommended: Recommended[] = [
   {
     recipe_id: 8,
     title: "Bunnprisburger",
+<<<<<<< HEAD
 >>>>>>> parent of 5e6a2fe (Klarert errors)
   },
 ];
 /*
+=======
+  },
+];
+/*
+export default function Page() {
+  return (
+    <main className="light-background">
+      <div className="logo-container">
+        <div className="logo"></div>
+      </div>
+      <div className="light-blue flex">
+        <div className="flex grow flex-col justify-between rounded-xl light-blue">
+          <NewGroceriesItems NewGroceriesItems={dummyGroceries} />
+          <RecommendedItems RecommendedItems={dummyRecommended} />
+          <CloseToExpireItems CloseToExpireItems={dummyDates} />
+        </div>
+      </div>
+    </main>
+  );
+}
+*/
+>>>>>>> parent of 5e6a2fe (Klarert errors)
 export default function Page() {
   return (
     <main className="light-background">
