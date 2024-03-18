@@ -2,29 +2,11 @@ import CloseToExpireItems from "@/src/app/ui/home/closestToExpire";
 import NewGroceriesItems from "@/src/app/ui/home/newgroceriesItems";
 import RecommendedItems from "@/src/app/ui/home/recipesRecommended";
 
-<<<<<<< HEAD
 import { CloseToExpire, Groceries } from "@/src/app/backend/definitions";
-=======
-interface CloseToExpire {
+
+interface Recommended {
   item_id: number;
   item_name: string;
-  expiration_date: Date;
-  quantity: number;
-  item_type: string;
-}
-
-interface Groceries {
-  item_id: number;
-  item_name: string;
-  item_quantity_type: string;
-}
->>>>>>> home
-
-interface Recipe {
-  recipe_id: number;
-  title: string;
-  content: string;
-  image: string;
 }
 
 const dummyDates: CloseToExpire[] = [
@@ -54,29 +36,23 @@ const dummyDates: CloseToExpire[] = [
 const dummyGroceries: Groceries[] = [
   {
     item_id: 4,
-    item_name: "Egg",
-    item_quantity_type: "stk",
+    item_name: "Kebab",
   },
   {
     item_id: 5,
-    item_name: "Tomato",
-    item_quantity_type: "stk",
+    item_name: "Pizza",
   },
-  { item_id: 6, item_name: "Protein Nut", item_quantity_type: "stk" },
+  { item_id: 6, item_name: "Bunnprisburger" },
 ];
 
-const dummyRecommended: Recipe[] = [
+const dummyRecommended: Recommended[] = [
   {
-    recipe_id: 7,
-    title: "Pizza med croissant",
-    content: "lalal",
-    image: "lolol",
+    item_id: 7,
+    item_name: "Pizza med croissant",
   },
   {
-    recipe_id: 8,
-    title: "Bunnprisburger",
-    content: "kfnawke",
-    image: "nfer",
+    item_id: 8,
+    item_name: "Bunnprisburger",
   },
 ];
 
@@ -87,17 +63,9 @@ export default function Page() {
         <div className="logo"></div>
       </div>
       <div className="light-blue flex">
-        <div className="flex grow flex-row rounded-xl light-blue">
-          <div className="home-container">
-            <NewGroceriesItems NewGroceriesItems={dummyGroceries} />
-          </div>
-          <div className="home-container">
-            <RecommendedItems RecommendedItems={dummyRecommended} />
-          </div>
-          <div className="home-container">
-            <CloseToExpireItems CloseToExpireItems={dummyDates} />
-          </div>
-        </div>
+        <NewGroceriesItems NewGroceriesItems={dummyGroceries} />
+        <RecommendedItems RecommendedItems={dummyRecommended} />
+        <CloseToExpireItems CloseToExpireItems={dummyDates} />
       </div>
     </main>
   );
