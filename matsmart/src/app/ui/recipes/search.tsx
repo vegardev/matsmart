@@ -18,13 +18,19 @@ export function SearchBar({ placeholder }: { placeholder: string }) {
   );
 }
 
-export function SearchByTags({ tags }: { tags: Tags[] }) {
+export function SearchByTags({
+  tags,
+  displayText,
+}: {
+  tags: Tags[];
+  displayText: string;
+}) {
   const [showMap, setShowMap] = useState(false);
 
   /*Følgende kode er et produkt av å spør copilot om hjelp til å fikse en error som kom når man lagde en lignende kode under map funksjonen.
   Promten for å få koden var "I get the error Rendered more hooks than during the previous render."*/
   const [checkedTags, setCheckedTags] = useState<{ [key: number]: boolean }>(
-    {},
+    {}
   );
   const handleTagClick = (tagId: number) => {
     setCheckedTags((prevState) => ({
@@ -44,7 +50,7 @@ export function SearchByTags({ tags }: { tags: Tags[] }) {
         }}
       >
         <div className="flex items-center space-x-2 text-sm font-medium  hover:text-gray-900 pl-3">
-          Sort by tags
+          {displayText}
         </div>
         {showMap ? (
           <ChevronUpIcon className="size-8 flex px-1 mr-1 ml-2 bg-gray-100 rounded-full group-hover:bg-gray-200" />
