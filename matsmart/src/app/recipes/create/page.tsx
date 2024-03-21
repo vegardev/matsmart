@@ -4,7 +4,7 @@ import { SearchByTags } from "@/src/app/ui/recipes/search";
 import { tagsDummyData } from "@/src/app/backend/dummyData";
 import Link from "next/link";
 
-export default function Page({ params }: { params: { id: string } }) {
+export default function Page() {
   return (
     <>
       <div className="flex justify-between mb-10">

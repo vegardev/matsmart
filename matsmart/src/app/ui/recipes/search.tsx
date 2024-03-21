@@ -30,7 +30,7 @@ export function SearchByTags({
   /*Følgende kode er et produkt av å spør copilot om hjelp til å fikse en error som kom når man lagde en lignende kode under map funksjonen.
   Promten for å få koden var "I get the error Rendered more hooks than during the previous render."*/
   const [checkedTags, setCheckedTags] = useState<{ [key: number]: boolean }>(
-    {}
+    {},
   );
   const handleTagClick = (tagId: number) => {
     setCheckedTags((prevState) => ({
