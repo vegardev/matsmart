@@ -57,3 +57,13 @@ export type Inventory_items = {
   item_location: string;
   expiration_date: string;
 };
+
+export type Recipe_Page = {
+  recipe_id: number;
+  recipe_name: string;
+  recipe_time: number;
+  recipe_image: string;
+  recipe_tags: string[];
+  recipe_method: string;
+  recipe_ingredients: string;
+};
