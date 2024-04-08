@@ -84,8 +84,8 @@ export default function Page() {
       <div className="logo-container">
         <div className="logo"></div>
       </div>
-      <div className="light-blue flex">
-        <div className="flex grow flex-row rounded-xl light-blue">
+      <div className="color-prim flex">
+        <div className="flex grow flex-row rounded-xl color-prim">
           <div className="home-container">
             <NewGroceriesItems NewGroceriesItems={dummyGroceries} />
           </div>

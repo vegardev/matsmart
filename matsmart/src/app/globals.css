@@ -45,12 +45,20 @@ body {
   align-items: center;
 }
 
-.light-background {
-  background-color: rgb(0, 119, 193);
+.color-prim {
+  background-color: rgb(140, 185, 189);
 }
 
-.light-blue {
-  background-color: rgb(106, 191, 230);
+.color-sec {
+  background-color: rgb(254, 251, 246);
+}
+
+.color-ter {
+  background-color: rgb(236, 177, 89);
+}
+
+.color-qua {
+  background-color: rgb(182, 115, 82);
 }
 
 .normal-font {
