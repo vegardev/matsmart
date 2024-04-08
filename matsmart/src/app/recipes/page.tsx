@@ -27,7 +27,7 @@ export default function Recipes() {
           <Recipe recipes={recipesDummyData} />
         </div>
         <div className="lg:ml-10 md:ml-6 sm:ml-3">
-          <SearchByTags tags={tagsDummyData} />
+          <SearchByTags tags={tagsDummyData} displayText="Sort by tags" />
         </div>
       </div>
     </div>
