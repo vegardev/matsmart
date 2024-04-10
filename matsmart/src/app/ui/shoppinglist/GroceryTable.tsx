@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { GroceryItem } from "../../backend/definitions";
+import { GroceryItem } from "@/src/app/backend/definitions";
 
 type TableProps = {
   data: GroceryItem[];
