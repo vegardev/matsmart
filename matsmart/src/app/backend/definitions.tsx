@@ -57,3 +57,16 @@ export type Inventory_items = {
   item_location: string;
   expiration_date: string;
 };
+
+export type InventoryItem = {
+  name: string;
+  quantity: number;
+  quantityType: string;
+  expirationDate: string;
+};
+
+export type GroceryItem = {
+  name: string;
+  quantity: number;
+  quantityType: string;
+};

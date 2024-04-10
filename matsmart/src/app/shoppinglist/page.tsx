@@ -5,9 +5,9 @@ import MeasurementDropdown from "../ui/shoppinglist/MeasurementDropdown";
 
 export default function ShoppingList() {
   return (
-    <div className="flex flex-col padd">
+    <div className="flex flex-col">
       <h1 className={`mb-4 text-xl md:text-2xl`}>Shopping list</h1>
-      <div className="mt-4 flex items-center justify-between gap-2 md:mt-8 max-w-3xl ">
+      <div className="mt-4 flex flex-row items-center justify-items-center gap-2 md:mt-8 max-w-3xl">
         <SearchBar placeholder="Add to shopping list..." />
         <MeasurementDropdown />
         <MyButton />
@@ -15,18 +15,22 @@ export default function ShoppingList() {
       <GroceryTable
         data={[
           {
-            groceries: "Apples",
-            amount: 10,
+            name: "Apples",
+            quantity: 10,
+            quantityType: " pieces",
           },
           {
-            groceries: "Bananas",
-            amount: 5,
+            name: "Bananas",
+            quantity: 5,
+            quantityType: " pieces",
           },
           {
-            groceries: "Oranges",
-            amount: 8,
+            name: "Oranges",
+            quantity: 8,
+            quantityType: " pieces",
           },
         ]}
+        className="mt-4"
       />
     </div>
   );
