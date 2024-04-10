@@ -4,9 +4,24 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --background-start-rgb: 140, 185, 189;
+  --background-end-rgb: 254, 251, 246;
+}
+
+/* root med hvit*/ /*
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 140, 185, 189;
   --background-end-rgb: 255, 255, 255;
 }
+*/
+/*root med blå*/ /*
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 140, 185, 189;
+  --background-end-rgb: 255, 255, 255;
+}
+*/
 /*
 @media (prefers-color-scheme: dark) {
   :root {
@@ -15,7 +30,8 @@
     --background-end-rgb: 0, 119, 193;
   }
 }
-*/
+
+/* bakgrunn med gradient*/
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -59,6 +75,11 @@ body {
 
 .color-qua {
   background-color: rgb(182, 115, 82);
+}
+
+/* den originale */
+.color-test {
+  background-color: rgb(214, 219, 220);
 }
 
 .normal-font {
