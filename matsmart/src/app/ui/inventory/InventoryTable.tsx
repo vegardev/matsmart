@@ -1,13 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { GroceryItem } from "@/src/app/backend/definitions";
+import { InventoryItem } from "@/src/app/backend/definitions";
 
 type TableProps = {
-  data: GroceryItem[];
-  className?: string;
+  data: InventoryItem[];
 };
 
-const GroceryTable: React.FC<TableProps> = ({ data, className }) => {
+const InventoryTable: React.FC<TableProps> = ({ data }) => {
   const [checkedStates, setCheckedStates] = useState(
     new Array(data.length).fill(false),
   );
@@ -23,19 +22,20 @@ const GroceryTable: React.FC<TableProps> = ({ data, className }) => {
 
   return (
     <>
-      <table
-        className={`min-w-full divide-y rounded-md divide-gray-200 ${className}`}
-      >
+      <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Groceries
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Amount
+              Quantity
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Bought?
+              Expiration Date
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Remove?
             </th>
           </tr>
         </thead>
@@ -45,6 +45,9 @@ const GroceryTable: React.FC<TableProps> = ({ data, className }) => {
               <td className="px-6 py-4 whitespace-nowrap">{item.name}</td>
               <td className="px-6 py-4 whitespace-nowrap">
                 {item.quantity + item.quantityType}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {item.expirationDate}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <input
@@ -65,13 +68,13 @@ const GroceryTable: React.FC<TableProps> = ({ data, className }) => {
             right: "20px",
             zIndex: 1000,
           }}
-          onClick={() => alert("Added bought items to inventory!")}
+          onClick={() => alert("Removed items to inventory!")}
         >
-          Add bought items to inventory
+          Remove from inventory
         </button>
       )}
     </>
   );
 };
 
-export default GroceryTable;
+export default InventoryTable;
