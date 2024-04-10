@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { InventoryItem } from "../../backend/definitions";
+import { InventoryItem } from "@/src/app/backend/definitions";
 
 type TableProps = {
   data: InventoryItem[];
