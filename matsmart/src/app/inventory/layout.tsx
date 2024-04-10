@@ -1,6 +1,4 @@
 import Link from "next/link";
-import clsx from "clsx";
-import { headers } from "next/headers";
 
 const links: any[] = [
   { name: "Pantry", href: "pantry" },
@@ -8,8 +6,6 @@ const links: any[] = [
   { name: "Freezer", href: "freezer" },
 ];
 
-const headersList = headers();
-const pathname = headersList.get("x-invoke-path") || "";
 export default function InventoryLayout({
   children,
 }: {
@@ -24,12 +20,7 @@ export default function InventoryLayout({
             return (
               <div
                 key={link.name}
-                className={clsx(
-                  "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3",
-                  {
-                    "bg-sky-100 text-blue-600": pathname === link.href,
-                  }
-                )}
+                className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3"
               >
                 <Link href={`/inventory/${link.href}`}>{link.name}</Link>
               </div>
