@@ -1,4 +1,4 @@
-import InventoryTable from "../../ui/inventory/InventoryTable";
+import InventoryTable from "@/src/app/ui/inventory/InventoryTable";
 
 export default function Freezer() {
   return (
