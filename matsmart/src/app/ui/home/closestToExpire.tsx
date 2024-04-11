@@ -29,7 +29,7 @@ export default async function CloseToExpireItems({
                   className={clsx(
                     "truncate text-sm md:text-base font-semibold text-right",
                     {
-                      "text-yellow-600":
+                      "text-yellow-700":
                         item.expiration_date >= new Date() &&
                         item.expiration_date <
                           new Date(
