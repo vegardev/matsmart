@@ -52,9 +52,11 @@ describe("Database get tests", () => {
       {
         recipe_id: 1,
         title: "Stekt egg",
-        content: "Stek egget i en panne.",
+        recipe_method: "Stek egget i en panne.",
+        recipe_nutrtion: "0",
         image:
           "https://aichasmat.no/wp-content/uploads/2016/10/Stekt-egg-pa-marokkansk-vis-.jpg",
+        recipe_time: null,
       },
     ]);
     // Add more assertions here based on the expected structure and values of the result
