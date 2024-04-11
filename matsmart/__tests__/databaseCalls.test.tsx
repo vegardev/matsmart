@@ -53,7 +53,7 @@ describe("Database get tests", () => {
         recipe_id: 1,
         title: "Stekt egg",
         recipe_method: "Stek egget i en panne.",
-        recipe_nutrtion: "0",
+        recipe_nutritions: "0",
         image:
           "https://aichasmat.no/wp-content/uploads/2016/10/Stekt-egg-pa-marokkansk-vis-.jpg",
         recipe_time: null,
