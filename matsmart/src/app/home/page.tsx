@@ -81,6 +81,7 @@ const dummyRecommended: Recipe[] = [
 export default function Page() {
   return (
     <main className="light-background">
+      <h1>‎</h1>
       <div className="logo-container">
         <div className="logo"></div>
       </div>
