@@ -32,5 +32,4 @@ typescript:
     - npm install
   script:
     - npx tsc --noEmit
-    - jest --ci --reporters=default --reporters=jest-junit
     - npm test
