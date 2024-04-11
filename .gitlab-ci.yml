@@ -27,7 +27,9 @@ prettier:
 
 typescript:
   stage: test
-  script:
+  before_script:
     - cd matsmart
-    - npm install typescript
+    - npm install jest, jest-junit, typescript
+  script:
     - npx tsc --noEmit
+    - jest --ci --reporters=default --reporters=jest-junit

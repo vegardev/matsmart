@@ -29,7 +29,7 @@ export type Recipe = {
   recipe_id: number;
   title: string;
   recipe_method: string;
-  recipe_nutrtion: string;
+  recipe_nutritions: string;
   image: string;
   recipe_time: string;
 };
