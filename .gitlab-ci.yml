@@ -33,3 +33,8 @@ typescript:
   script:
     - npx tsc --noEmit
     - jest --ci --reporters=default --reporters=jest-junit
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - junit.xml
