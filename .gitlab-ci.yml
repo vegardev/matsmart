@@ -31,6 +31,7 @@ typescript:
     - cd matsmart
     - npm install
   script:
+    - cd matsmart
     - npx tsc --noEmit
     - jest --ci --reporters=default --reporters=jest-junit
   artifacts:
