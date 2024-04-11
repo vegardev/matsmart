@@ -28,8 +28,10 @@ export type Recipe_Preview = {
 export type Recipe = {
   recipe_id: number;
   title: string;
-  content: string;
+  recipe_method: string;
+  recipe_nutritions: string;
   image: string;
+  recipe_time: string;
 };
 
 export type Recipes_no_content = {
