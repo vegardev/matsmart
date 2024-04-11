@@ -66,4 +66,5 @@ export type Recipe_Page = {
   recipe_tags: string[];
   recipe_method: string;
   recipe_ingredients: string;
+  recipe_nutrition: string;
 };

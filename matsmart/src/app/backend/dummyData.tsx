@@ -70,6 +70,19 @@ export const recipesDummyData = [
       <li>1 can of olives</li>
       <li>1 can of pineapple</li>
     </ul>`,
+    recipe_nutrition: `<p>
+    <b>Energy:</b> 1000 kcal
+    <br />
+    <b>Protein:</b> 50 g
+    <br />
+    <b>Fat:</b> 30 g
+    <br />
+    <b>Carbohydrates:</b> 100 g
+    <br />
+    <b>Fiber:</b> 10 g
+    <br />
+    <b>Salt:</b> 5 g
+    </p>`,
   },
   {
     recipe_id: 2,
@@ -128,6 +141,19 @@ export const recipesDummyData = [
       <li>1 can of olives</li>
       <li>1 can of pineapple</li>
     </ul>`,
+    recipe_nutrition: `<p>
+    <b>Energy:</b> 1000 kcal
+    <br />
+    <b>Protein:</b> 50 g
+    <br />
+    <b>Fat:</b> 30 g
+    <br />
+    <b>Carbohydrates:</b> 100 g
+    <br />
+    <b>Fiber:</b> 10 g
+    <br />
+    <b>Salt:</b> 5 g
+    </p>`,
   },
   {
     recipe_id: 3,
@@ -187,6 +213,19 @@ export const recipesDummyData = [
       <li>1 can of olives</li>
       <li>1 can of pineapple</li>
     </ul>`,
+    recipe_nutrition: `<p>
+    <b>Energy:</b> 1000 kcal
+    <br />
+    <b>Protein:</b> 50 g
+    <br />
+    <b>Fat:</b> 30 g
+    <br />
+    <b>Carbohydrates:</b> 100 g
+    <br />
+    <b>Fiber:</b> 10 g
+    <br />
+    <b>Salt:</b> 5 g
+    </p>`,
   },
   {
     recipe_id: 4,
@@ -246,6 +285,19 @@ export const recipesDummyData = [
       <li>1 can of olives</li>
       <li>1 can of pineapple</li>
     </ul>`,
+    recipe_nutrition: `<p>
+    <b>Energy:</b> 1000 kcal
+    <br />
+    <b>Protein:</b> 50 g
+    <br />
+    <b>Fat:</b> 30 g
+    <br />
+    <b>Carbohydrates:</b> 100 g
+    <br />
+    <b>Fiber:</b> 10 g
+    <br />
+    <b>Salt:</b> 5 g
+    </p>`,
   },
   {
     recipe_id: 5,
@@ -305,6 +357,19 @@ export const recipesDummyData = [
       <li>1 can of olives</li>
       <li>1 can of pineapple</li>
     </ul>`,
+    recipe_nutrition: `<p>
+    <b>Energy:</b> 1000 kcal
+    <br />
+    <b>Protein:</b> 50 g
+    <br />
+    <b>Fat:</b> 30 g
+    <br />
+    <b>Carbohydrates:</b> 100 g
+    <br />
+    <b>Fiber:</b> 10 g
+    <br />
+    <b>Salt:</b> 5 g
+    </p>`,
   },
   {
     recipe_id: 6,
@@ -364,6 +429,19 @@ export const recipesDummyData = [
       <li>1 can of olives</li>
       <li>1 can of pineapple</li>
     </ul>`,
+    recipe_nutrition: `<p>
+    <b>Energy:</b> 1000 kcal
+    <br />
+    <b>Protein:</b> 50 g
+    <br />
+    <b>Fat:</b> 30 g
+    <br />
+    <b>Carbohydrates:</b> 100 g
+    <br />
+    <b>Fiber:</b> 10 g
+    <br />
+    <b>Salt:</b> 5 g
+    </p>`,
   },
   {
     recipe_id: 7,
@@ -423,5 +501,18 @@ export const recipesDummyData = [
       <li>1 can of olives</li>
       <li>1 can of pineapple</li>
     </ul>`,
+    recipe_nutrition: `<p>
+    <b>Energy:</b> 1000 kcal
+    <br />
+    <b>Protein:</b> 50 g
+    <br />
+    <b>Fat:</b> 30 g
+    <br />
+    <b>Carbohydrates:</b> 100 g
+    <br />
+    <b>Fiber:</b> 10 g
+    <br />
+    <b>Salt:</b> 5 g
+    </p>`,
   },
 ];
