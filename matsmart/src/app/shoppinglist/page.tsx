@@ -2,6 +2,7 @@ import { SearchBar } from "@/src/app/ui/recipes/search";
 import GroceryTable from "../ui/shoppinglist/GroceryTable";
 import MyButton from "../ui/shoppinglist/button";
 import MeasurementDropdown from "../ui/shoppinglist/MeasurementDropdown";
+import { shoppingListDummyData } from "../backend/dummyData";
 
 export default function ShoppingList() {
   return (
@@ -12,26 +13,7 @@ export default function ShoppingList() {
         <MeasurementDropdown />
         <MyButton />
       </div>
-      <GroceryTable
-        data={[
-          {
-            name: "Apples",
-            quantity: 10,
-            quantityType: " pieces",
-          },
-          {
-            name: "Bananas",
-            quantity: 5,
-            quantityType: " pieces",
-          },
-          {
-            name: "Oranges",
-            quantity: 8,
-            quantityType: " pieces",
-          },
-        ]}
-        className="mt-4"
-      />
+      <GroceryTable data={shoppingListDummyData} className="mt-4" />
     </div>
   );
 }

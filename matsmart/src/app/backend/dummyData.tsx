@@ -68,3 +68,111 @@ export const recipesDummyData = [
     recipe_tags: ["Beef", "Mexican"],
   },
 ];
+
+export const shoppingListDummyData = [
+  {
+    item_name: "Apples",
+    item_quantity: 10,
+    item_quantity_type: " pieces",
+  },
+  {
+    item_name: "Bananas",
+    item_quantity: 5,
+    item_quantity_type: " pieces",
+  },
+  {
+    item_name: "Oranges",
+    item_quantity: 8,
+    item_quantity_type: " pieces",
+  },
+];
+
+export const pantryInventoryDummyData = [
+  {
+    inventory_id: 1,
+    item_id: 1,
+    item_quantity: 10,
+    item_quantity_type: " pieces",
+    item_name: "Apples",
+    item_location: "Shelf",
+    expiration_date: "24.12.2024",
+  },
+  {
+    inventory_id: 1,
+    item_id: 1,
+    item_quantity: 500,
+    item_quantity_type: "g",
+    item_name: "Pasta",
+    item_location: "Shelf",
+    expiration_date: "01.01.2030",
+  },
+  {
+    inventory_id: 1,
+    item_id: 1,
+    item_quantity: 1.5,
+    item_quantity_type: "kg",
+    item_name: "Rice",
+    item_location: "Shelf",
+    expiration_date: "Never",
+  },
+];
+
+export const fridgeInventoryDummyData = [
+  {
+    inventory_id: 1,
+    item_id: 1,
+    item_quantity: 650,
+    item_quantity_type: "g",
+    item_name: "Chicken",
+    item_location: "Fridge",
+    expiration_date: "24.12.2024",
+  },
+  {
+    inventory_id: 1,
+    item_id: 1,
+    item_quantity: 2,
+    item_quantity_type: "L",
+    item_name: "Milk",
+    item_location: "Shelf",
+    expiration_date: "20.04.2024",
+  },
+  {
+    inventory_id: 1,
+    item_id: 1,
+    item_quantity: 1,
+    item_quantity_type: "kg",
+    item_name: "Cheese",
+    item_location: "Fridge",
+    expiration_date: "Expired",
+  },
+];
+
+export const freezerInventoryDummyData = [
+  {
+    inventory_id: 1,
+    item_id: 1,
+    item_quantity: 1.2,
+    item_quantity_type: "kg",
+    item_name: "Peas",
+    item_location: "Freezer",
+    expiration_date: "24.12.2024",
+  },
+  {
+    inventory_id: 1,
+    item_id: 1,
+    item_quantity: 1.5,
+    item_quantity_type: "L",
+    item_name: "Ice cream",
+    item_location: "Freezer",
+    expiration_date: "20.11.2024",
+  },
+  {
+    inventory_id: 1,
+    item_id: 1,
+    item_quantity: 4,
+    item_quantity_type: " pieces",
+    item_name: "Baguette",
+    item_location: "Freezer",
+    expiration_date: "24.12.2025",
+  },
+];
