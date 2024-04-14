@@ -40,36 +40,17 @@ export const recipesDummyData = [
     fiyasilufyi asf ai fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg
     sa-fusa fiuakuy qt <br /> <br /> fuays fiyasilufyi asf ai
     fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg sa-fusa fiuakuy qt{" "}`,
-    recipe_ingredients: `<h3><b>Pizza sauce</b></h3>
-    <ul>
-      <li>1 can of tomatoes</li>
-      <li>1 onion</li>
-      <li>1 garlic clove</li>
-      <li>1 tbsp of olive oil</li>
-      <li>1 tsp of salt</li>
-      <li>1 tsp of sugar</li>
-      <li>1 tsp of oregano</li>
-    </ul>
-    <br />
-    <h3><b>Pizza dough</b></h3>
-    <ul>
-      <li>25 g of yeast</li>
-      <li>2.5 dl of water</li>
-      <li>1 tbsp of olive oil</li>
-      <li>1 tsp of salt</li>
-      <li>7 dl of flour</li>
-    </ul>
-    <br />
-    <h3><b>Topping (copilot pizza xdd)</b></h3>
-    <ul>
-      <li>1 mozzarella</li>
-      <li>1 tomato</li>
-      <li>1 red onion</li>
-      <li>1 bell pepper</li>
-      <li>1 can of corn</li>
-      <li>1 can of olives</li>
-      <li>1 can of pineapple</li>
-    </ul>`,
+    recipe_ingredients: [
+      "Pasta",
+      "Tomato Sauce",
+      "Cheese",
+      "Basil",
+      "Salt",
+      "Pepper",
+      "Olive Oil",
+      "Garlic",
+      "Onion",
+    ],
     recipe_nutrition: `<p>
     <b>Energy:</b> 1000 kcal
     <br />
@@ -111,36 +92,17 @@ export const recipesDummyData = [
     fiyasilufyi asf ai fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg
     sa-fusa fiuakuy qt <br /> <br /> fuays fiyasilufyi asf ai
     fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg sa-fusa fiuakuy qt{" "}`,
-    recipe_ingredients: `<h3><b>Pizza sauce</b></h3>
-    <ul>
-      <li>1 can of tomatoes</li>
-      <li>1 onion</li>
-      <li>1 garlic clove</li>
-      <li>1 tbsp of olive oil</li>
-      <li>1 tsp of salt</li>
-      <li>1 tsp of sugar</li>
-      <li>1 tsp of oregano</li>
-    </ul>
-    <br />
-    <h3><b>Pizza dough</b></h3>
-    <ul>
-      <li>25 g of yeast</li>
-      <li>2.5 dl of water</li>
-      <li>1 tbsp of olive oil</li>
-      <li>1 tsp of salt</li>
-      <li>7 dl of flour</li>
-    </ul>
-    <br />
-    <h3><b>Topping (copilot pizza xdd)</b></h3>
-    <ul>
-      <li>1 mozzarella</li>
-      <li>1 tomato</li>
-      <li>1 red onion</li>
-      <li>1 bell pepper</li>
-      <li>1 can of corn</li>
-      <li>1 can of olives</li>
-      <li>1 can of pineapple</li>
-    </ul>`,
+    recipe_ingredients: [
+      "Pasta",
+      "Tomato Sauce",
+      "Cheese",
+      "Basil",
+      "Salt",
+      "Pepper",
+      "Olive Oil",
+      "Garlic",
+      "Onion",
+    ],
     recipe_nutrition: `<p>
     <b>Energy:</b> 1000 kcal
     <br />
@@ -183,36 +145,17 @@ export const recipesDummyData = [
     fiyasilufyi asf ai fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg
     sa-fusa fiuakuy qt <br /> <br /> fuays fiyasilufyi asf ai
     fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg sa-fusa fiuakuy qt{" "}`,
-    recipe_ingredients: `<h3><b>Pizza sauce</b></h3>
-    <ul>
-      <li>1 can of tomatoes</li>
-      <li>1 onion</li>
-      <li>1 garlic clove</li>
-      <li>1 tbsp of olive oil</li>
-      <li>1 tsp of salt</li>
-      <li>1 tsp of sugar</li>
-      <li>1 tsp of oregano</li>
-    </ul>
-    <br />
-    <h3><b>Pizza dough</b></h3>
-    <ul>
-      <li>25 g of yeast</li>
-      <li>2.5 dl of water</li>
-      <li>1 tbsp of olive oil</li>
-      <li>1 tsp of salt</li>
-      <li>7 dl of flour</li>
-    </ul>
-    <br />
-    <h3><b>Topping (copilot pizza xdd)</b></h3>
-    <ul>
-      <li>1 mozzarella</li>
-      <li>1 tomato</li>
-      <li>1 red onion</li>
-      <li>1 bell pepper</li>
-      <li>1 can of corn</li>
-      <li>1 can of olives</li>
-      <li>1 can of pineapple</li>
-    </ul>`,
+    recipe_ingredients: [
+      "Pasta",
+      "Tomato Sauce",
+      "Cheese",
+      "Basil",
+      "Salt",
+      "Pepper",
+      "Olive Oil",
+      "Garlic",
+      "Onion",
+    ],
     recipe_nutrition: `<p>
     <b>Energy:</b> 1000 kcal
     <br />
@@ -255,36 +198,17 @@ export const recipesDummyData = [
     fiyasilufyi asf ai fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg
     sa-fusa fiuakuy qt <br /> <br /> fuays fiyasilufyi asf ai
     fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg sa-fusa fiuakuy qt{" "}`,
-    recipe_ingredients: `<h3><b>Pizza sauce</b></h3>
-    <ul>
-      <li>1 can of tomatoes</li>
-      <li>1 onion</li>
-      <li>1 garlic clove</li>
-      <li>1 tbsp of olive oil</li>
-      <li>1 tsp of salt</li>
-      <li>1 tsp of sugar</li>
-      <li>1 tsp of oregano</li>
-    </ul>
-    <br />
-    <h3><b>Pizza dough</b></h3>
-    <ul>
-      <li>25 g of yeast</li>
-      <li>2.5 dl of water</li>
-      <li>1 tbsp of olive oil</li>
-      <li>1 tsp of salt</li>
-      <li>7 dl of flour</li>
-    </ul>
-    <br />
-    <h3><b>Topping (copilot pizza xdd)</b></h3>
-    <ul>
-      <li>1 mozzarella</li>
-      <li>1 tomato</li>
-      <li>1 red onion</li>
-      <li>1 bell pepper</li>
-      <li>1 can of corn</li>
-      <li>1 can of olives</li>
-      <li>1 can of pineapple</li>
-    </ul>`,
+    recipe_ingredients: [
+      "Pasta",
+      "Tomato Sauce",
+      "Cheese",
+      "Basil",
+      "Salt",
+      "Pepper",
+      "Olive Oil",
+      "Garlic",
+      "Onion",
+    ],
     recipe_nutrition: `<p>
     <b>Energy:</b> 1000 kcal
     <br />
@@ -327,36 +251,17 @@ export const recipesDummyData = [
     fiyasilufyi asf ai fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg
     sa-fusa fiuakuy qt <br /> <br /> fuays fiyasilufyi asf ai
     fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg sa-fusa fiuakuy qt{" "} </p>`,
-    recipe_ingredients: `<h3><b>Pizza sauce</b></h3>
-    <ul>
-      <li>1 can of tomatoes</li>
-      <li>1 onion</li>
-      <li>1 garlic clove</li>
-      <li>1 tbsp of olive oil</li>
-      <li>1 tsp of salt</li>
-      <li>1 tsp of sugar</li>
-      <li>1 tsp of oregano</li>
-    </ul>
-    <br />
-    <h3><b>Pizza dough</b></h3>
-    <ul>
-      <li>25 g of yeast</li>
-      <li>2.5 dl of water</li>
-      <li>1 tbsp of olive oil</li>
-      <li>1 tsp of salt</li>
-      <li>7 dl of flour</li>
-    </ul>
-    <br />
-    <h3><b>Topping (copilot pizza xdd)</b></h3>
-    <ul>
-      <li>1 mozzarella</li>
-      <li>1 tomato</li>
-      <li>1 red onion</li>
-      <li>1 bell pepper</li>
-      <li>1 can of corn</li>
-      <li>1 can of olives</li>
-      <li>1 can of pineapple</li>
-    </ul>`,
+    recipe_ingredients: [
+      "Pasta",
+      "Tomato Sauce",
+      "Cheese",
+      "Basil",
+      "Salt",
+      "Pepper",
+      "Olive Oil",
+      "Garlic",
+      "Onion",
+    ],
     recipe_nutrition: `<p>
     <b>Energy:</b> 1000 kcal
     <br />
@@ -399,36 +304,17 @@ export const recipesDummyData = [
     fiyasilufyi asf ai fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg
     sa-fusa fiuakuy qt <br /> <br /> fuays fiyasilufyi asf ai
     fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg sa-fusa fiuakuy qt{" "}`,
-    recipe_ingredients: `<h3><b>Pizza sauce</b></h3>
-    <ul>
-      <li>1 can of tomatoes</li>
-      <li>1 onion</li>
-      <li>1 garlic clove</li>
-      <li>1 tbsp of olive oil</li>
-      <li>1 tsp of salt</li>
-      <li>1 tsp of sugar</li>
-      <li>1 tsp of oregano</li>
-    </ul>
-    <br />
-    <h3><b>Pizza dough</b></h3>
-    <ul>
-      <li>25 g of yeast</li>
-      <li>2.5 dl of water</li>
-      <li>1 tbsp of olive oil</li>
-      <li>1 tsp of salt</li>
-      <li>7 dl of flour</li>
-    </ul>
-    <br />
-    <h3><b>Topping (copilot pizza xdd)</b></h3>
-    <ul>
-      <li>1 mozzarella</li>
-      <li>1 tomato</li>
-      <li>1 red onion</li>
-      <li>1 bell pepper</li>
-      <li>1 can of corn</li>
-      <li>1 can of olives</li>
-      <li>1 can of pineapple</li>
-    </ul>`,
+    recipe_ingredients: [
+      "Pasta",
+      "Tomato Sauce",
+      "Cheese",
+      "Basil",
+      "Salt",
+      "Pepper",
+      "Olive Oil",
+      "Garlic",
+      "Onion",
+    ],
     recipe_nutrition: `<p>
     <b>Energy:</b> 1000 kcal
     <br />
@@ -471,36 +357,17 @@ export const recipesDummyData = [
     fiyasilufyi asf ai fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg
     sa-fusa fiuakuy qt <br /> <br /> fuays fiyasilufyi asf ai
     fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg sa-fusa fiuakuy qt{" "}`,
-    recipe_ingredients: `<h3><b>Pizza sauce</b></h3>
-    <ul>
-      <li>1 can of tomatoes</li>
-      <li>1 onion</li>
-      <li>1 garlic clove</li>
-      <li>1 tbsp of olive oil</li>
-      <li>1 tsp of salt</li>
-      <li>1 tsp of sugar</li>
-      <li>1 tsp of oregano</li>
-    </ul>
-    <br />
-    <h3><b>Pizza dough</b></h3>
-    <ul>
-      <li>25 g of yeast</li>
-      <li>2.5 dl of water</li>
-      <li>1 tbsp of olive oil</li>
-      <li>1 tsp of salt</li>
-      <li>7 dl of flour</li>
-    </ul>
-    <br />
-    <h3><b>Topping (copilot pizza xdd)</b></h3>
-    <ul>
-      <li>1 mozzarella</li>
-      <li>1 tomato</li>
-      <li>1 red onion</li>
-      <li>1 bell pepper</li>
-      <li>1 can of corn</li>
-      <li>1 can of olives</li>
-      <li>1 can of pineapple</li>
-    </ul>`,
+    recipe_ingredients: [
+      "Pasta",
+      "Tomato Sauce",
+      "Cheese",
+      "Basil",
+      "Salt",
+      "Pepper",
+      "Olive Oil",
+      "Garlic",
+      "Onion",
+    ],
     recipe_nutrition: `<p>
     <b>Energy:</b> 1000 kcal
     <br />
