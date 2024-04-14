@@ -94,7 +94,7 @@ export const pantryInventoryDummyData = [
     item_quantity: 10,
     item_quantity_type: " pieces",
     item_name: "Apples",
-    item_location: "Shelf",
+    item_location: "skuff",
     expiration_date: "24.12.2024",
   },
   {
@@ -103,7 +103,7 @@ export const pantryInventoryDummyData = [
     item_quantity: 500,
     item_quantity_type: "g",
     item_name: "Pasta",
-    item_location: "Shelf",
+    item_location: "skuff",
     expiration_date: "01.01.2030",
   },
   {
@@ -112,7 +112,7 @@ export const pantryInventoryDummyData = [
     item_quantity: 1.5,
     item_quantity_type: "kg",
     item_name: "Rice",
-    item_location: "Shelf",
+    item_location: "skuff",
     expiration_date: "Never",
   },
 ];
@@ -124,7 +124,7 @@ export const fridgeInventoryDummyData = [
     item_quantity: 650,
     item_quantity_type: "g",
     item_name: "Chicken",
-    item_location: "Fridge",
+    item_location: "kjøleskap",
     expiration_date: "24.12.2024",
   },
   {
@@ -133,7 +133,7 @@ export const fridgeInventoryDummyData = [
     item_quantity: 2,
     item_quantity_type: "L",
     item_name: "Milk",
-    item_location: "Shelf",
+    item_location: "kjøleskap",
     expiration_date: "20.04.2024",
   },
   {
@@ -142,7 +142,7 @@ export const fridgeInventoryDummyData = [
     item_quantity: 1,
     item_quantity_type: "kg",
     item_name: "Cheese",
-    item_location: "Fridge",
+    item_location: "kjøleskap",
     expiration_date: "Expired",
   },
 ];
@@ -154,7 +154,7 @@ export const freezerInventoryDummyData = [
     item_quantity: 1.2,
     item_quantity_type: "kg",
     item_name: "Peas",
-    item_location: "Freezer",
+    item_location: "fryser",
     expiration_date: "24.12.2024",
   },
   {
@@ -163,7 +163,7 @@ export const freezerInventoryDummyData = [
     item_quantity: 1.5,
     item_quantity_type: "L",
     item_name: "Ice cream",
-    item_location: "Freezer",
+    item_location: "fryser",
     expiration_date: "20.11.2024",
   },
   {
@@ -172,7 +172,7 @@ export const freezerInventoryDummyData = [
     item_quantity: 4,
     item_quantity_type: " pieces",
     item_name: "Baguette",
-    item_location: "Freezer",
+    item_location: "fryser",
     expiration_date: "24.12.2025",
   },
 ];
