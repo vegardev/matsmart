@@ -1,11 +1,11 @@
 import InventoryTable from "@/src/app/ui/inventory/InventoryTable";
-import { pantryInventoryDummyData } from "../../backend/dummyData";
+import { fetchInventoryItems } from "../../backend/databaseCalls";
 
-export default function Pantry() {
+export default async function Pantry() {
   return (
     <>
       <h1>Pantry</h1>
-      <InventoryTable data={pantryInventoryDummyData} />
+      <InventoryTable data={await fetchInventoryItems("skuff")} />
     </>
   );
 }

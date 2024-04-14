@@ -1,11 +1,11 @@
 import InventoryTable from "@/src/app/ui/inventory/InventoryTable";
-import { freezerInventoryDummyData } from "../../backend/dummyData";
+import { fetchInventoryItems } from "../../backend/databaseCalls";
 
-export default function Freezer() {
+export default async function Freezer() {
   return (
     <>
       <h1>Freezer</h1>
-      <InventoryTable data={freezerInventoryDummyData} />
+      <InventoryTable data={await fetchInventoryItems("fryser")} />
     </>
   );
 }

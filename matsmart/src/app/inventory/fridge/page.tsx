@@ -1,11 +1,11 @@
 import InventoryTable from "@/src/app/ui/inventory/InventoryTable";
-import { fridgeInventoryDummyData } from "../../backend/dummyData";
+import { fetchInventoryItems } from "../../backend/databaseCalls";
 
-export default function Fridge() {
+export default async function Fridge() {
   return (
     <>
       <h1>Fridge</h1>
-      <InventoryTable data={fridgeInventoryDummyData} />
+      <InventoryTable data={await fetchInventoryItems("kjøleskap")} />
     </>
   );
 }
