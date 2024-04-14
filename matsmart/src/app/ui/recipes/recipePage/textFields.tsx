@@ -36,7 +36,7 @@ export function RecipeTextFields({
 
   return (
     <div className="flex flex-col justify-between rounded-xl bg-gray-50 p-4">
-      {/*...*/}
+      <h2 className="py-4 mx-3 text-2xl font-bold">{type + ":"}</h2>
       <div className={"bg-white px-6 py-3 rounded-2xl"}>
         {type === "Ingredients" && Array.isArray(content) ? (
           <div className="flex flex-col">
