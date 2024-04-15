@@ -67,12 +67,14 @@ export async function fetchRecipeItems(
 }
 
 //Fetches all items in a inventory based on a location value
+// Gjorde endring slik at navn på item hentes fra item_database
 export async function fetchInventoryItems(
   location: string,
 ): Promise<Inventory_items[]> {
   try {
     const dbquery = await query({
-      query: "SELECT * FROM inventory WHERE location = ?",
+      query:
+        "SELECT inventory.*, item_database.item_name FROM inventory, item_database WHERE inventory.item_id = item_database.item_id AND location = ?",
       values: [location],
     });
     return dbquery as Inventory_items[];

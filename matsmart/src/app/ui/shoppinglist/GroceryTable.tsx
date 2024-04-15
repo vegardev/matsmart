@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { GroceryItem } from "@/src/app/backend/definitions";
+import { Inventory_items } from "@/src/app/backend/definitions";
 
 type TableProps = {
-  data: GroceryItem[];
+  data: Inventory_items[];
   className?: string;
 };
 
@@ -42,9 +42,9 @@ const GroceryTable: React.FC<TableProps> = ({ data, className }) => {
         <tbody className="bg-white divide-y divide-gray-200">
           {data.map((item, index) => (
             <tr key={index}>
-              <td className="px-6 py-4 whitespace-nowrap">{item.name}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{item.item_name}</td>
               <td className="px-6 py-4 whitespace-nowrap">
-                {item.quantity + item.quantityType}
+                {item.item_quantity + item.item_quantity_type}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <input
