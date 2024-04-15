@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Freezer renders correctly 1`] = `
+<DocumentFragment>
+  <h1>
+    Freezer
+  </h1>
+  <table
+    class="min-w-full divide-y divide-gray-200"
+  >
+    <thead
+      class="bg-gray-50"
+    >
+      <tr>
+        <th
+          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+        >
+          Groceries
+        </th>
+        <th
+          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+        >
+          Quantity
+        </th>
+        <th
+          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+        >
+          Expiration Date
+        </th>
+        <th
+          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+        >
+          Remove?
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      class="bg-white divide-y divide-gray-200"
+    />
+  </table>
+</DocumentFragment>
+`;
+
+exports[`Fridge renders correctly 1`] = `
+<DocumentFragment>
+  <h1>
+    Fridge
+  </h1>
+  <table
+    class="min-w-full divide-y divide-gray-200"
+  >
+    <thead
+      class="bg-gray-50"
+    >
+      <tr>
+        <th
+          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+        >
+          Groceries
+        </th>
+        <th
+          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+        >
+          Quantity
+        </th>
+        <th
+          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+        >
+          Expiration Date
+        </th>
+        <th
+          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+        >
+          Remove?
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      class="bg-white divide-y divide-gray-200"
+    />
+  </table>
+</DocumentFragment>
+`;
+
+exports[`Pantry renders correctly 1`] = `
+<DocumentFragment>
+  <h1>
+    Pantry
+  </h1>
+  <table
+    class="min-w-full divide-y divide-gray-200"
+  >
+    <thead
+      class="bg-gray-50"
+    >
+      <tr>
+        <th
+          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+        >
+          Groceries
+        </th>
+        <th
+          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+        >
+          Quantity
+        </th>
+        <th
+          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+        >
+          Expiration Date
+        </th>
+        <th
+          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+        >
+          Remove?
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      class="bg-white divide-y divide-gray-200"
+    />
+  </table>
+</DocumentFragment>
+`;

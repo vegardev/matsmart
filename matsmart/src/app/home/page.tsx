@@ -18,12 +18,14 @@ interface Item_database {
   item_quantity_type: string;
 }
 
-interface Recipe {
+export type Recipe = {
   recipe_id: number;
   title: string;
-  content: string;
+  recipe_method: string;
+  recipe_nutritions: string;
   image: string;
-}
+  recipe_time: string;
+};
 
 const dummyDates: CloseToExpire[] = [
   {
@@ -67,14 +69,18 @@ const dummyRecommended: Recipe[] = [
   {
     recipe_id: 7,
     title: "Pizza med croissant",
-    content: "lalal",
+    recipe_method: "lalal",
+    recipe_nutritions: "string",
     image: "lolol",
+    recipe_time: "string",
   },
   {
     recipe_id: 8,
     title: "Bunnprisburger",
-    content: "kfnawke",
+    recipe_method: "lalal",
+    recipe_nutritions: "string",
     image: "nfer",
+    recipe_time: "string",
   },
 ];
 
@@ -84,8 +90,8 @@ export default function Page() {
       <div className="logo-container">
         <div className="logo"></div>
       </div>
-      <div className="color-prim flex">
-        <div className="flex grow flex-row rounded-xl color-prim">
+      <div className="transparent">
+        <div className="flex grow flex-row rounded-xl color-sec">
           <div className="home-container">
             <NewGroceriesItems NewGroceriesItems={dummyGroceries} />
           </div>
