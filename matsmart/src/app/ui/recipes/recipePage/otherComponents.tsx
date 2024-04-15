@@ -42,8 +42,8 @@ export function IngredientsCheck({
   const missingIngredients = ingredientsNeeded.filter(
     (ingredientNeeded) =>
       !ingredients.some(
-        (ingredient) => ingredient.item_name === ingredientNeeded
-      )
+        (ingredient) => ingredient.item_name === ingredientNeeded,
+      ),
   );
 
   const closestExpirationDate = findClosestExpirationDate();
