@@ -8,6 +8,7 @@ import {
   fridgeInventoryDummyData,
   pantryInventoryDummyData,
 } from "@/src/app/backend/dummyData";
+import fetch from "jest-fetch-mock";
 
 describe("Freezer", () => {
   it("renders correctly", async () => {
