@@ -92,17 +92,7 @@ export const recipesDummyData = [
     fiyasilufyi asf ai fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg
     sa-fusa fiuakuy qt <br /> <br /> fuays fiyasilufyi asf ai
     fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg sa-fusa fiuakuy qt{" "}`,
-    recipe_ingredients: [
-      "Pasta",
-      "Tomato Sauce",
-      "Cheese",
-      "Basil",
-      "Salt",
-      "Pepper",
-      "Olive Oil",
-      "Garlic",
-      "Onion",
-    ],
+    recipe_ingredients: ["Pasta", "Rice"],
     recipe_nutrition: `<p>
     <b>Energy:</b> 1000 kcal
     <br />
@@ -381,5 +371,35 @@ export const recipesDummyData = [
     <br />
     <b>Salt:</b> 5 g
     </p>`,
+  },
+];
+
+export const pantryInventoryDummyData = [
+  {
+    inventory_id: 1,
+    item_id: 1,
+    item_quantity: 10,
+    item_quantity_type: " pieces",
+    item_name: "Apples",
+    item_location: "skuff",
+    expiration_date: "24.12.2024",
+  },
+  {
+    inventory_id: 1,
+    item_id: 1,
+    item_quantity: 500,
+    item_quantity_type: "g",
+    item_name: "Pasta",
+    item_location: "skuff",
+    expiration_date: "01.01.2030",
+  },
+  {
+    inventory_id: 1,
+    item_id: 1,
+    item_quantity: 1.5,
+    item_quantity_type: "kg",
+    item_name: "Rice",
+    item_location: "skuff",
+    expiration_date: "03.02.2023",
   },
 ];

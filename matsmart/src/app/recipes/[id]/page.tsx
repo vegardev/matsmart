@@ -3,7 +3,10 @@ import { recipesDummyData } from "@/src/app/backend/dummyData"; // Erstatt med d
 import { Recipe_Page } from "@/src/app/backend/definitions";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { DisplayRecipeTags } from "@/src/app/ui/recipes/recipePage/otherComponents";
+import {
+  DisplayRecipeTags,
+  IngredientsCheck,
+} from "@/src/app/ui/recipes/recipePage/otherComponents";
 import { RecipeTextFields } from "@/src/app/ui/recipes/recipePage/textFields";
 
 function getRecipeById(id: number): Recipe_Page {
@@ -18,14 +21,13 @@ export default function Page({ params }: { params: { id: string } }) {
   const recipe = getRecipeById(Number(params.id));
   return (
     <>
-      <div className="flex justify-between mb-10">
+      <div className="flex justify-between mb-6">
         <div className="mb-4 text-xl md:text-4xl">{recipe.recipe_name}</div>
-        <div className="">
+        <div className="bg-white rounded-lg p-2 pr-6">
           <div>
             <DisplayRecipeTags tags={recipe.recipe_tags} />
           </div>
-          <div className="ps-4">Can be made until: 12.03.2024</div>{" "}
-          {/* Legg til etter MVP */}
+          <IngredientsCheck ingredientsNeeded={recipe.recipe_ingredients} />
         </div>
       </div>
       <div className="grid grid-cols-11">

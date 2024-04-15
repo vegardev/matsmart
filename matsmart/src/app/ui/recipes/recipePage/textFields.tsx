@@ -2,16 +2,7 @@ import clsx from "clsx";
 import { ShoppingCartIcon as ShoppingCartIconSolid } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
-let aIngredients = [
-  "Salt",
-  "Pepper",
-  "Sugar",
-  "Flour",
-  "Butter",
-  "Milk",
-  "Cheese",
-];
+import { pantryInventoryDummyData } from "@/src/app/backend/dummyData";
 
 export function RecipeTextFields({
   type,
@@ -44,12 +35,15 @@ export function RecipeTextFields({
               <div
                 key={index}
                 className={clsx("flex justify-between ", {
-                  "text-red-500": !aIngredients.includes(ingredient),
+                  "text-red-500": !pantryInventoryDummyData.some(
+                    (item) => item.item_name === ingredient,
+                  ),
                 })}
               >
                 {ingredient}
-                {!aIngredients.includes(ingredient) &&
-                !clickedIngredients.includes(ingredient) ? (
+                {!pantryInventoryDummyData.some(
+                  (item) => item.item_name === ingredient,
+                ) && !clickedIngredients.includes(ingredient) ? (
                   <ShoppingCartIconSolid
                     className="size-5 text-black hover:cursor-pointer hover:text-blue-400"
                     onClick={() => handleIconClick(ingredient)}

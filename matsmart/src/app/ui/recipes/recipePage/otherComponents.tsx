@@ -1,3 +1,6 @@
+import { Inventory_items } from "@/src/app/backend/definitions";
+import { pantryInventoryDummyData } from "@/src/app/backend/dummyData";
+
 export function DisplayRecipeTags({ tags }: { tags: string[] }) {
   return (
     <div className="flex flex-wrap space-x-1 ps-4 pb-2">
@@ -14,15 +17,52 @@ export function DisplayRecipeTags({ tags }: { tags: string[] }) {
   );
 }
 
-/* export function IngredientsCheck({
-  ingredients,
+export function IngredientsCheck({
   ingredientsNeeded,
 }: {
-  ingredients: string[];
   ingredientsNeeded: string[];
 }) {
-  return <div className="flex flex-col">Can be made until: {}</div>;
-}
-*/
+  const ingredients: Inventory_items[] = pantryInventoryDummyData;
 
-// Legg til etter MVP
+  function findClosestExpirationDate() {
+    let closestExpirationDate = new Date(8640000000000000);
+    ingredientsNeeded.map((ingredientNeeded) => {
+      ingredients.map((ingredient) => {
+        if (
+          ingredient.item_name === ingredientNeeded &&
+          new Date(ingredient.expiration_date) < closestExpirationDate
+        ) {
+          closestExpirationDate = new Date(ingredient.expiration_date);
+        }
+      });
+    });
+    return closestExpirationDate;
+  }
+
+  const missingIngredients = ingredientsNeeded.filter(
+    (ingredientNeeded) =>
+      !ingredients.some(
+        (ingredient) => ingredient.item_name === ingredientNeeded,
+      ),
+  );
+
+  const closestExpirationDate = findClosestExpirationDate();
+  const isExpired = closestExpirationDate < new Date();
+
+  return (
+    <div className="ps-4">
+      Can be made until:{" "}
+      {missingIngredients.length > 0 ? (
+        <span className="text-red-500">Missing ingredients</span>
+      ) : (
+        <span className={isExpired ? "text-red-500" : ""}>
+          {closestExpirationDate.toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          })}
+        </span>
+      )}
+    </div>
+  );
+}
