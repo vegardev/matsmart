@@ -1,25 +1,17 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import Freezer from "@/src/app/inventory/freezer/page";
 import Fridge from "@/src/app/inventory/fridge/page";
 import Pantry from "@/src/app/inventory/pantry/page";
-import { fetchInventoryItems } from "@/src/app/backend/databaseCalls";
 import {
   freezerInventoryDummyData,
   fridgeInventoryDummyData,
   pantryInventoryDummyData,
 } from "@/src/app/backend/dummyData";
-import { waitFor } from "@testing-library/react";
-
-jest.mock("../src/app/backend/databaseCalls", () => ({
-  fetchInventoryItems: jest.fn(),
-}));
 
 describe("Freezer", () => {
   it("renders correctly", async () => {
-    (fetchInventoryItems as jest.Mock).mockResolvedValueOnce(
-      freezerInventoryDummyData,
-    );
+    fetch.mockResponseOnce(JSON.stringify(freezerInventoryDummyData));
 
     const { asFragment } = render(<Freezer />);
     await waitFor(() => {
@@ -30,9 +22,7 @@ describe("Freezer", () => {
 
 describe("Fridge", () => {
   it("renders correctly", async () => {
-    (fetchInventoryItems as jest.Mock).mockResolvedValueOnce(
-      fridgeInventoryDummyData,
-    );
+    fetch.mockResponseOnce(JSON.stringify(fridgeInventoryDummyData));
 
     const { asFragment } = render(<Fridge />);
     await waitFor(() => {
@@ -43,9 +33,7 @@ describe("Fridge", () => {
 
 describe("Pantry", () => {
   it("renders correctly", async () => {
-    (fetchInventoryItems as jest.Mock).mockResolvedValueOnce(
-      pantryInventoryDummyData,
-    );
+    fetch.mockResponseOnce(JSON.stringify(pantryInventoryDummyData));
 
     const { asFragment } = render(<Pantry />);
     await waitFor(() => {

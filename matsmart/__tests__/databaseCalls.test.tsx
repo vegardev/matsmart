@@ -14,7 +14,7 @@ import {
 } from "@/src/app/backend/definitions";
 import { test, describe } from "@jest/globals";
 
-describe("Database get tests", () => {
+describe("Database GET tests", () => {
   test("Fetch database test", async () => {
     const result: Item_database[] = await fetchDatabaseTest();
     expect(result).toEqual([
@@ -22,6 +22,7 @@ describe("Database get tests", () => {
       { item_id: 2, item_name: "Melk", item_quantity_type: "liter" },
       { item_id: 3, item_name: "Mel", item_quantity_type: "gram" },
       { item_id: 4, item_name: "Smør", item_quantity_type: "gram" },
+      { item_id: 5, item_name: "Baguette", item_quantity_type: "stykk" },
     ]);
     // Add more assertions here based on the expected structure and values of the result
   });
@@ -91,6 +92,7 @@ describe("Database get tests", () => {
       {
         inventory_id: 1,
         item_id: 1,
+        item_name: "Egg",
         item_quantity: 6,
         item_quantity_type: "stykk",
         location: "kjøleskap",
@@ -99,6 +101,7 @@ describe("Database get tests", () => {
       {
         inventory_id: 2,
         item_id: 2,
+        item_name: "Melk",
         item_quantity: 2,
         item_quantity_type: "liter",
         location: "kjøleskap",
@@ -107,6 +110,7 @@ describe("Database get tests", () => {
       {
         inventory_id: 4,
         item_id: 1,
+        item_name: "Egg",
         item_quantity: 2,
         item_quantity_type: "stykk",
         location: "kjøleskap",
