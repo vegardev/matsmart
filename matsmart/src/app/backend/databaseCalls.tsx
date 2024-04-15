@@ -82,3 +82,19 @@ export async function fetchInventoryItems(
     throw Error((error as Error).message);
   }
 }
+
+// Gjør full text search på recipe titles i databasen, og returnerer en liste med oppskrifter som matcher
+export async function fetchSuggestions(
+  searchQuery: string,
+): Promise<Recipes_no_content[]> {
+  try {
+    const dbquery = await query({
+      query:
+        "SELECT recipe_id, title, image FROM recipes WHERE title LIKE CONCAT('%', ?, '%')",
+      values: [searchQuery],
+    });
+    return dbquery as Recipes_no_content[];
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
