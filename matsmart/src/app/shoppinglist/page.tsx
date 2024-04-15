@@ -1,4 +1,4 @@
-import { SearchBar } from "@/src/app/ui/components/SearchBar";
+import { SearchBar } from "@/src/app/ui/shoppinglist/GrocerySearchBar";
 import GroceryTable from "@/src/app/ui/shoppinglist/GroceryTable";
 import MyButton from "@/src/app/ui/shoppinglist/button";
 import MeasurementDropdown from "@/src/app/ui/shoppinglist/MeasurementDropdown";

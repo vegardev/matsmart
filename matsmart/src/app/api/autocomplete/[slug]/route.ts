@@ -1,4 +1,4 @@
-import { fetchSuggestions } from "@/src/app/backend/databaseCalls";
+import { fetchGrocerySuggestions } from "@/src/app/backend/databaseCalls";
 import { NextResponse } from "next/server";
 
 type Params = {
@@ -13,7 +13,7 @@ export async function GET(request: Request, context: { params: Params }) {
       return new NextResponse("Invalid search query.", { status: 400 });
     }
 
-    const queryResult = await fetchSuggestions(partialQuery);
+    const queryResult = await fetchGrocerySuggestions(partialQuery);
     const suggestions = queryResult;
     console.log(suggestions);
     return new NextResponse(JSON.stringify(suggestions));

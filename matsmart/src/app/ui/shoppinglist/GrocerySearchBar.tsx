@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React, { useState, useEffect } from "react";
-import { SearchSuggestions } from "@/src/app/ui/components/SearchSuggestions";
+import { SearchSuggestions } from "@/src/app/ui/shoppinglist/SearchSuggestions";
 
 export function SearchBar({ searchTerm = "" }: { searchTerm: string }) {
   const [search, setSearch] = useState(searchTerm);
-  const [recipes, setRecipes] = useState([]);
+  const [groceries, setGroceries] = useState([]);
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     if (search !== "") {
       fetch(`/api/autocomplete/${search}`)
         .then((response) => response.json())
-        .then((data) => setRecipes(data));
+        .then((data) => setGroceries(data));
 
       setIsActive(true);
     } else {
@@ -34,7 +34,9 @@ export function SearchBar({ searchTerm = "" }: { searchTerm: string }) {
           onChange={(input) => setSearch(input.target.value)}
         />
       </div>
-      {search && <SearchSuggestions suggestions={recipes} />}
+      {search && (
+        <SearchSuggestions setSearch={setSearch} suggestions={groceries} />
+      )}
     </div>
   );
 }

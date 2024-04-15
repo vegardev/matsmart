@@ -84,7 +84,7 @@ export async function fetchInventoryItems(
 }
 
 // Gjør full text search på recipe titles i databasen, og returnerer en liste med oppskrifter som matcher
-export async function fetchSuggestions(
+export async function fetchRecipeSuggestions(
   searchQuery: string,
 ): Promise<Recipes_no_content[]> {
   try {
@@ -94,6 +94,22 @@ export async function fetchSuggestions(
       values: [searchQuery],
     });
     return dbquery as Recipes_no_content[];
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
+
+// Gjør full text search på item names i databasen, og returnerer en liste med items som matcher
+export async function fetchGrocerySuggestions(
+  searchQuery: string,
+): Promise<Item_database[]> {
+  try {
+    const dbquery = await query({
+      query:
+        "SELECT * FROM item_database WHERE item_name LIKE CONCAT('%', ?, '%')",
+      values: [searchQuery],
+    });
+    return dbquery as Item_database[];
   } catch (error) {
     throw Error((error as Error).message);
   }
