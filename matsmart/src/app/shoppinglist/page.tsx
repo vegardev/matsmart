@@ -1,8 +1,8 @@
 import { SearchBar } from "@/src/app/ui/recipes/search";
-import GroceryTable from "../ui/shoppinglist/GroceryTable";
-import MyButton from "../ui/shoppinglist/button";
-import MeasurementDropdown from "../ui/shoppinglist/MeasurementDropdown";
-import { shoppingListDummyData } from "../backend/dummyData";
+import GroceryTable from "@/src/app/ui/shoppinglist/GroceryTable";
+import MyButton from "@/src/app/ui/shoppinglist/button";
+import MeasurementDropdown from "@/src/app/ui/shoppinglist/MeasurementDropdown";
+import { shoppingListDummyData } from "@/src/app/backend/dummyData";
 
 export default function ShoppingList() {
   return (
