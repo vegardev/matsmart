@@ -97,3 +97,12 @@ body {
   flex: 1;
   margin: 0 10px;
 }
+
+.ql-container {
+  resize: vertical;
+  overflow: auto;
+}
+
+.ql-editor {
+  min-height: 18em;
+}
