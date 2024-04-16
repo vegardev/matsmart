@@ -87,3 +87,20 @@ export type Recipe_Page = {
   recipe_ingredients: string[];
   recipe_nutrition: string;
 };
+
+export type Recipe_CreateType = {
+  recipe_name: string;
+  recipe_time: number;
+  recipe_image: string;
+  recipe_tags: string[];
+  recipe_method: string;
+  recipe_ingredients: string[];
+  recipe_nutrition: string;
+};
+
+export type Recipe_createTest = {
+  title: string;
+  recipe_method: string;
+  recipe_nutritions: string;
+  image: string;
+};
