@@ -2,12 +2,12 @@ import { fetchGrocerySuggestions } from "@/src/app/backend/databaseCalls";
 import { NextResponse } from "next/server";
 
 type Params = {
-  slug: string;
+  term: string;
 };
 
 export async function GET(request: Request, context: { params: Params }) {
   try {
-    const partialQuery = context.params.slug;
+    const partialQuery = context.params.term;
 
     if (typeof partialQuery !== "string" || !partialQuery.trim()) {
       return new NextResponse("Invalid search query.", { status: 400 });

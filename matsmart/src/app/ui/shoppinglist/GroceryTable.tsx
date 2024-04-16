@@ -1,19 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import { Inventory_items } from "@/src/app/backend/definitions";
+import { Shopping_items } from "@/src/app/backend/definitions";
 
 type TableProps = {
-  data: Inventory_items[];
+  data: Shopping_items[];
   className?: string;
 };
 
 const GroceryTable: React.FC<TableProps> = ({ data, className }) => {
   const [checkedStates, setCheckedStates] = useState(
-    new Array(data.length).fill(false),
+    new Array(data.length).fill(false)
   );
   const handleCheckboxChange = (
     event: React.ChangeEvent<HTMLInputElement>,
-    index: number,
+    index: number
   ) => {
     // Update the specific checkbox's checked state in the array
     const newCheckedStates = [...checkedStates];
@@ -44,7 +44,7 @@ const GroceryTable: React.FC<TableProps> = ({ data, className }) => {
             <tr key={index}>
               <td className="px-6 py-4 whitespace-nowrap">{item.item_name}</td>
               <td className="px-6 py-4 whitespace-nowrap">
-                {item.item_quantity + item.item_quantity_type}
+                {item.item_quantity + " " + item.item_quantity_type}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <input

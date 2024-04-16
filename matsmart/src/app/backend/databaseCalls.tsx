@@ -5,6 +5,7 @@ import {
   Recipes_no_content,
   Recipe_items,
   Inventory_items,
+  Shopping_items,
 } from "@/src/app/backend/definitions";
 
 //Posts to console if you have connection with the database
@@ -52,7 +53,7 @@ export async function fetchSingelRecipe(recipe_id: number): Promise<Recipe[]> {
 
 //Fetces info about items needed for a recipe based on a recipe_id value
 export async function fetchRecipeItems(
-  recipe_id: number,
+  recipe_id: number
 ): Promise<Recipe_items[]> {
   try {
     const dbquery = await query({
@@ -69,7 +70,7 @@ export async function fetchRecipeItems(
 //Fetches all items in a inventory based on a location value
 // Gjorde endring slik at navn på item hentes fra item_database
 export async function fetchInventoryItems(
-  location: string,
+  location: string
 ): Promise<Inventory_items[]> {
   try {
     const dbquery = await query({
@@ -85,7 +86,7 @@ export async function fetchInventoryItems(
 
 // Gjør full text search på recipe titles i databasen, og returnerer en liste med oppskrifter som matcher
 export async function fetchRecipeSuggestions(
-  searchQuery: string,
+  searchQuery: string
 ): Promise<Recipes_no_content[]> {
   try {
     const dbquery = await query({
@@ -101,13 +102,74 @@ export async function fetchRecipeSuggestions(
 
 // Gjør full text search på item names i databasen, og returnerer en liste med items som matcher
 export async function fetchGrocerySuggestions(
-  searchQuery: string,
+  searchQuery: string
 ): Promise<Item_database[]> {
   try {
     const dbquery = await query({
       query:
         "SELECT * FROM item_database WHERE item_name LIKE CONCAT('%', ?, '%')",
       values: [searchQuery],
+    });
+    return dbquery as Item_database[];
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
+
+// Fetcher alle items i shopping_list
+// Gjorde endring slik at navn på shopping list items hentes fra item_database
+export async function fetchShoppingList(): Promise<Shopping_items[]> {
+  try {
+    const dbquery = await query({
+      query:
+        "SELECT idb.item_name, sl.item_quantity, sl.item_quantity_type FROM item_database idb, shopping_list sl WHERE idb.item_id = sl.item_id",
+      values: [],
+    });
+    return dbquery as Shopping_items[];
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
+
+// Submitter ny item til item_database
+export async function submitGroceryItem(
+  item_name: string,
+  item_quantity_type: string
+): Promise<void> {
+  try {
+    await query({
+      query:
+        "INSERT INTO item_database (item_name, item_quantity_type) VALUES (?, ?)",
+      values: [item_name, item_quantity_type],
+    });
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
+
+// Submitter ny item til shopping_list
+export async function submitShoppingListItem(
+  item_id: number,
+  item_quantity: number,
+  item_quantity_type: string
+): Promise<void> {
+  try {
+    await query({
+      query:
+        "INSERT INTO shopping_list (item_id, item_quantity, item_quantity_type) VALUES (?, ?, ?)",
+      values: [item_id, item_quantity, item_quantity_type],
+    });
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
+
+// Fetcher alle grocery items fra item_database
+export async function fetchGroceryItems(): Promise<Item_database[]> {
+  try {
+    const dbquery = await query({
+      query: "SELECT * FROM item_database",
+      values: [],
     });
     return dbquery as Item_database[];
   } catch (error) {
