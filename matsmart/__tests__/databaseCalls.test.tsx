@@ -15,7 +15,6 @@ import {
 import { test, describe } from "@jest/globals";
 
 describe("Database GET tests", () => {
-  /*
   test("Fetch database test", async () => {
     const result: Item_database[] = await fetchDatabaseTest();
     expect(result).toEqual([
@@ -27,7 +26,7 @@ describe("Database GET tests", () => {
     ]);
     // Add more assertions here based on the expected structure and values of the result
   });
- */
+
   test("Fetch all recipes", async () => {
     const result: Recipes_no_content[] = await fetchRecipes();
     expect(result).toEqual([
