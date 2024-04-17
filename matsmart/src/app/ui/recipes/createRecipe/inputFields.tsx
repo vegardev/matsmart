@@ -1,13 +1,15 @@
 import React, { useState, useImperativeHandle, forwardRef } from "react";
+import { DisplayRecipeTags } from "@/src/app/ui/recipes/sharedComponents";
 import "react-quill/dist/quill.snow.css";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const TextInputFields = forwardRef(
   ({ catagory }: { catagory: string }, ref) => {
     const [value, setValue] = useState("");
     const [ingredients, setIngredients] = useState<string[]>([]);
-    const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
     useImperativeHandle(ref, () => ({
       getValue: () => value,
@@ -36,7 +38,7 @@ const TextInputFields = forwardRef(
                 onChange={handleChange}
               />
               <button
-                className="text-center bg-blue-400 px-3 py-2 rounded-lg text-white"
+                className="text-center bg-blue-600 px-3 py-2 rounded-lg text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 onClick={handleAdd}
               >
                 Add
@@ -95,8 +97,43 @@ const AddImage = forwardRef((props, ref) => {
   );
 });
 
+const AddTags = forwardRef((props, ref) => {
+  const [tags, setTags] = useState<string[]>([]);
+  const [value, setValue] = useState("");
+
+  useImperativeHandle(ref, () => ({
+    getTags: () => tags,
+  }));
+
+  const handleAdd = () => {
+    setTags((prevTags) => [...prevTags, value]);
+    setValue("");
+  };
+
+  return (
+    <div className="flex flex-col">
+      <div className="flex mb-2 ps-4">
+        <input
+          className="bg-white px-4 rounded-2xl mr-2 ml-auto"
+          type="text"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+        <button
+          className="text-center bg-blue-600 px-3 py-1 rounded-lg text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+          onClick={handleAdd}
+        >
+          Add
+        </button>
+      </div>
+      <DisplayRecipeTags tags={tags} />
+    </div>
+  );
+});
+
 // Lint failed if we didn't add displayName
 TextInputFields.displayName = "TextInputFields";
 AddImage.displayName = "AddImage";
+AddTags.displayName = "AddTags";
 
-export { TextInputFields, AddImage };
+export { TextInputFields, AddImage, AddTags };

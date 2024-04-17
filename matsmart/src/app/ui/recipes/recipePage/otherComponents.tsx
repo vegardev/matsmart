@@ -1,6 +1,7 @@
 import { Inventory_items2 } from "@/src/app/backend/definitions";
 import { pantryInventoryDummyData } from "@/src/app/backend/dummyData";
 
+/*
 export function DisplayRecipeTags({ tags }: { tags: string[] }) {
   return (
     <div className="flex flex-wrap space-x-1 ps-4 pb-2">
@@ -16,7 +17,7 @@ export function DisplayRecipeTags({ tags }: { tags: string[] }) {
     </div>
   );
 }
-
+*/
 export function IngredientsCheck({
   ingredientsNeeded,
 }: {
