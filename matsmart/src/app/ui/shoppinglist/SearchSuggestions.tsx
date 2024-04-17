@@ -32,7 +32,7 @@ export function SearchSuggestions({
                 key={suggestion.item_id}
                 onClick={() => handleItemClick(suggestion.item_name)}
                 onKeyDown={handleKeyDown(suggestion.item_name)}
-                className={`${index === selected ? "bg-blue-200" : "bg-gray-50"}`}
+                className={`rounded-md p-1 ${index === selected ? "bg-blue-200" : "bg-gray-50"}`}
                 role="button"
                 tabIndex={0}
               >

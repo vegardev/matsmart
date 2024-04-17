@@ -1,4 +1,5 @@
 import { query } from "@/src/app/backend/db";
+import mysql, { RowDataPacket } from "mysql2/promise";
 import {
   Item_database,
   Recipe,
@@ -84,6 +85,23 @@ export async function fetchInventoryItems(
   }
 }
 
+// Submitter en ny item til inventory
+export async function submitInventoryItem(
+  item_id: number,
+  item_quantity: number,
+  item_quantity_type: string,
+  location: string
+): Promise<void> {
+  try {
+    await query({
+      query:
+        "INSERT INTO inventory (item_id, item_quantity, item_quantity_type, location) VALUES (?, ?, ?, ?)",
+      values: [item_id, item_quantity, item_quantity_type, location],
+    });
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
 // Gjør full text search på recipe titles i databasen, og returnerer en liste med oppskrifter som matcher
 export async function fetchRecipeSuggestions(
   searchQuery: string
@@ -122,7 +140,7 @@ export async function fetchShoppingList(): Promise<Shopping_items[]> {
   try {
     const dbquery = await query({
       query:
-        "SELECT idb.item_name, sl.item_quantity, sl.item_quantity_type FROM item_database idb, shopping_list sl WHERE idb.item_id = sl.item_id",
+        "SELECT sl.item_id, idb.item_name, sl.item_quantity, sl.item_quantity_type FROM item_database idb, shopping_list sl WHERE idb.item_id = sl.item_id",
       values: [],
     });
     return dbquery as Shopping_items[];
@@ -132,18 +150,39 @@ export async function fetchShoppingList(): Promise<Shopping_items[]> {
 }
 
 // Submitter ny item til item_database
+// Oppretter en ny connection som støtter transaksjoner
+// LAST_INSERT_ID() fungerer ikke uten
 export async function submitGroceryItem(
   item_name: string,
   item_quantity_type: string
-): Promise<void> {
+): Promise<number> {
+  const dbconnection = await mysql.createConnection({
+    host: "mysql.stud.ntnu.no",
+    database: "fs_idatt1005_1_bdigsec4_datab",
+    user: "fs_idatt1005_1_group_bdigsec4",
+    password: "Password",
+  });
+
   try {
-    await query({
-      query:
-        "INSERT INTO item_database (item_name, item_quantity_type) VALUES (?, ?)",
-      values: [item_name, item_quantity_type],
-    });
+    await dbconnection.beginTransaction();
+
+    await dbconnection.query(
+      "INSERT INTO item_database (item_name, item_quantity_type) VALUES (?, ?)",
+      [item_name, item_quantity_type]
+    );
+
+    const [rows] = (await dbconnection.query(
+      "SELECT LAST_INSERT_ID() as item_id"
+    )) as RowDataPacket[];
+
+    await dbconnection.commit();
+
+    return rows[0].item_id;
   } catch (error) {
+    await dbconnection.rollback();
     throw Error((error as Error).message);
+  } finally {
+    dbconnection.end();
   }
 }
 
@@ -158,6 +197,33 @@ export async function submitShoppingListItem(
       query:
         "INSERT INTO shopping_list (item_id, item_quantity, item_quantity_type) VALUES (?, ?, ?)",
       values: [item_id, item_quantity, item_quantity_type],
+    });
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
+
+// Updater item i shopping_list
+export async function updateShoppingListItem(
+  item_id: number,
+  itemQuantity: number
+): Promise<void> {
+  try {
+    await query({
+      query: "UPDATE shopping_list SET item_quantity = ? WHERE item_id = ?",
+      values: [itemQuantity, item_id],
+    });
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
+
+// Sletter item fra shopping_list
+export async function deleteShoppingListItem(item_id: number): Promise<void> {
+  try {
+    await query({
+      query: "DELETE FROM shopping_list WHERE item_id = ?",
+      values: [item_id],
     });
   } catch (error) {
     throw Error((error as Error).message);

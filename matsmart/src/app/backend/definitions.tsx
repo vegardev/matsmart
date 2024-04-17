@@ -53,17 +53,17 @@ export type Recipe_items = {
 //expiration date burde nok endres type til Date
 export type Inventory_items = {
   inventory_id?: number;
-  item_id?: number;
+  item_id: number;
   item_quantity: number;
   item_quantity_type: string;
   item_name: string;
-  item_location?: string;
+  item_location: string;
   expiration_date?: string;
 };
 
 export type Shopping_items = {
   item_id: number;
-  item_name?: string;
+  item_name: string;
   item_quantity: number;
   item_quantity_type: string;
 };

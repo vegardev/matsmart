@@ -10,12 +10,14 @@ export async function GET() {
   return new NextResponse(JSON.stringify(items));
 }
 
-export async function POST(response: Response, item: Shopping_items) {
-  console.log("POST request: ", item.item_id, item.item_quantity);
+export async function POST(response: Response) {
+  const item: Shopping_items = await response.json();
+
   await submitShoppingListItem(
     item.item_id,
     item.item_quantity,
     item.item_quantity_type
   );
-  return new NextResponse(JSON.stringify(item));
+
+  return new NextResponse(JSON.stringify({ item }));
 }
