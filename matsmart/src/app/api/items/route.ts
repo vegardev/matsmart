@@ -10,8 +10,8 @@ export async function GET() {
   return new NextResponse(JSON.stringify(items));
 }
 
-export async function POST(request: Request, response: Response) {
-  const item: Item_database = await response.json();
+export async function POST(request: Request) {
+  const item: Item_database = await request.json();
 
   const itemId = await submitGroceryItem(
     item.item_name,
