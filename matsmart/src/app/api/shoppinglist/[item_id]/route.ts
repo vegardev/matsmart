@@ -5,7 +5,7 @@ import {
 import { NextResponse } from "next/server";
 import { Shopping_items } from "@/src/app/backend/definitions";
 
-export async function PUT(response: Response) {
+export async function PUT(request: Request, response: Response) {
   const item: Shopping_items = await response.json();
 
   // Gjør item_quantity til number igjen
@@ -17,7 +17,7 @@ export async function PUT(response: Response) {
 }
 
 // Sletter spesifikk item fra shopping_list
-export async function DELETE(response: Response) {
+export async function DELETE(request: Request, response: Response) {
   const item: Shopping_items = await response.json();
 
   await deleteShoppingListItem(item.item_id);
