@@ -45,7 +45,7 @@ const dummyDates: CloseToExpire[] = [
   {
     item_id: 3,
     item_name: "Apples",
-    expiration_date: new Date(2025, 2, 1),
+    expiration_date: new Date(2024, 3, 13),
     quantity: 10,
     item_type: "Fruit",
   },
@@ -87,6 +87,7 @@ const dummyRecommended: Recipe[] = [
 export default function Page() {
   return (
     <main className="light-background">
+      <h1>‎</h1>
       <div className="logo-container">
         <div className="logo"></div>
       </div>
