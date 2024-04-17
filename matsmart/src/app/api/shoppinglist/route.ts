@@ -16,7 +16,7 @@ export async function POST(request: Request) {
   await submitShoppingListItem(
     item.item_id,
     item.item_quantity,
-    item.item_quantity_type
+    item.item_quantity_type,
   );
 
   return new NextResponse(JSON.stringify({ item }));
