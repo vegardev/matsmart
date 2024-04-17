@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export type CloseToExpire = {
   item_id: number;
   item_name: string;
@@ -52,11 +53,11 @@ export type Recipe_items = {
 //expiration date burde nok endres type til Date
 export type Inventory_items = {
   inventory_id?: number;
-  item_id?: number;
+  item_id: number;
   item_quantity: number;
   item_quantity_type: string;
   item_name: string;
-  item_location?: string;
+  item_location: string;
   expiration_date?: string;
 };
 

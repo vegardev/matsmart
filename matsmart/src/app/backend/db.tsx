@@ -7,7 +7,7 @@ export async function query({
   query: string;
   values?: any[];
 }) {
-  const dbconnetion = await mysql.createConnection({
+  const dbconnection = await mysql.createConnection({
     host: "mysql.stud.ntnu.no",
     database: "fs_idatt1005_1_bdigsec4_datab",
     user: "fs_idatt1005_1_group_bdigsec4",
@@ -15,8 +15,8 @@ export async function query({
   });
 
   try {
-    const [results] = await dbconnetion.execute(query, values);
-    dbconnetion.end();
+    const [results] = await dbconnection.execute(query, values);
+    dbconnection.end();
     return results;
   } catch (error) {
     throw Error((error as Error).message);
