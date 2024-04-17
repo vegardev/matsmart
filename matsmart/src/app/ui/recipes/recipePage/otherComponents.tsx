@@ -53,9 +53,9 @@ export function IngredientsCheck({
     <div className="ps-4">
       Can be made until:{" "}
       {missingIngredients.length > 0 ? (
-        <span className="text-red-500">Missing ingredients</span>
+        <span className="text-red-600">Missing ingredients</span>
       ) : (
-        <span className={isExpired ? "text-red-500" : ""}>
+        <span className={isExpired ? "text-red-600" : ""}>
           {closestExpirationDate.toLocaleDateString("en-GB", {
             day: "2-digit",
             month: "2-digit",

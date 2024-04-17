@@ -35,7 +35,7 @@ export function RecipeTextFields({
               <div
                 key={index}
                 className={clsx("flex justify-between ", {
-                  "text-red-500": !pantryInventoryDummyData.some(
+                  "text-red-600": !pantryInventoryDummyData.some(
                     (item) => item.item_name === ingredient,
                   ),
                 })}
