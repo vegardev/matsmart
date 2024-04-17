@@ -61,16 +61,30 @@ export type Inventory_items = {
   expiration_date?: string;
 };
 
-export type Shopping_items = {
-  item_id: number;
-  item_name: string;
+/*
+-----------
+-----------
+Husk å fiks opp i type greiene senere
+-----------
+-----------
+*/
+export type Inventory_items2 = {
+  inventory_id?: number;
+  item_id?: number;
   item_quantity: number;
   item_quantity_type: string;
+  item_name: string;
+  item_location?: string;
+  expiration_date: string;
 };
 
-export type QuantityDropdownProps = {
-  quantity: number;
-  setQuantity: (quantity: number) => void;
-  quantityType: string;
-  setQuantityType: (quantityType: string) => void;
+export type Recipe_Page = {
+  recipe_id: number;
+  recipe_name: string;
+  recipe_time: number;
+  recipe_image: string;
+  recipe_tags: string[];
+  recipe_method: string;
+  recipe_ingredients: string[];
+  recipe_nutrition: string;
 };
