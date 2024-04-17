@@ -15,7 +15,7 @@ const GroceryTable: React.FC<
     checkedStates: boolean[];
     onCheckboxChange: (
       event: React.ChangeEvent<HTMLInputElement>,
-      index: number
+      index: number,
     ) => void;
     locations: string[];
     setLocations: React.Dispatch<React.SetStateAction<string[]>>;

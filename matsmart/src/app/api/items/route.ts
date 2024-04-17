@@ -15,7 +15,7 @@ export async function POST(response: Response) {
 
   const itemId = await submitGroceryItem(
     item.item_name,
-    item.item_quantity_type
+    item.item_quantity_type,
   );
 
   return new NextResponse(JSON.stringify({ item, item_id: itemId }));

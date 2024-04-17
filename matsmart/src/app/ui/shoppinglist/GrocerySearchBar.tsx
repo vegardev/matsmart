@@ -26,7 +26,7 @@ export function SearchBar({
           .then((response) => response.json())
           .then((data) => setGroceries(data))
           .catch((error) =>
-            console.error("Error fetching suggestion data:", error)
+            console.error("Error fetching suggestion data:", error),
           );
       }
     }, 500);

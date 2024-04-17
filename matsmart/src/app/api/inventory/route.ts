@@ -9,7 +9,7 @@ export async function POST(response: Response) {
     item.item_id,
     item.item_quantity,
     item.item_quantity_type,
-    item.item_location
+    item.item_location,
   );
 
   return new NextResponse(JSON.stringify({ item }));

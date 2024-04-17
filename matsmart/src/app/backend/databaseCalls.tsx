@@ -54,7 +54,7 @@ export async function fetchSingelRecipe(recipe_id: number): Promise<Recipe[]> {
 
 //Fetces info about items needed for a recipe based on a recipe_id value
 export async function fetchRecipeItems(
-  recipe_id: number
+  recipe_id: number,
 ): Promise<Recipe_items[]> {
   try {
     const dbquery = await query({
@@ -71,7 +71,7 @@ export async function fetchRecipeItems(
 //Fetches all items in a inventory based on a location value
 // Gjorde endring slik at navn på item hentes fra item_database
 export async function fetchInventoryItems(
-  location: string
+  location: string,
 ): Promise<Inventory_items[]> {
   try {
     const dbquery = await query({
@@ -90,7 +90,7 @@ export async function submitInventoryItem(
   item_id: number,
   item_quantity: number,
   item_quantity_type: string,
-  location: string
+  location: string,
 ): Promise<void> {
   try {
     await query({
@@ -104,7 +104,7 @@ export async function submitInventoryItem(
 }
 // Gjør full text search på recipe titles i databasen, og returnerer en liste med oppskrifter som matcher
 export async function fetchRecipeSuggestions(
-  searchQuery: string
+  searchQuery: string,
 ): Promise<Recipes_no_content[]> {
   try {
     const dbquery = await query({
@@ -120,7 +120,7 @@ export async function fetchRecipeSuggestions(
 
 // Gjør full text search på item names i databasen, og returnerer en liste med items som matcher
 export async function fetchGrocerySuggestions(
-  searchQuery: string
+  searchQuery: string,
 ): Promise<Item_database[]> {
   try {
     const dbquery = await query({
@@ -154,7 +154,7 @@ export async function fetchShoppingList(): Promise<Shopping_items[]> {
 // LAST_INSERT_ID() fungerer ikke uten
 export async function submitGroceryItem(
   item_name: string,
-  item_quantity_type: string
+  item_quantity_type: string,
 ): Promise<number> {
   const dbconnection = await mysql.createConnection({
     host: "mysql.stud.ntnu.no",
@@ -168,11 +168,11 @@ export async function submitGroceryItem(
 
     await dbconnection.query(
       "INSERT INTO item_database (item_name, item_quantity_type) VALUES (?, ?)",
-      [item_name, item_quantity_type]
+      [item_name, item_quantity_type],
     );
 
     const [rows] = (await dbconnection.query(
-      "SELECT LAST_INSERT_ID() as item_id"
+      "SELECT LAST_INSERT_ID() as item_id",
     )) as RowDataPacket[];
 
     await dbconnection.commit();
@@ -190,7 +190,7 @@ export async function submitGroceryItem(
 export async function submitShoppingListItem(
   item_id: number,
   item_quantity: number,
-  item_quantity_type: string
+  item_quantity_type: string,
 ): Promise<void> {
   try {
     await query({
@@ -206,7 +206,7 @@ export async function submitShoppingListItem(
 // Updater item i shopping_list
 export async function updateShoppingListItem(
   item_id: number,
-  itemQuantity: number
+  itemQuantity: number,
 ): Promise<void> {
   try {
     await query({
