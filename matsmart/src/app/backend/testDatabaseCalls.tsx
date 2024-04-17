@@ -52,7 +52,7 @@ export async function fetchSingelRecipe(recipe_id: number): Promise<Recipe[]> {
 
 //Fetces info about items needed for a recipe based on a recipe_id value
 export async function fetchRecipeItems(
-  recipe_id: number
+  recipe_id: number,
 ): Promise<Recipe_items[]> {
   try {
     const dbquery = await testquery({
@@ -69,7 +69,7 @@ export async function fetchRecipeItems(
 //Fetches all items in a inventory based on a location value
 // Gjorde endring slik at navn på item hentes fra item_database
 export async function fetchInventoryItems(
-  location: string
+  location: string,
 ): Promise<Inventory_items[]> {
   try {
     const dbquery = await testquery({
