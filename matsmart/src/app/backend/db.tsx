@@ -22,3 +22,26 @@ export async function query({
     throw Error((error as Error).message);
   }
 }
+
+export async function testquery({
+  query,
+  values = [],
+}: {
+  query: string;
+  values?: any[];
+}) {
+  const dbconnetion = await mysql.createConnection({
+    host: "mysql.stud.ntnu.no",
+    database: "fs_idatt1005_1_bdigsec4_test",
+    user: "fs_idatt1005_1_group_bdigsec4",
+    password: "Password",
+  });
+
+  try {
+    const [results] = await dbconnetion.execute(query, values);
+    dbconnetion.end();
+    return results;
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
