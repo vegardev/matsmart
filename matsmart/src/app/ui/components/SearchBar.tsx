@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { SearchSuggestions } from "@/src/app/ui/components/SearchSuggestions";
 
-export function SearchBar<T>({
+export function SearchBar<Type>({
   searchTerm,
   setSearchTerm,
   databaseTable,
@@ -13,12 +13,12 @@ export function SearchBar<T>({
   setSearchTerm: (term: string) => void;
   databaseTable: string;
   placeholder: string;
-  suggestions: T[];
+  suggestions: Type[];
 }) {
   // search er variabelen som brukes til å søke databasen
   // searchTerm "passes" inn i search for å kunne endre søkefeltet fra parent-komponenten
   const [search, setSearch] = useState(searchTerm);
-  const [items, setItems] = useState<T[]>([]);
+  const [items, setItems] = useState<Type[]>([]);
   const [selected, setSelected] = useState(0);
   const [isSuggestionSelected, setIsSuggestionSelected] = useState(false);
 
