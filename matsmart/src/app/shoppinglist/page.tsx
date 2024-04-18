@@ -1,9 +1,9 @@
 "use client";
-import { SearchBar } from "@/src/app/ui/shoppinglist/GrocerySearchBar";
+import { SearchBar } from "@/src/app/ui/components/SearchBar";
 import GroceryTable from "@/src/app/ui/shoppinglist/GroceryTable";
 import { Item_database, Shopping_items } from "@/src/app/backend/definitions";
 import { useState, useEffect } from "react";
-import QuantityDropdown from "@/src/app/ui/shoppinglist/MeasurementDropdown";
+import QuantityDropdown from "@/src/app/ui/shoppinglist/QuantityDropdown";
 
 export default function ShoppingList() {
   const [shoppingItems, setShoppingItems] = useState<Shopping_items[]>([]);
@@ -226,7 +226,23 @@ export default function ShoppingList() {
     <div className="flex flex-col">
       <h1 className={`mb-4 text-xl md:text-2xl`}>Shopping list</h1>
       <div className="mt-4 flex flex-row items-baseline justify-items-center gap-2 md:mt-8 max-w-3xl">
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <SearchBar<Item_database>
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          placeholder="Search for grocery items..."
+          databaseTable="item"
+          suggestions={groceryItems}
+        />
+        {/* Her er hvordan søkebaren fungerer med tags.
+            Det kan hende du trenger noe logikk herfra, med tanke på searchTerm og setSearchTerm
+          <SearchBar<Tags>
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          placeholder="Search for tags..."
+          databaseTable="tag"
+          suggestions={tags}
+        /> 
+        */}
         <QuantityDropdown
           quantity={quantity}
           setQuantity={setQuantity}

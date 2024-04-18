@@ -88,3 +88,17 @@ export type Recipe_Page = {
   recipe_ingredients: string[];
   recipe_nutrition: string;
 };
+
+export type QuantityDropdownProps = {
+  quantity: number;
+  setQuantity: (quantity: number) => void;
+  quantityType: string;
+  setQuantityType: (quantityType: string) => void;
+};
+
+export type Shopping_items = {
+  item_id: number;
+  item_name: string;
+  item_quantity: number;
+  item_quantity_type: string;
+};
