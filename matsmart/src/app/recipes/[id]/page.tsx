@@ -3,10 +3,8 @@ import { recipesDummyData } from "@/src/app/backend/dummyData"; // Erstatt med d
 import { Recipe_Page } from "@/src/app/backend/definitions";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import {
-  DisplayRecipeTags,
-  IngredientsCheck,
-} from "@/src/app/ui/recipes/recipePage/otherComponents";
+import { IngredientsCheck } from "@/src/app/ui/recipes/recipePage/otherComponents";
+import { DisplayRecipeTags } from "@/src/app/ui/recipes/sharedComponents";
 import { RecipeTextFields } from "@/src/app/ui/recipes/recipePage/textFields";
 
 function getRecipeById(id: number): Recipe_Page {
