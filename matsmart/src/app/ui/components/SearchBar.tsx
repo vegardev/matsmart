@@ -1,18 +1,24 @@
 /* eslint-disable no-unused-vars */
 "use client";
 import React, { useState, useEffect } from "react";
-import { SearchSuggestions } from "@/src/app/ui/shoppinglist/SearchSuggestions";
-import { Shopping_items } from "../../backend/definitions";
+import { SearchSuggestions } from "@/src/app/ui/components/SearchSuggestions";
 
-export function SearchBar({
+export function SearchBar<T>({
   searchTerm,
   setSearchTerm,
+  databaseTable,
+  placeholder,
 }: {
   searchTerm: string;
   setSearchTerm: (term: string) => void;
+  databaseTable: string;
+  placeholder: string;
+  suggestions: T[];
 }) {
+  // search er variabelen som brukes til å søke databasen
+  // searchTerm "passes" inn i search for å kunne endre søkefeltet fra parent-komponenten
   const [search, setSearch] = useState(searchTerm);
-  const [groceries, setGroceries] = useState<Shopping_items[]>([]);
+  const [items, setItems] = useState<T[]>([]);
   const [selected, setSelected] = useState(0);
   const [isSuggestionSelected, setIsSuggestionSelected] = useState(false);
 
@@ -22,26 +28,27 @@ export function SearchBar({
     // Debounce for å redusere database kall før brukeren er ferdig med å søke
     const delayDebounceFn = setTimeout(() => {
       if (isActive) {
-        fetch(`/api/autocomplete/${search}`)
+        fetch(`/api/autocomplete/${databaseTable}/${search}`)
           .then((response) => response.json())
-          .then((data) => setGroceries(data))
+          .then((data) => setItems(data))
           .catch((error) =>
             console.error("Error fetching suggestion data:", error),
           );
       }
     }, 500);
     return () => clearTimeout(delayDebounceFn);
-  }, [search, isActive]);
+  }, [search, isActive, databaseTable]);
 
   function handleKeyDown(event: React.KeyboardEvent) {
-    if (event.key === "Tab" && groceries.length > 0) {
-      setSelected((selected + 1) % groceries.length);
+    if (event.key === "Tab" && items.length > 0) {
+      setSelected((selected + 1) % items.length);
       event.preventDefault();
     } else if (event.key === "Enter") {
-      if (selected !== undefined && selected < groceries.length) {
-        setSearch(groceries[selected].item_name);
-        setSearchTerm(groceries[selected].item_name);
-        setGroceries([]);
+      const selectedName = (items[selected] as any)[`${databaseTable}_name`];
+      if (selected !== undefined && selected < items.length && selectedName) {
+        setSearch(selectedName);
+        setSearchTerm(selectedName);
+        setItems([]);
       } else {
         setSearchTerm(search);
       }
@@ -62,7 +69,7 @@ export function SearchBar({
         <input
           id="search"
           className={`peer block w-full border border-gray-200 py-[9px] pl-3 text-sm outline-2 placeholder:text-gray-500 ${isActive ? "rounded-t-md" : "rounded-md"}`}
-          placeholder="Search for groceries"
+          placeholder={placeholder}
           value={search}
           onChange={(input) => {
             setSearch(input.target.value);
@@ -70,11 +77,12 @@ export function SearchBar({
           }}
         />
       </div>
-      {search && groceries.length !== 1 && !isSuggestionSelected && (
+      {search && items.length !== 1 && !isSuggestionSelected && (
         <SearchSuggestions
           setSearch={setSearch}
-          suggestions={groceries}
+          suggestions={items}
           selected={selected}
+          databaseTable={databaseTable}
         />
       )}
     </div>

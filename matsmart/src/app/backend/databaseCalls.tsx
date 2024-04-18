@@ -7,6 +7,7 @@ import {
   Recipe_items,
   Inventory_items,
   Shopping_items,
+  Tags,
 } from "@/src/app/backend/definitions";
 
 //Posts to console if you have connection with the database
@@ -129,6 +130,19 @@ export async function fetchGrocerySuggestions(
       values: [searchQuery],
     });
     return dbquery as Item_database[];
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
+
+// Gjør full text search på item names i databasen, og returnerer en liste med items som matcher
+export async function sortByTag(searchQuery: string): Promise<Tags[]> {
+  try {
+    const dbquery = await query({
+      query: "SELECT * FROM tags WHERE tag_name LIKE CONCAT('%', ?, '%')",
+      values: [searchQuery],
+    });
+    return dbquery as Tags[];
   } catch (error) {
     throw Error((error as Error).message);
   }
