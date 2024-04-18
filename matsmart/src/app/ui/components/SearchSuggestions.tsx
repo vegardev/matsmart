@@ -1,4 +1,4 @@
-export function SearchSuggestions<T>({
+export function SearchSuggestions<Type>({
   setSearch,
   suggestions,
   selected,
@@ -6,7 +6,7 @@ export function SearchSuggestions<T>({
 }: {
   // eslint-disable-next-line no-unused-vars
   setSearch: (search: string) => void;
-  suggestions: T[];
+  suggestions: Type[];
   selected: number;
   databaseTable: string;
 }) {
