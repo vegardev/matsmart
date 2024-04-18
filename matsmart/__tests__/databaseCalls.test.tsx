@@ -42,7 +42,11 @@ describe("Database GET tests", () => {
         image:
           "https://media.snl.no/media/278133/standard_compressed_Vaso_con_leche__Madrid__Espa%C3%B1a__2021_03_1_.jpg",
       },
-      { recipe_id: 3, title: "Melkebolle", image: null },
+      {
+        recipe_id: 3,
+        title: "Melkebolle",
+        image: null,
+      },
     ]);
     // Add more assertions here based on the expected structure and values of the result
   });
