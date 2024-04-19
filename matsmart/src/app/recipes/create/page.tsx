@@ -7,13 +7,14 @@ import {
 import { useRef, useState } from "react";
 import { createRecipe } from "@/src/app/backend/uploadData";
 import { useRouter } from "next/navigation";
+import { Add_Recipe_Ingredient } from "@/src/app/backend/definitions";
 
 interface InputFieldsHandle {
   getValue: () => string;
 }
 
 interface IngredientsFieldsHandle {
-  getIngredients: () => string[];
+  getIngredients: () => Add_Recipe_Ingredient[];
 }
 
 interface ImageFieldsHandle {

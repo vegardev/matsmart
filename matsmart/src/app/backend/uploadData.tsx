@@ -10,11 +10,18 @@ const Recipe_Create = z.object({
   recipe_nutritions: z.string(),
   recipe_image: z.string(),
   recipe_time: z.string(),
-  recipe_ingredients: z.array(z.string()),
+  recipe_ingredients: z.array(
+    z.object({
+      item_name: z.string(),
+      item_quantity: z.number(),
+      item_quantity_type: z.string(),
+    }),
+  ),
   recipe_tags: z.array(z.string()),
 });
 
 export async function createRecipe(recipeContent: Recipe_CreateType) {
+  console.log(recipeContent);
   const recipe = Recipe_Create.parse(recipeContent);
   try {
     await query({
@@ -44,14 +51,14 @@ export async function createRecipe(recipeContent: Recipe_CreateType) {
     for (const ingredient of recipe.recipe_ingredients) {
       let item_id = await query({
         query: "Select item_id FROM item_database WHERE item_name = ?",
-        values: [ingredient],
+        values: [ingredient.item_name],
       });
 
       if (item_id == null || (Array.isArray(item_id) && item_id.length === 0)) {
         item_id = await query({
           query:
             "INSERT INTO item_database (item_name, item_quantity_type) VALUES (?, ?)",
-          values: [ingredient, "midlertidig"],
+          values: [ingredient.item_name, ingredient.item_quantity_type],
         });
 
         let item_id_number: number | null = null;
@@ -66,8 +73,8 @@ export async function createRecipe(recipeContent: Recipe_CreateType) {
           values: [
             recipe_id_packet[0].recipe_id,
             item_id_number,
-            1,
-            "midlertidig",
+            ingredient.item_quantity,
+            ingredient.item_quantity_type,
           ],
         });
       } else {
@@ -79,8 +86,8 @@ export async function createRecipe(recipeContent: Recipe_CreateType) {
           values: [
             recipe_id_packet[0].recipe_id,
             item_id_packet[0].item_id,
-            1,
-            "midlertidig",
+            ingredient.item_quantity,
+            ingredient.item_quantity_type,
           ],
         });
       }
