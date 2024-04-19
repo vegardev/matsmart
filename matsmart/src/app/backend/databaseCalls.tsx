@@ -92,12 +92,19 @@ export async function submitInventoryItem(
   item_quantity: number,
   item_quantity_type: string,
   location: string,
+  expiration_date: Date,
 ): Promise<void> {
   try {
     await query({
       query:
-        "INSERT INTO inventory (item_id, item_quantity, item_quantity_type, location) VALUES (?, ?, ?, ?)",
-      values: [item_id, item_quantity, item_quantity_type, location],
+        "INSERT INTO inventory (item_id, item_quantity, item_quantity_type, location, expiration_date) VALUES (?, ?, ?, ?, ?)",
+      values: [
+        item_id,
+        item_quantity,
+        item_quantity_type,
+        location,
+        expiration_date,
+      ],
     });
   } catch (error) {
     throw Error((error as Error).message);

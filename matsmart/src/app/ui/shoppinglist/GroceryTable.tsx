@@ -20,6 +20,8 @@ const GroceryTable: React.FC<
     locations: string[];
     setLocations: React.Dispatch<React.SetStateAction<string[]>>;
     onLocationChange: (index: number, newLocation: string) => void;
+    expiryDates: (Date | null)[];
+    onExpiryDateChange: (index: number, newDate: Date) => void;
     anyCheckboxChecked: boolean;
   }
 > = ({
@@ -31,6 +33,8 @@ const GroceryTable: React.FC<
   onCheckboxChange,
   locations,
   onLocationChange,
+  expiryDates,
+  onExpiryDateChange,
   anyCheckboxChecked,
 }) => {
   return (
@@ -50,9 +54,14 @@ const GroceryTable: React.FC<
               Bought?
             </th>
             {checkedStates.includes(true) && (
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Location
-              </th>
+              <>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Location
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Expiry date
+                </th>
+              </>
             )}
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Remove?
@@ -100,20 +109,36 @@ const GroceryTable: React.FC<
               </td>
               {anyCheckboxChecked ? (
                 checkedStates[index] ? (
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <select
-                      value={locations[index]}
-                      onChange={(e) => onLocationChange(index, e.target.value)}
-                      className="rounded-md border p-1 border-gray-200 bg-gray-50 text-sm outline-2"
-                    >
-                      <option value="">Select location</option>
-                      <option value="fryser">Freezer</option>
-                      <option value="kjøleskap">Fridge</option>
-                      <option value="skuff">Pantry</option>
-                    </select>
-                  </td>
+                  <>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <select
+                        value={locations[index]}
+                        onChange={(e) =>
+                          onLocationChange(index, e.target.value)
+                        }
+                        className="rounded-md border p-1 border-gray-200 bg-gray-50 text-sm outline-2"
+                      >
+                        <option value="">Select location</option>
+                        <option value="fryser">Freezer</option>
+                        <option value="kjøleskap">Fridge</option>
+                        <option value="skuff">Pantry</option>
+                      </select>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <input
+                        type="date"
+                        onChange={(e) =>
+                          onExpiryDateChange(index, new Date(e.target.value))
+                        }
+                        className="rounded-md border p-1 border-gray-200 bg-gray-50 text-sm outline-2"
+                      />
+                    </td>
+                  </>
                 ) : (
-                  <td className="px-6 py-4 whitespace-nowrap"></td>
+                  <>
+                    <td className="px-6 py-4 whitespace-nowrap"></td>
+                    <td className="px-6 py-4 whitespace-nowrap"></td>
+                  </>
                 )
               ) : null}
               <td className="px-6 py-4 whitespace-nowrap">

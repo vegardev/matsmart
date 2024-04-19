@@ -10,6 +10,7 @@ export async function POST(request: Request) {
     item.item_quantity,
     item.item_quantity_type,
     item.item_location,
+    item.expiration_date,
   );
 
   return new NextResponse(JSON.stringify({ item }));
