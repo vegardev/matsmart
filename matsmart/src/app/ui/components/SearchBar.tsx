@@ -5,20 +5,18 @@ import { SearchSuggestions } from "@/src/app/ui/components/SearchSuggestions";
 import clsx from "clsx";
 
 export function SearchBar<Type>({
-  searchTerm,
-  setSearchTerm,
   databaseTable,
   placeholder,
+  search,
+  setSearch,
+  suggestions,
 }: {
-  searchTerm: string;
-  setSearchTerm: (term: string) => void;
   databaseTable: string;
   placeholder: string;
+  search: string;
+  setSearch: (search: string) => void;
   suggestions: Type[];
 }) {
-  // search er variabelen som brukes til å søke databasen
-  // searchTerm "passes" inn i search for å kunne endre søkefeltet fra parent-komponenten
-  const [search, setSearch] = useState(searchTerm);
   const [items, setItems] = useState<Type[]>([]);
   const [selected, setSelected] = useState(0);
   const [isSuggestionSelected, setIsSuggestionSelected] = useState(false);
@@ -48,10 +46,8 @@ export function SearchBar<Type>({
       const selectedName = (items[selected] as any)[`${databaseTable}_name`];
       if (selected !== undefined && selected < items.length && selectedName) {
         setSearch(selectedName);
-        setSearchTerm(selectedName);
         setItems([]);
-      } else {
-        setSearchTerm(search);
+        console.log("Currently selected: ", selectedName);
       }
       setIsSuggestionSelected(true);
     }
@@ -72,22 +68,27 @@ export function SearchBar<Type>({
         </label>
         <input
           id="search"
-          className={`peer block w-full border border-gray-200 py-[9px] pl-3 text-sm outline-2 placeholder:text-gray-500 ${isActive ? "rounded-t-md" : "rounded-md"}`}
+          autoComplete="off"
+          onBlur={() => {
+            setTimeout(() => setIsSuggestionSelected(true), 200);
+          }}
+          className={`peer block w-full border border-gray-200 py-[9px] pl-3 text-sm outline-2 placeholder:text-gray-500 ${isActive && !isSuggestionSelected ? "rounded-t-md" : "rounded-md"}`}
           placeholder={placeholder}
           value={search}
           onChange={(input) => {
             setSearch(input.target.value);
-            setSearchTerm(input.target.value);
           }}
         />
       </div>
       {search && items.length !== 1 && !isSuggestionSelected && (
-        <SearchSuggestions
-          setSearch={setSearch}
-          suggestions={items}
-          selected={selected}
-          databaseTable={databaseTable}
-        />
+        <div className="absolute w-full mt-10">
+          <SearchSuggestions
+            setSearch={setSearch}
+            suggestions={items}
+            selected={selected}
+            databaseTable={databaseTable}
+          />
+        </div>
       )}
     </div>
   );
