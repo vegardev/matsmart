@@ -26,7 +26,7 @@ export function SearchSuggestions<Type>({
   return (
     <>
       {suggestions.length > 0 && (
-        <div className="flex flex-col rounded-b-md p-2 bg-gray-50">
+        <div className="flex flex-col rounded-b-md p-2 bg-gray-50 border-2 border-gray-300">
           <ul>
             {suggestions.map((suggestion, index) => {
               const id = (suggestion as any)[`${databaseTable}_id`];
@@ -36,7 +36,7 @@ export function SearchSuggestions<Type>({
                   key={id}
                   onClick={() => handleItemClick(name)}
                   onKeyDown={handleKeyDown(name)}
-                  className={`rounded-md p-1 ${index === selected ? "bg-blue-200" : "bg-gray-50"}`}
+                  className={`rounded-md p-1 ${index !== suggestions.length - 1 ? "border-b-2 border-gray-200" : ""} ${index === selected ? "bg-blue-200" : "bg-gray-50"} hover:bg-blue-100`}
                   role="button"
                   tabIndex={0}
                 >

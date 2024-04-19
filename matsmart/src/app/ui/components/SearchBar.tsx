@@ -61,14 +61,18 @@ export function SearchBar<Type>({
   }, [search]);
 
   return (
-    <div className="flex flex-col" onKeyDown={handleKeyDown}>
+    <div className="relative flex flex-col" onKeyDown={handleKeyDown}>
       <div className="flex flex-col flex-1 flex-shrink-0">
         <label htmlFor="search" className="sr-only">
           Search
         </label>
         <input
           id="search"
-          className={`peer block w-full border border-gray-200 py-[9px] pl-3 text-sm outline-2 placeholder:text-gray-500 ${isActive ? "rounded-t-md" : "rounded-md"}`}
+          autoComplete="off"
+          onBlur={() => {
+            setTimeout(() => setIsSuggestionSelected(true), 200);
+          }}
+          className={`peer block w-full border border-gray-200 py-[9px] pl-3 text-sm outline-2 placeholder:text-gray-500 ${isActive && !isSuggestionSelected ? "rounded-t-md" : "rounded-md"}`}
           placeholder={placeholder}
           value={search}
           onChange={(input) => {
@@ -78,12 +82,14 @@ export function SearchBar<Type>({
         />
       </div>
       {search && items.length !== 1 && !isSuggestionSelected && (
-        <SearchSuggestions
-          setSearch={setSearch}
-          suggestions={items}
-          selected={selected}
-          databaseTable={databaseTable}
-        />
+        <div className="absolute w-full mt-10">
+          <SearchSuggestions
+            setSearch={setSearch}
+            suggestions={items}
+            selected={selected}
+            databaseTable={databaseTable}
+          />
+        </div>
       )}
     </div>
   );
