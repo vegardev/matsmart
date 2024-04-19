@@ -21,7 +21,6 @@ const Recipe_Create = z.object({
 });
 
 export async function createRecipe(recipeContent: Recipe_CreateType) {
-  console.log(recipeContent);
   const recipe = Recipe_Create.parse(recipeContent);
   try {
     await query({
