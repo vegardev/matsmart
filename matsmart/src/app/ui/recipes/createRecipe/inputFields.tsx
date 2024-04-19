@@ -21,7 +21,7 @@ const TextInputFields = forwardRef(
 
     const handleAdd = () => {
       const formattedValue =
-        value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+        value.charAt(0).toUpperCase() + value.slice(1).toLowerCase().trimEnd();
 
       const fullIngredient = {
         item_name: formattedValue,
@@ -141,7 +141,7 @@ const AddTags = forwardRef((props, ref) => {
 
   const handleAdd = () => {
     const formattedValue =
-      value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+      value.charAt(0).toUpperCase() + value.slice(1).toLowerCase().trimEnd();
     setTags((prevTags) => [...prevTags, formattedValue]);
     setValue("");
   };
