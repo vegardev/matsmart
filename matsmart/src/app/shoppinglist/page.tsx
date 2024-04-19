@@ -8,6 +8,8 @@ import QuantityDropdown from "@/src/app/ui/shoppinglist/QuantityDropdown";
 export default function ShoppingList() {
   const [shoppingItems, setShoppingItems] = useState<Shopping_items[]>([]);
   const [groceryItems, setGroceryItems] = useState<Item_database[]>([]);
+  // search er til enhver tid input i søkefeltet, og er en query til databasen
+  // search er også navnet på item som skal legges til i shopping list
   const [search, setSearch] = useState("");
   const [quantity, setQuantity] = useState<number>(1);
   const [quantityType, setQuantityType] = useState<string>("stk.");

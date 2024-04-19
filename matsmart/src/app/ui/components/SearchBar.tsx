@@ -16,8 +16,6 @@ export function SearchBar<Type>({
   setSearch: (search: string) => void;
   suggestions: Type[];
 }) {
-  // search er variabelen som brukes til å søke databasen
-  // searchTerm "passes" inn i search for å kunne endre søkefeltet fra parent-komponenten
   const [items, setItems] = useState<Type[]>([]);
   const [selected, setSelected] = useState(0);
   const [isSuggestionSelected, setIsSuggestionSelected] = useState(false);
