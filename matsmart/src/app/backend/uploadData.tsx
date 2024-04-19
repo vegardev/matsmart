@@ -1,6 +1,10 @@
 "use server";
 import { z } from "zod";
-import { Recipe_CreateType } from "@/src/app/backend/definitions";
+import {
+  Recipe_CreateType,
+  Recipe_Preview,
+  Tags,
+} from "@/src/app/backend/definitions";
 import { query } from "@/src/app/backend/db";
 import { RowDataPacket } from "mysql2";
 
@@ -128,6 +132,49 @@ export async function createRecipe(recipeContent: Recipe_CreateType) {
     console.log("Tags inserted");
     console.log("Recipe insert complete");
     return recipe_id_packet[0].recipe_id;
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
+
+export async function getRecipes(searchParams: string) {
+  try {
+    let recipes: Recipe_Preview[];
+
+    if (!searchParams || searchParams.trim() === "") {
+      recipes = (await query({
+        query: "SELECT * FROM recipes",
+        values: [],
+      })) as Recipe_Preview[];
+    } else {
+      recipes = (await query({
+        query: "SELECT * FROM recipes WHERE title LIKE ?",
+        values: ["%" + searchParams + "%"],
+      })) as Recipe_Preview[];
+    }
+
+    for (const recipe of recipes) {
+      const tags = (await query({
+        query:
+          "SELECT tag_name FROM tags INNER JOIN recipe_tags ON tags.tag_id = recipe_tags.tag_id WHERE recipe_tags.recipe_id = ?",
+        values: [recipe.recipe_id],
+      })) as RowDataPacket[];
+
+      recipe.recipe_tags = tags.map((tag) => tag.tag_name);
+    }
+
+    return recipes;
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
+
+export async function getTags() {
+  try {
+    return (await query({
+      query: "SELECT * FROM tags",
+      values: [],
+    })) as Tags[];
   } catch (error) {
     throw Error((error as Error).message);
   }

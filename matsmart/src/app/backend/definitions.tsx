@@ -20,7 +20,7 @@ export type Tags = {
 
 export type Recipe_Preview = {
   recipe_id: number;
-  recipe_name: string;
+  title: string;
   recipe_time: number;
   recipe_image: string;
   recipe_tags: string[];
