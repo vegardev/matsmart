@@ -4,20 +4,20 @@ import React, { useState, useEffect } from "react";
 import { SearchSuggestions } from "@/src/app/ui/components/SearchSuggestions";
 
 export function SearchBar<Type>({
-  searchTerm,
-  setSearchTerm,
   databaseTable,
   placeholder,
+  search,
+  setSearch,
+  suggestions,
 }: {
-  searchTerm: string;
-  setSearchTerm: (term: string) => void;
   databaseTable: string;
   placeholder: string;
+  search: string;
+  setSearch: (search: string) => void;
   suggestions: Type[];
 }) {
   // search er variabelen som brukes til å søke databasen
   // searchTerm "passes" inn i search for å kunne endre søkefeltet fra parent-komponenten
-  const [search, setSearch] = useState(searchTerm);
   const [items, setItems] = useState<Type[]>([]);
   const [selected, setSelected] = useState(0);
   const [isSuggestionSelected, setIsSuggestionSelected] = useState(false);
@@ -47,10 +47,8 @@ export function SearchBar<Type>({
       const selectedName = (items[selected] as any)[`${databaseTable}_name`];
       if (selected !== undefined && selected < items.length && selectedName) {
         setSearch(selectedName);
-        setSearchTerm(selectedName);
         setItems([]);
-      } else {
-        setSearchTerm(search);
+        console.log("Currently selected: ", selectedName);
       }
       setIsSuggestionSelected(true);
     }
@@ -77,7 +75,6 @@ export function SearchBar<Type>({
           value={search}
           onChange={(input) => {
             setSearch(input.target.value);
-            setSearchTerm(input.target.value);
           }}
         />
       </div>

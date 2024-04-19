@@ -8,9 +8,10 @@ import QuantityDropdown from "@/src/app/ui/shoppinglist/QuantityDropdown";
 export default function ShoppingList() {
   const [shoppingItems, setShoppingItems] = useState<Shopping_items[]>([]);
   const [groceryItems, setGroceryItems] = useState<Item_database[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [search, setSearch] = useState("");
   const [quantity, setQuantity] = useState<number>(1);
   const [quantityType, setQuantityType] = useState<string>("stk.");
+  const [refreshShoppingList, setRefreshShoppingList] = useState<boolean>(true);
 
   const [checkedStates, setCheckedStates] = useState<boolean[]>(
     new Array(shoppingItems.length).fill(false),
@@ -54,13 +55,16 @@ export default function ShoppingList() {
   };
 
   useEffect(() => {
+    if (!refreshShoppingList) return;
+
     fetch("/api/shoppinglist")
       .then((response) => response.json()) // Extract JSON data from the response
       .then((data) => {
         setShoppingItems(data);
         setCheckedStates(new Array(data.length).fill(false));
+        setRefreshShoppingList(false);
       }); // Pass the data to setItems
-  }, []);
+  }, [refreshShoppingList]);
 
   useEffect(() => {
     fetch("/api/items")
@@ -75,10 +79,10 @@ export default function ShoppingList() {
   // Legg til item i shopping list
   const handleAddToShoppingList = async () => {
     console.log("Clicked add to shopping list...");
-    const item = groceryItems.find((item) => item.item_name === searchTerm);
+    const item = groceryItems.find((item) => item.item_name === search);
     let itemId = item?.item_id;
 
-    console.log("Item: ", item);
+    console.log("Adding item... ", item);
 
     if (!item) {
       const response = await fetch("/api/items", {
@@ -87,7 +91,7 @@ export default function ShoppingList() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          item_name: searchTerm,
+          item_name: search,
           item_quantity_type: quantityType,
         }),
       });
@@ -109,6 +113,7 @@ export default function ShoppingList() {
       item_quantity: quantity,
       item_quantity_type: quantityType,
     });
+
     console.log("Body: ", body);
 
     await fetch("/api/shoppinglist", {
@@ -129,7 +134,7 @@ export default function ShoppingList() {
       .then((newItem) => {
         console.log(newItem);
 
-        newItem.item_name = searchTerm;
+        newItem.item_name = search;
         newItem.item_quantity_type = quantityType;
         newItem.item_quantity = quantity;
         setShoppingItems((prevItems) => [...prevItems, newItem]);
@@ -143,9 +148,10 @@ export default function ShoppingList() {
             newItem.item_name +
             " to shopping list!",
         );
+        setRefreshShoppingList(true);
       })
       .catch((error) => {
-        alert("Error adding item to shopping list:" + error);
+        alert("Update quantity rather than adding same item! \n" + error);
       });
   };
 
@@ -227,22 +233,12 @@ export default function ShoppingList() {
       <h1 className={`mb-4 text-xl md:text-2xl`}>Shopping list</h1>
       <div className="mt-4 flex flex-row items-baseline justify-items-center gap-2 md:mt-8 max-w-3xl">
         <SearchBar<Item_database>
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
+          search={search}
+          setSearch={setSearch}
           placeholder="Search for grocery items..."
           databaseTable="item"
           suggestions={groceryItems}
         />
-        {/* Her er hvordan søkebaren fungerer med tags.
-            Det kan hende du trenger noe logikk herfra, med tanke på searchTerm og setSearchTerm
-          <SearchBar<Tags>
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          placeholder="Search for tags..."
-          databaseTable="tag"
-          suggestions={tags}
-        /> 
-        */}
         <QuantityDropdown
           quantity={quantity}
           setQuantity={setQuantity}
