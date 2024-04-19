@@ -126,7 +126,7 @@ export async function createRecipe(recipeContent: Recipe_CreateType) {
     }
 
     console.log("Tags inserted");
-    console.log("Recipe created");
+    console.log("Recipe insert complete");
     return recipe_id_packet[0].recipe_id;
   } catch (error) {
     throw Error((error as Error).message);
