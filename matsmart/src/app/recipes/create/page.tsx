@@ -7,13 +7,14 @@ import {
 import { useRef, useState } from "react";
 import { createRecipe } from "@/src/app/backend/uploadData";
 import { useRouter } from "next/navigation";
+import { Add_Recipe_Ingredient } from "@/src/app/backend/definitions";
 
 interface InputFieldsHandle {
   getValue: () => string;
 }
 
 interface IngredientsFieldsHandle {
-  getIngredients: () => string[];
+  getIngredients: () => Add_Recipe_Ingredient[];
 }
 
 interface ImageFieldsHandle {
@@ -42,10 +43,7 @@ export default function Page() {
     const nutritions = nutritionsRef.current?.getValue() || "";
     const image = imageRef.current?.getImage() || "";
     const tags = tagsRef.current?.getTags() || [];
-    // Here you can send the data to your database
-    alert(
-      ` Title: ${title}\n\n Method: ${method}\n\n Ingredients: ${ingredients}\n\n Nutritions: ${nutritions}\n\n Image: ${image}\n\n Time requirement: ${timeRequirement}\n\n Tags: ${tags}`,
-    );
+
     let recipe_id = createRecipe({
       title: title,
       recipe_method: method,

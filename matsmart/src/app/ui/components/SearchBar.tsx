@@ -2,6 +2,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { SearchSuggestions } from "@/src/app/ui/components/SearchSuggestions";
+import clsx from "clsx";
 
 export function SearchBar<Type>({
   databaseTable,
@@ -57,7 +58,10 @@ export function SearchBar<Type>({
   }, [search]);
 
   return (
-    <div className="relative flex flex-col" onKeyDown={handleKeyDown}>
+    <div
+      className={clsx("flex flex-col", { "ml-auto": databaseTable == "tag" })}
+      onKeyDown={handleKeyDown}
+    >
       <div className="flex flex-col flex-1 flex-shrink-0">
         <label htmlFor="search" className="sr-only">
           Search

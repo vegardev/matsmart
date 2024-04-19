@@ -103,12 +103,18 @@ export type Shopping_items = {
   item_quantity_type: string;
 };
 
+export type Add_Recipe_Ingredient = {
+  item_name: string;
+  item_quantity: number;
+  item_quantity_type: string;
+};
+
 export type Recipe_CreateType = {
   title: string;
   recipe_time: string;
   recipe_image: string;
   recipe_tags: string[];
   recipe_method: string;
-  recipe_ingredients: string[];
+  recipe_ingredients: Add_Recipe_Ingredient[];
   recipe_nutritions: string;
 };
