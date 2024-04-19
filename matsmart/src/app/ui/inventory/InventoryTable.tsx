@@ -47,7 +47,7 @@ const InventoryTable: React.FC<TableProps> = ({ data }) => {
                 {item.item_quantity + item.item_quantity_type}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                {item.expiration_date}
+                {item.expiration_date.toISOString().split("T")[0]}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <input
