@@ -132,3 +132,62 @@ export async function createRecipe(recipeContent: Recipe_CreateType) {
     throw Error((error as Error).message);
   }
 }
+
+// Bruker automatisk parameteren for å komme til recipe page(n)
+export async function makeDish(recipe_id: number) {
+  // Henter nødvendige ingredienser til gjeldende recipe
+  const recipe_items = (await query({
+    query: "SELECT * FROM Recipe_items WHERE recipe_id = ?",
+    values: [recipe_id],
+  })) as RowDataPacket[];
+
+  // For hver ingrediens, oppdateres gjenstående kvantitet
+  for (const recipe_item of recipe_items) {
+    await dishUsesIngredients(recipe_item.item_id, recipe_item.item_quantity);
+  }
+}
+
+// Hjelpefunksjon for å fjerne brukte ingredienser fra inventory
+export async function dishUsesIngredients(
+  item_id: number,
+  required_quantity: number,
+) {
+  // Viktig å sortere etter utløpsdato
+  const inventory_items = (await query({
+    query:
+      "SELECT * FROM Inventory_items WHERE item_id = ? ORDER BY expiration_date ASC",
+    values: [item_id],
+  })) as RowDataPacket[];
+
+  let remaining_quantity = required_quantity;
+
+  // Løkke som sjekker hver rad av en spesifikk ingrediens og mengden av den
+  for (const inventory_item of inventory_items) {
+    if (inventory_item.item_quantity <= remaining_quantity) {
+      remaining_quantity -= inventory_item.item_quantity;
+
+      await query({
+        query: "DELETE FROM Inventory_items WHERE itemid = ?",
+        values: [inventory_item.id],
+      });
+    } else {
+      inventory_item.item_quantity -= remaining_quantity;
+
+      // Om ingrediensen ikke er fullstendig brukt opp, oppdateres heller mengden
+      await query({
+        query: "UPDATE Inventory_items SET item_quantity = ?  WHERE id = ?",
+        values: [inventory_item.id, inventory_item.item_quantity],
+      });
+
+      remaining_quantity = 0;
+    }
+
+    if (remaining_quantity === 0) {
+      break;
+    }
+  }
+
+  if (remaining_quantity > 0) {
+    throw new Error("Not enough of the item in the inventory");
+  }
+}
