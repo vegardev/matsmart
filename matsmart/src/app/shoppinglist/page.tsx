@@ -21,7 +21,20 @@ export default function ShoppingList() {
   const [locations, setLocations] = useState<string[]>(
     new Array(shoppingItems.length).fill(""),
   );
+
+  const [expiryDates, setExpiryDates] = useState<(Date | null)[]>(
+    new Array(shoppingItems.length).fill(null),
+  );
+
   const anyCheckboxChecked = checkedStates.some((checked) => checked);
+
+  const handleExpiryDateChange = (index: number, value: string | Date) => {
+    setExpiryDates((prevDates) => {
+      const newDates = [...prevDates];
+      newDates[index] = value ? new Date(value) : null;
+      return newDates;
+    });
+  };
 
   const handleQuantityChange = (index: number, newQuantity: number) => {
     if (newQuantity === -1) {
@@ -76,6 +89,11 @@ export default function ShoppingList() {
 
   useEffect(() => {
     setCheckedStates(new Array(shoppingItems.length).fill(false));
+  }, [shoppingItems]);
+
+  // Update expiryDates array length when shoppingItems changes
+  useEffect(() => {
+    setExpiryDates(new Array(shoppingItems.length).fill(null));
   }, [shoppingItems]);
 
   // Legg til item i shopping list
@@ -170,6 +188,7 @@ export default function ShoppingList() {
         (shoppingItem) => shoppingItem.item_id === item.item_id,
       );
       const itemLocation = locations[itemIndex];
+      let itemExpiryDate = expiryDates[itemIndex];
       if (!itemLocation || itemLocation === "") {
         alert("Please select location for all bought items");
         return;
@@ -184,6 +203,9 @@ export default function ShoppingList() {
           item_quantity: item.item_quantity,
           item_quantity_type: item.item_quantity_type,
           item_location: itemLocation,
+          expiration_date: itemExpiryDate
+            ? itemExpiryDate.toISOString().split("T")[0]
+            : null,
         }),
       })
         .then((response) => {
@@ -271,6 +293,8 @@ export default function ShoppingList() {
         onLocationChange={handleLocationChange}
         locations={locations}
         setLocations={setLocations}
+        expiryDates={expiryDates}
+        onExpiryDateChange={handleExpiryDateChange}
         anyCheckboxChecked={anyCheckboxChecked}
         className="mt-4"
       />

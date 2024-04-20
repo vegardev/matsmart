@@ -20,7 +20,7 @@ const links = [
   },
   {
     name: "Inventory",
-    href: "/inventory",
+    href: "/inventory/skuff",
     icon: BriefcaseIcon,
   },
   {

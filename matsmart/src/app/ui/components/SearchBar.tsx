@@ -43,13 +43,15 @@ export function SearchBar<Type>({
       setSelected((selected + 1) % items.length);
       event.preventDefault();
     } else if (event.key === "Enter") {
-      const selectedName = (items[selected] as any)[`${databaseTable}_name`];
-      if (selected !== undefined && selected < items.length && selectedName) {
+      if (selected !== null) {
+        const selectedName = (items[selected] as any)[`${databaseTable}_name`];
         setSearch(selectedName);
         setItems([]);
         console.log("Currently selected: ", selectedName);
+        setIsSuggestionSelected(true);
+      } else {
+        setSearch(search);
       }
-      setIsSuggestionSelected(true);
     }
   }
 
@@ -59,7 +61,9 @@ export function SearchBar<Type>({
 
   return (
     <div
-      className={clsx("flex flex-col", { "ml-auto": databaseTable == "tag" })}
+      className={clsx("relative flex flex-col", {
+        "ml-auto": databaseTable == "tag",
+      })}
       onKeyDown={handleKeyDown}
     >
       <div className="flex flex-col flex-1 flex-shrink-0">

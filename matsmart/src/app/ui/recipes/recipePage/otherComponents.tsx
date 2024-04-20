@@ -1,4 +1,4 @@
-import { Inventory_items2 } from "@/src/app/backend/definitions";
+import { Inventory_items } from "@/src/app/backend/definitions";
 import { pantryInventoryDummyData } from "@/src/app/backend/dummyData";
 
 /*
@@ -23,17 +23,23 @@ export function IngredientsCheck({
 }: {
   ingredientsNeeded: string[];
 }) {
-  const ingredients: Inventory_items2[] = pantryInventoryDummyData;
+  const ingredients: Inventory_items[] = pantryInventoryDummyData.map(
+    (item) => ({
+      ...item,
+      expiration_date: new Date(item.expiration_date),
+    }),
+  );
 
   function findClosestExpirationDate() {
     let closestExpirationDate = new Date(8640000000000000);
     ingredientsNeeded.map((ingredientNeeded) => {
       ingredients.map((ingredient) => {
+        const ingredientExpirationDate = new Date(ingredient.expiration_date);
         if (
           ingredient.item_name === ingredientNeeded &&
-          new Date(ingredient.expiration_date) < closestExpirationDate
+          ingredientExpirationDate < closestExpirationDate
         ) {
-          closestExpirationDate = new Date(ingredient.expiration_date);
+          closestExpirationDate = ingredientExpirationDate;
         }
       });
     });
