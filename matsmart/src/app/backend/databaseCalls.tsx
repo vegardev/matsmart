@@ -8,6 +8,7 @@ import {
   Inventory_items,
   Shopping_items,
   Tags,
+  CloseToExpire,
 } from "@/src/app/backend/definitions";
 
 //Posts to console if you have connection with the database
@@ -105,6 +106,17 @@ export async function submitInventoryItem(
         location,
         expiration_date,
       ],
+    });
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
+// Sletter item fra inventory
+export async function deleteInventoryItem(item_id: number): Promise<void> {
+  try {
+    await query({
+      query: "DELETE FROM inventory WHERE item_id = ?",
+      values: [item_id],
     });
   } catch (error) {
     throw Error((error as Error).message);
@@ -259,6 +271,54 @@ export async function fetchGroceryItems(): Promise<Item_database[]> {
       values: [],
     });
     return dbquery as Item_database[];
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
+
+// Fetcher anbefalte recipes basert på tilgjengelige ingredienser
+export async function fetchRecommendedRecipes(): Promise<Recipe[]> {
+  try {
+    const dbquery = await query({
+      query: `SELECT *
+         FROM recipes 
+         WHERE NOT EXISTS (
+           SELECT 1 FROM recipe_items 
+           WHERE recipe_items.recipe_id = recipes.recipe_id 
+           AND recipe_items.item_id NOT IN (
+             SELECT inventory.item_id FROM inventory
+           )
+         )`,
+    });
+    return dbquery as Recipe[];
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
+
+// Fetcher ingredients/items som holder på å gå ut på dato
+export async function fetchCloseToExpireItems(): Promise<CloseToExpire[]> {
+  try {
+    const dbquery = await query({
+      query:
+        "SELECT i.*, id.item_name FROM inventory i INNER JOIN item_database id ON i.item_id = id.item_id WHERE i.expiration_date IN ( SELECT MIN(expiration_date) FROM inventory GROUP BY item_id ) AND i.expiration_date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) ORDER BY i.expiration_date ASC LIMIT 5",
+      values: [],
+    });
+    return dbquery as CloseToExpire[];
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
+
+// Fetcher nylig lagt til items/ingredients til inventory
+export async function fetchRecentlyAddedItems(): Promise<Inventory_items[]> {
+  try {
+    const dbquery = await query({
+      query:
+        "SELECT inventory.*, item_database.item_name FROM inventory, item_database WHERE inventory.item_id = item_database.item_id ORDER BY inventory.inventory_id DESC LIMIT 5",
+      values: [],
+    });
+    return dbquery as Inventory_items[];
   } catch (error) {
     throw Error((error as Error).message);
   }

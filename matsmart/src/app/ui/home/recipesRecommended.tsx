@@ -1,9 +1,10 @@
+"use client";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { Recipe } from "@/src/app/backend/definitions";
 import Link from "next/link";
 
-export default async function RecommendedItems({
+export default function RecommendedItems({
   RecommendedItems,
 }: {
   RecommendedItems: Recipe[];

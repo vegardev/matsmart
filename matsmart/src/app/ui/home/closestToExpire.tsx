@@ -1,12 +1,14 @@
+"use client";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { CloseToExpire } from "@/src/app/backend/definitions";
 
-export default async function CloseToExpireItems({
+export default function CloseToExpireItems({
   CloseToExpireItems,
 }: {
   CloseToExpireItems: CloseToExpire[];
 }) {
+  console.log(CloseToExpireItems);
   return (
     <div className="flex w-full flex-col md:col-span-4">
       <h2 className="h1-font">Expiry overview</h2>
@@ -40,7 +42,7 @@ export default async function CloseToExpireItems({
                     },
                   )}
                 >
-                  {item.expiration_date.toLocaleDateString()}
+                  {item.expiration_date.toLocaleString()}
                 </p>
               </div>
             );

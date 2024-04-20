@@ -1,25 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { Inventory_items } from "@/src/app/backend/definitions";
 
 type TableProps = {
   data: Inventory_items[];
+  // eslint-disable-next-line no-unused-vars
+  onCheckboxChange: (index: number) => void;
 };
 
-const InventoryTable: React.FC<TableProps> = ({ data }) => {
-  const [checkedStates, setCheckedStates] = useState(
-    new Array(data.length).fill(false),
-  );
-  const handleCheckboxChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
-    // Update the specific checkbox's checked state in the array
-    const newCheckedStates = [...checkedStates];
-    newCheckedStates[index] = event.target.checked;
-    setCheckedStates(newCheckedStates);
-  };
-
+const InventoryTable: React.FC<TableProps> = ({ data, onCheckboxChange }) => {
   return (
     <>
       <table className="min-w-full divide-y divide-gray-200">
@@ -44,35 +33,25 @@ const InventoryTable: React.FC<TableProps> = ({ data }) => {
             <tr key={index}>
               <td className="px-6 py-4 whitespace-nowrap">{item.item_name}</td>
               <td className="px-6 py-4 whitespace-nowrap">
-                {item.item_quantity + item.item_quantity_type}
+                {item.item_quantity + " " + item.item_quantity_type}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                {item.expiration_date.toISOString().split("T")[0]}
+                {item.expiration_date
+                  ? typeof item.expiration_date === "string"
+                    ? item.expiration_date
+                    : item.expiration_date.toDateString()
+                  : "No expiration date"}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <input
                   type="checkbox"
-                  checked={checkedStates[index]}
-                  onChange={(e) => handleCheckboxChange(e, index)}
+                  onChange={() => onCheckboxChange(index)}
                 />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      {checkedStates.some((checked) => checked) && (
-        <button
-          style={{
-            position: "fixed",
-            bottom: "20px",
-            right: "20px",
-            zIndex: 1000,
-          }}
-          onClick={() => alert("Removed items to inventory!")}
-        >
-          Remove from inventory
-        </button>
-      )}
     </>
   );
 };

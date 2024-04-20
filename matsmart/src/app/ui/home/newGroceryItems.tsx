@@ -1,12 +1,13 @@
+"use client";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
-import { Item_database } from "@/src/app/backend/definitions";
+import { Inventory_items } from "@/src/app/backend/definitions";
 import Link from "next/link";
 
-export default async function NewGroceriesItems({
+export default function NewGroceriesItems({
   NewGroceriesItems,
 }: {
-  NewGroceriesItems: Item_database[];
+  NewGroceriesItems: Inventory_items[];
 }) {
   return (
     <div className="flex w-full flex-col md:col-span-4">
@@ -17,7 +18,7 @@ export default async function NewGroceriesItems({
           {NewGroceriesItems.map((item, i) => {
             return (
               <div
-                key={item.item_id}
+                key={i}
                 className={clsx("grid grid-cols-3 items-center py-4", {
                   "border-t": i !== 0,
                 })}

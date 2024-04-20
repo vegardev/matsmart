@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Freezer renders correctly 1`] = `
+exports[`InventoryPage renders Freezer correctly 1`] = `
 <DocumentFragment>
   <h1>
-    Freezer
+    Fryser
   </h1>
   <table
     class="min-w-full divide-y divide-gray-200"
@@ -41,10 +41,10 @@ exports[`Freezer renders correctly 1`] = `
 </DocumentFragment>
 `;
 
-exports[`Fridge renders correctly 1`] = `
+exports[`InventoryPage renders Fridge correctly 1`] = `
 <DocumentFragment>
   <h1>
-    Fridge
+    Kjøleskap
   </h1>
   <table
     class="min-w-full divide-y divide-gray-200"
@@ -82,10 +82,10 @@ exports[`Fridge renders correctly 1`] = `
 </DocumentFragment>
 `;
 
-exports[`Pantry renders correctly 1`] = `
+exports[`InventoryPage renders Pantry correctly 1`] = `
 <DocumentFragment>
   <h1>
-    Pantry
+    Skuff
   </h1>
   <table
     class="min-w-full divide-y divide-gray-200"

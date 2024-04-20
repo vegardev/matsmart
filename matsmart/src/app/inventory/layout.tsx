@@ -1,9 +1,9 @@
 import Link from "next/link";
 
 const links: any[] = [
-  { name: "Pantry", href: "pantry" },
-  { name: "Fridge", href: "fridge" },
-  { name: "Freezer", href: "freezer" },
+  { name: "Pantry", href: "skuff" },
+  { name: "Fridge", href: "kjøleskap" },
+  { name: "Freezer", href: "fryser" },
 ];
 
 export default function InventoryLayout({
