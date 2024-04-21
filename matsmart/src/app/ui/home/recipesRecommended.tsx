@@ -16,15 +16,16 @@ export default function RecommendedItems({
         <div></div>
         <div className="light-background">
           {RecommendedItems.map((item, i) => {
+            console.log(`Item ${i}:`, item);
             return (
               <div
-                key={item.title}
+                key={i}
                 className={clsx("grid grid-cols-3 items-center py-4", {
                   "border-t": i !== 0,
                 })}
               >
                 <div className="min-w-0">
-                  <Link href="/shoppinglist">
+                  <Link href={"/recipes/" + item.recipe_id}>
                     <p className="normal-font">{item.title}</p>
                   </Link>
                 </div>

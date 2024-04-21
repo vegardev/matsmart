@@ -24,7 +24,7 @@ export default function NewGroceriesItems({
                 })}
               >
                 <div className="min-w-0">
-                  <Link href="/shoppinglist">
+                  <Link href={"/inventory/" + item.item_location}>
                     {" "}
                     <p className="normal-font">{item.item_name}</p>
                   </Link>
