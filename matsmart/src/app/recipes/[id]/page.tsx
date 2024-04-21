@@ -20,7 +20,7 @@ export default function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <div className="flex justify-between mb-6">
-        <div className="mb-4 text-xl md:text-4xl">{recipe.recipe_name}</div>
+        <div className="mb-4 text-xl md:text-4xl">{recipe.title}</div>
         <div className="bg-white rounded-lg p-2 pr-6">
           <div>
             <DisplayRecipeTags tags={recipe.recipe_tags} />
@@ -44,7 +44,7 @@ export default function Page({ params }: { params: { id: string } }) {
             width={320}
             height={208}
             src={recipe.recipe_image}
-            alt={"Image of " + recipe.recipe_name}
+            alt={"Image of " + recipe.title}
           />
           <RecipeTextFields
             type="Nutritions"

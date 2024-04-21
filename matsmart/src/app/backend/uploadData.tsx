@@ -1,6 +1,10 @@
 "use server";
 import { z } from "zod";
-import { Recipe_CreateType } from "@/src/app/backend/definitions";
+import {
+  Recipe_CreateType,
+  Recipe_Preview,
+  Tags,
+} from "@/src/app/backend/definitions";
 import { query } from "@/src/app/backend/db";
 import { RowDataPacket } from "mysql2";
 
@@ -130,6 +134,75 @@ export async function createRecipe(recipeContent: Recipe_CreateType) {
     return recipe_id_packet[0].recipe_id;
   } catch (error) {
     throw Error((error as Error).message);
+  }
+}
+
+export async function getRecipes(queryFetch: string, tagsFetch: string) {
+  try {
+    let recipes: Recipe_Preview[];
+
+    if (!queryFetch || queryFetch.trim() === "") {
+      recipes = (await query({
+        query: "SELECT * FROM recipes",
+        values: [],
+      })) as Recipe_Preview[];
+    } else {
+      recipes = (await query({
+        query: "SELECT * FROM recipes WHERE title LIKE ?",
+        values: ["%" + queryFetch + "%"],
+      })) as Recipe_Preview[];
+    }
+
+    for (const recipe of recipes) {
+      const tags = (await query({
+        query:
+          "SELECT tag_name FROM tags INNER JOIN recipe_tags ON tags.tag_id = recipe_tags.tag_id WHERE recipe_tags.recipe_id = ?",
+        values: [recipe.recipe_id],
+      })) as RowDataPacket[];
+
+      recipe.recipe_tags = tags.map((tag) => tag.tag_name);
+    }
+
+    if (tagsFetch && tagsFetch.trim() !== "") {
+      const tags = tagsFetch.split(",");
+      recipes = recipes.filter((recipe) =>
+        tags.every((tag) => recipe.recipe_tags.includes(tag)),
+      );
+    }
+
+    return recipes;
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
+
+export async function getTags() {
+  try {
+    return (await query({
+      query: "SELECT * FROM tags",
+      values: [],
+    })) as Tags[];
+  } catch (error) {
+    throw Error((error as Error).message);
+  }
+}
+
+export async function getRecipeIds() {
+  const result = await query({
+    query: "SELECT recipe_id FROM recipes",
+    values: [],
+  });
+
+  if (Array.isArray(result)) {
+    return result.map((row) => {
+      if ("recipe_id" in row) {
+        return row.recipe_id;
+      } else {
+        throw new Error("Row does not have recipe_id property");
+      }
+    });
+  } else {
+    throw new Error("Query result is not an array");
   }
 }
 
