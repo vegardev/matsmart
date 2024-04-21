@@ -14,7 +14,7 @@ export const tagsDummyData = [
 export const recipesDummyData = [
   {
     recipe_id: 1,
-    recipe_name: "Pasta",
+    title: "Pasta",
     recipe_time: 30,
     recipe_image:
       "https://images.matprat.no/p8hgg8jg6v-jumbotron/large/fersk_pasta1.jpg",
@@ -67,7 +67,7 @@ export const recipesDummyData = [
   },
   {
     recipe_id: 2,
-    recipe_name: "Chicken Curry",
+    title: "Chicken Curry",
     recipe_time: 45,
     recipe_image: "https://images.matprat.no/xftestavbe-related/tablet",
     recipe_tags: ["Indian", "Poultry"],
@@ -109,7 +109,7 @@ export const recipesDummyData = [
   },
   {
     recipe_id: 3,
-    recipe_name: "Beef Stir Fry",
+    title: "Beef Stir Fry",
     recipe_time: 25,
     recipe_image:
       "https://cdn.momsdish.com/wp-content/uploads/2021/07/Steak-Stir-Fry-Recipe-015.jpg",
@@ -162,7 +162,7 @@ export const recipesDummyData = [
   },
   {
     recipe_id: 4,
-    recipe_name: "Vegan Salad",
+    title: "Vegan Salad",
     recipe_time: 15,
     recipe_image:
       "https://cdn77-s3.lazycatkitchen.com/wp-content/uploads/2021/05/green-vegan-salad-platter-800x1200.jpg",
@@ -215,7 +215,7 @@ export const recipesDummyData = [
   },
   {
     recipe_id: 5,
-    recipe_name: "Seafood Paella",
+    title: "Seafood Paella",
     recipe_time: 60,
     recipe_image:
       "https://themediterraneanchick.com/wp-content/uploads/2020/09/IMG_0825-1-scaled.jpg",
@@ -268,7 +268,7 @@ export const recipesDummyData = [
   },
   {
     recipe_id: 6,
-    recipe_name: "Chicken Parmesan",
+    title: "Chicken Parmesan",
     recipe_time: 45,
     recipe_image:
       "https://hips.hearstapps.com/hmg-prod/images/delish-202102-airfryerchickenparm-184-ls-1612561654.jpg?crop=1xw:0.84375xh;center,top&resize=1200:*",
@@ -321,7 +321,7 @@ export const recipesDummyData = [
   },
   {
     recipe_id: 7,
-    recipe_name: "Beef Tacos",
+    title: "Beef Tacos",
     recipe_time: 30,
     recipe_image:
       "https://danosseasoning.com/wp-content/uploads/2022/03/Beef-Tacos-768x575.jpg",
