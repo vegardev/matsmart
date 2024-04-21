@@ -4,18 +4,23 @@ import Link from "next/link";
 import { getRecipes } from "@/src/app/backend/uploadData";
 import { useEffect, useState } from "react";
 
-export function Recipe({ queryfetch }: { queryfetch: string }) {
+export function Recipe({
+  queryfetch,
+  tagsFetch,
+}: {
+  queryfetch: string;
+  tagsFetch: string;
+}) {
   const [recipes, setRecipes] = useState<Recipe_Preview[]>([]);
 
   useEffect(() => {
     const fetchRecipes = async () => {
-      const result = await getRecipes(queryfetch);
+      const result = await getRecipes(queryfetch, tagsFetch);
       setRecipes(result);
     };
 
     fetchRecipes();
-  }, [queryfetch]);
-  console.log(recipes);
+  }, [queryfetch, tagsFetch]);
   return (
     <>
       {recipes.map((recipe) => (

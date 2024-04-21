@@ -1,6 +1,5 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { Recipe_Preview } from "@/src/app/backend/definitions";
 import { useState, useEffect } from "react";
 
 export function SearchButton() {
@@ -14,13 +13,13 @@ export function SearchButton() {
   );
 }
 
-export function RandomRecipeButton({ recipes }: { recipes: Recipe_Preview[] }) {
+export function RandomRecipeButton({ recipes }: { recipes: number[] }) {
   const [id, setId] = useState(0);
 
   useEffect(() => {
-    const newId = Math.ceil(Math.random() * recipes.length);
-    setId(newId);
-  }, [recipes.length]);
+    const newId = Math.floor(Math.random() * recipes.length);
+    setId(recipes[newId]);
+  }, [recipes, recipes.length]);
 
   return (
     <Link

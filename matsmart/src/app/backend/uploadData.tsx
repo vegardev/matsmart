@@ -137,11 +137,11 @@ export async function createRecipe(recipeContent: Recipe_CreateType) {
   }
 }
 
-export async function getRecipes(searchParams: string) {
+export async function getRecipes(queryFetch: string, tagsFetch: string) {
   try {
     let recipes: Recipe_Preview[];
 
-    if (!searchParams || searchParams.trim() === "") {
+    if (!queryFetch || queryFetch.trim() === "") {
       recipes = (await query({
         query: "SELECT * FROM recipes",
         values: [],
@@ -149,7 +149,7 @@ export async function getRecipes(searchParams: string) {
     } else {
       recipes = (await query({
         query: "SELECT * FROM recipes WHERE title LIKE ?",
-        values: ["%" + searchParams + "%"],
+        values: ["%" + queryFetch + "%"],
       })) as Recipe_Preview[];
     }
 
@@ -161,6 +161,13 @@ export async function getRecipes(searchParams: string) {
       })) as RowDataPacket[];
 
       recipe.recipe_tags = tags.map((tag) => tag.tag_name);
+    }
+
+    if (tagsFetch && tagsFetch.trim() !== "") {
+      const tags = tagsFetch.split(",");
+      recipes = recipes.filter((recipe) =>
+        tags.every((tag) => recipe.recipe_tags.includes(tag)),
+      );
     }
 
     return recipes;
@@ -177,5 +184,24 @@ export async function getTags() {
     })) as Tags[];
   } catch (error) {
     throw Error((error as Error).message);
+  }
+}
+
+export async function getRecipeIds() {
+  const result = await query({
+    query: "SELECT recipe_id FROM recipes",
+    values: [],
+  });
+
+  if (Array.isArray(result)) {
+    return result.map((row) => {
+      if ("recipe_id" in row) {
+        return row.recipe_id;
+      } else {
+        throw new Error("Row does not have recipe_id property");
+      }
+    });
+  } else {
+    throw new Error("Query result is not an array");
   }
 }

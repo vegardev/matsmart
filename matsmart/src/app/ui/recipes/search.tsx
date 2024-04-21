@@ -42,6 +42,19 @@ export function SearchBar({ placeholder }: { placeholder: string }) {
 
 export function SearchByTags() {
   const [tags, setTags] = useState<Tags[]>([]);
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const handleSearch = useDebouncedCallback((term) => {
+    const params = new URLSearchParams(searchParams);
+    if (term) {
+      params.set("tags", term);
+    } else {
+      params.delete("tags");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  }, 300);
 
   useEffect(() => {
     const fetchTags = async () => {
@@ -62,8 +75,8 @@ export function SearchByTags() {
           value: tag.tag_id,
           label: tag.tag_name,
         }))}
-        onChange={(data) => {
-          console.log(data);
+        onChange={(tags) => {
+          handleSearch(tags.map((data: any) => data.label).join(",")); // Using any because it was really hard to figure out a typing due to react.select
         }}
       />
     </div>
