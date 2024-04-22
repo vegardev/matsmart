@@ -1,13 +1,13 @@
 "use client";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
-import { Inventory_items } from "@/src/app/backend/definitions";
+import { Inventory_items_proper_location } from "@/src/app/backend/definitions";
 import Link from "next/link";
 
 export default function NewGroceriesItems({
   NewGroceriesItems,
 }: {
-  NewGroceriesItems: Inventory_items[];
+  NewGroceriesItems: Inventory_items_proper_location[];
 }) {
   return (
     <div className="flex w-full flex-col md:col-span-4">
@@ -24,7 +24,7 @@ export default function NewGroceriesItems({
                 })}
               >
                 <div className="min-w-0">
-                  <Link href="/shoppinglist">
+                  <Link href={`/inventory/${item.location}`}>
                     {" "}
                     <p className="normal-font">{item.item_name}</p>
                   </Link>

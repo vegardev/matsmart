@@ -60,6 +60,16 @@ export type Inventory_items = {
   expiration_date: Date;
 };
 
+export type Inventory_items_proper_location = {
+  inventory_id: number;
+  item_id: number;
+  item_quantity: number;
+  item_quantity_type: string;
+  item_name: string;
+  location: string;
+  expiration_date: Date;
+};
+
 export type QuantityDropdownProps = {
   quantity: number;
   setQuantity: (quantity: number) => void;

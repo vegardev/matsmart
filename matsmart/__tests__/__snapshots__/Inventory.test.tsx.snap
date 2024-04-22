@@ -3,7 +3,7 @@
 exports[`InventoryPage renders Freezer correctly 1`] = `
 <DocumentFragment>
   <h1>
-    Fryser
+    Freezer
   </h1>
   <table
     class="min-w-full divide-y divide-gray-200"
@@ -44,7 +44,7 @@ exports[`InventoryPage renders Freezer correctly 1`] = `
 exports[`InventoryPage renders Fridge correctly 1`] = `
 <DocumentFragment>
   <h1>
-    Kjøleskap
+    Fridge
   </h1>
   <table
     class="min-w-full divide-y divide-gray-200"
@@ -85,7 +85,7 @@ exports[`InventoryPage renders Fridge correctly 1`] = `
 exports[`InventoryPage renders Pantry correctly 1`] = `
 <DocumentFragment>
   <h1>
-    Skuff
+    Pantry
   </h1>
   <table
     class="min-w-full divide-y divide-gray-200"

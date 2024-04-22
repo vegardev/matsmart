@@ -16,6 +16,7 @@ export default function CloseToExpireItems({
         <div className="grid grid-cols-3 py-4 mx-3 "></div>
         <div className="light-background">
           {CloseToExpireItems.map((item, i) => {
+            const expirationDate = new Date(item.expiration_date);
             return (
               <div
                 key={item.item_id}
@@ -33,16 +34,16 @@ export default function CloseToExpireItems({
                     "truncate text-sm md:text-base font-semibold text-right",
                     {
                       "text-yellow-700":
-                        item.expiration_date >= new Date() &&
-                        item.expiration_date <
+                        expirationDate >= new Date() &&
+                        expirationDate <
                           new Date(
                             new Date().getTime() + 1000 * 60 * 60 * 24 * 2,
                           ),
-                      "text-red-600": item.expiration_date < new Date(),
+                      "text-red-600": expirationDate < new Date(),
                     },
                   )}
                 >
-                  {item.expiration_date.toLocaleString()}
+                  {expirationDate.toLocaleDateString()}
                 </p>
               </div>
             );

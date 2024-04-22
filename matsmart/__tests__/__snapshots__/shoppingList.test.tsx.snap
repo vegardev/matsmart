@@ -80,6 +80,21 @@ exports[`Shopping List renders correctly 1`] = `
           >
             g
           </option>
+          <option
+            value="teskje"
+          >
+            ts
+          </option>
+          <option
+            value="spiseskje"
+          >
+            ss
+          </option>
+          <option
+            value="kopp"
+          >
+            kopp
+          </option>
         </select>
       </div>
       <button
