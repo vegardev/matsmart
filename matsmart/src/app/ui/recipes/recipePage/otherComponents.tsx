@@ -44,8 +44,8 @@ export function IngredientsCheck({
   const missingIngredients = ingredientsNeeded.filter(
     (ingredientNeeded) =>
       !ingredients.some(
-        (ingredient) => ingredient.item_name === ingredientNeeded.item_name
-      )
+        (ingredient) => ingredient.item_name === ingredientNeeded.item_name,
+      ),
   );
 
   const closestExpirationDate = findClosestExpirationDate();
@@ -102,8 +102,8 @@ export function MakeRecipeButton({
   const missingIngredients = ingredientsNeeded.filter(
     (ingredientNeeded) =>
       !ingredients.some(
-        (ingredient) => ingredient.item_name === ingredientNeeded.item_name
-      )
+        (ingredient) => ingredient.item_name === ingredientNeeded.item_name,
+      ),
   );
 
   if (missingIngredients.length > 0) {
