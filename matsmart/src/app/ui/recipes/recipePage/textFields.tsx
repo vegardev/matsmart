@@ -119,7 +119,7 @@ export function RecipeTextFields({
                 <li key={index} className="list-disc mb-2">
                   <div
                     className={clsx("flex justify-between border-b", {
-                      "text-red-500": !allIngredients.some(
+                      "text-red-600": !allIngredients.some(
                         (inventory) =>
                           inventory.item_name === ingredient.item_name &&
                           inventory.item_quantity >= ingredient.item_quantity,
