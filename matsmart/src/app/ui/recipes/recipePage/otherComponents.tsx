@@ -1,34 +1,29 @@
-import { Inventory_items } from "@/src/app/backend/definitions";
-import { pantryInventoryDummyData } from "@/src/app/backend/dummyData";
+import {
+  Inventory_items,
+  Add_Recipe_Ingredient,
+} from "@/src/app/backend/definitions";
+import { getInventory, makeDish } from "@/src/app/backend/uploadData";
+import { useEffect, useState } from "react";
 
-/*
-export function DisplayRecipeTags({ tags }: { tags: string[] }) {
-  return (
-    <div className="flex flex-wrap space-x-1 ps-4 pb-2">
-      Tags:
-      {tags.map((tag) => (
-        <p
-          key={tag}
-          className="bg-gray-100 rounded-full px-2 py-1 text-xs ms-2"
-        >
-          {tag}
-        </p>
-      ))}
-    </div>
-  );
-}
-*/
 export function IngredientsCheck({
   ingredientsNeeded,
 }: {
-  ingredientsNeeded: string[];
+  ingredientsNeeded: Add_Recipe_Ingredient[];
 }) {
-  const ingredients: Inventory_items[] = pantryInventoryDummyData.map(
-    (item) => ({
-      ...item,
-      expiration_date: new Date(item.expiration_date),
-    }),
-  );
+  const [ingredients, setIngredients] = useState<Inventory_items[]>([]);
+
+  useEffect(() => {
+    const fetchInventory = async () => {
+      const inventory = await getInventory();
+      const inventoryWithDates = inventory.map((item) => ({
+        ...item,
+        expiration_date: new Date(item.expiration_date),
+      }));
+      setIngredients(inventoryWithDates);
+    };
+
+    fetchInventory();
+  }, []);
 
   function findClosestExpirationDate() {
     let closestExpirationDate = new Date(8640000000000000);
@@ -36,7 +31,7 @@ export function IngredientsCheck({
       ingredients.map((ingredient) => {
         const ingredientExpirationDate = new Date(ingredient.expiration_date);
         if (
-          ingredient.item_name === ingredientNeeded &&
+          ingredient.item_name === ingredientNeeded.item_name &&
           ingredientExpirationDate < closestExpirationDate
         ) {
           closestExpirationDate = ingredientExpirationDate;
@@ -49,7 +44,7 @@ export function IngredientsCheck({
   const missingIngredients = ingredientsNeeded.filter(
     (ingredientNeeded) =>
       !ingredients.some(
-        (ingredient) => ingredient.item_name === ingredientNeeded,
+        (ingredient) => ingredient.item_name === ingredientNeeded.item_name,
       ),
   );
 
@@ -71,5 +66,57 @@ export function IngredientsCheck({
         </span>
       )}
     </div>
+  );
+}
+
+export function MakeRecipeButton({
+  recipe_id,
+  ingredientsNeeded,
+}: {
+  recipe_id: number;
+  ingredientsNeeded: Add_Recipe_Ingredient[];
+}) {
+  const [isMaking, setIsMaking] = useState(false);
+  const [ingredients, setIngredients] = useState<Inventory_items[]>([]);
+
+  useEffect(() => {
+    const fetchInventory = async () => {
+      const inventory = await getInventory();
+      const inventoryWithDates = inventory.map((item) => ({
+        ...item,
+        expiration_date: new Date(item.expiration_date),
+      }));
+      setIngredients(inventoryWithDates);
+    };
+
+    fetchInventory();
+  }, []);
+
+  const handleMake = async () => {
+    setIsMaking(true);
+    await makeDish(recipe_id);
+    setIsMaking(false);
+    window.location.reload();
+  };
+
+  const missingIngredients = ingredientsNeeded.filter(
+    (ingredientNeeded) =>
+      !ingredients.some(
+        (ingredient) => ingredient.item_name === ingredientNeeded.item_name,
+      ),
+  );
+
+  if (missingIngredients.length > 0) {
+    return null;
+  }
+
+  return (
+    <button
+      className="bg-blue-600 px-3 rounded-lg text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+      onClick={handleMake}
+      disabled={isMaking}
+    >
+      {isMaking ? "Making..." : "Make dish"}
+    </button>
   );
 }

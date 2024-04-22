@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 const config: Config = {
   content: [
@@ -18,6 +19,14 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addBase }) {
+      addBase({
+        ol: { listStyle: "decimal", marginLeft: "1em" },
+        ul: { listStyle: "disc" },
+        "ol > li": { marginBottom: "4px" },
+      });
+    }),
+  ],
 };
 export default config;

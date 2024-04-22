@@ -60,17 +60,6 @@ export type Inventory_items = {
   expiration_date: Date;
 };
 
-export type Recipe_Page = {
-  recipe_id: number;
-  title: string;
-  recipe_time: number;
-  recipe_image: string;
-  recipe_tags: string[];
-  recipe_method: string;
-  recipe_ingredients: string[];
-  recipe_nutrition: string;
-};
-
 export type QuantityDropdownProps = {
   quantity: number;
   setQuantity: (quantity: number) => void;
@@ -101,3 +90,26 @@ export type Recipe_CreateType = {
   recipe_ingredients: Add_Recipe_Ingredient[];
   recipe_nutritions: string;
 };
+
+export type Recipe_Page = {
+  recipe_id: number;
+  title: string;
+  recipe_time: number;
+  recipe_image: string;
+  recipe_tags: string[];
+  recipe_method: string;
+  recipe_ingredients: Add_Recipe_Ingredient[];
+  recipe_nutritions: string;
+};
+
+export const ingredientTypes = [
+  { name: "stk", abbreviation: "stk." },
+  { name: "liter", abbreviation: "L" },
+  { name: "desiliter", abbreviation: "dL" },
+  { name: "milliliter", abbreviation: "mL" },
+  { name: "kilogram", abbreviation: "kg" },
+  { name: "gram", abbreviation: "g" },
+  { name: "teskje", abbreviation: "ts" },
+  { name: "spiseskje", abbreviation: "ss" },
+  { name: "kopp", abbreviation: "kopp" },
+];

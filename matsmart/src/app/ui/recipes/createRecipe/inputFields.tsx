@@ -3,7 +3,10 @@ import { DisplayRecipeTags } from "@/src/app/ui/recipes/sharedComponents";
 import "react-quill/dist/quill.snow.css";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import { Add_Recipe_Ingredient } from "@/src/app/backend/definitions";
+import {
+  Add_Recipe_Ingredient,
+  ingredientTypes,
+} from "@/src/app/backend/definitions";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -58,15 +61,11 @@ const TextInputFields = forwardRef(
                   value={quantityType}
                   onChange={(e) => setQuantityType(e.target.value)}
                 >
-                  <option value="stk">stk.</option>
-                  <option value="liter">L</option>
-                  <option value="desiliter">dL</option>
-                  <option value="milliliter">mL</option>
-                  <option value="kilogram">kg</option>
-                  <option value="gram">g</option>
-                  <option value="teskje">ts</option>
-                  <option value="spiseskje">ss</option>
-                  <option value="kopp">kopp</option>
+                  {ingredientTypes.map((type) => (
+                    <option key={type.name} value={type.name}>
+                      {type.abbreviation}
+                    </option>
+                  ))}
                 </select>
               </div>
               <button
