@@ -31,7 +31,7 @@ export function RecipeTextFields({
       const promises = content.map((ingredient: Add_Recipe_Ingredient) => {
         console.log(ingredient);
         const inventoryItem = allIngredients.find(
-          (inventory) => inventory.item_name === ingredient.item_name,
+          (inventory) => inventory.item_name === ingredient.item_name
         );
 
         if (
@@ -68,7 +68,7 @@ export function RecipeTextFields({
     setClickedIngredients((prevState) => [...prevState, ingredient]);
 
     const inventoryItem = allIngredients.find(
-      (inventory) => inventory.item_name === ingredient.item_name,
+      (inventory) => inventory.item_name === ingredient.item_name
     );
 
     if (
@@ -119,10 +119,10 @@ export function RecipeTextFields({
                 <li key={index} className="list-disc mb-2">
                   <div
                     className={clsx("flex justify-between border-b", {
-                      "text-red-500": !allIngredients.some(
+                      "text-red-600": !allIngredients.some(
                         (inventory) =>
                           inventory.item_name === ingredient.item_name &&
-                          inventory.item_quantity >= ingredient.item_quantity,
+                          inventory.item_quantity >= ingredient.item_quantity
                       ),
                     })}
                   >
@@ -131,11 +131,11 @@ export function RecipeTextFields({
                     {!allIngredients.some(
                       (inventory) =>
                         inventory.item_name === ingredient.item_name &&
-                        inventory.item_quantity >= ingredient.item_quantity,
+                        inventory.item_quantity >= ingredient.item_quantity
                     ) &&
                     !clickedIngredients.some(
                       (clickedIngredient) =>
-                        clickedIngredient.item_name === ingredient.item_name,
+                        clickedIngredient.item_name === ingredient.item_name
                     ) ? (
                       <div>
                         <ShoppingCartIconSolid

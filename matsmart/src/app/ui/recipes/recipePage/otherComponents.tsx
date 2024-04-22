@@ -44,8 +44,8 @@ export function IngredientsCheck({
   const missingIngredients = ingredientsNeeded.filter(
     (ingredientNeeded) =>
       !ingredients.some(
-        (ingredient) => ingredient.item_name === ingredientNeeded.item_name,
-      ),
+        (ingredient) => ingredient.item_name === ingredientNeeded.item_name
+      )
   );
 
   const closestExpirationDate = findClosestExpirationDate();
@@ -55,9 +55,9 @@ export function IngredientsCheck({
     <div className="ps-4">
       Can be made until:{" "}
       {missingIngredients.length > 0 ? (
-        <span className="text-red-500">Missing ingredients</span>
+        <span className="text-red-600">Missing ingredients</span>
       ) : (
-        <span className={isExpired ? "text-red-500" : ""}>
+        <span className={isExpired ? "text-red-600" : ""}>
           {closestExpirationDate.toLocaleDateString("en-GB", {
             day: "2-digit",
             month: "2-digit",
@@ -102,8 +102,8 @@ export function MakeRecipeButton({
   const missingIngredients = ingredientsNeeded.filter(
     (ingredientNeeded) =>
       !ingredients.some(
-        (ingredient) => ingredient.item_name === ingredientNeeded.item_name,
-      ),
+        (ingredient) => ingredient.item_name === ingredientNeeded.item_name
+      )
   );
 
   if (missingIngredients.length > 0) {
