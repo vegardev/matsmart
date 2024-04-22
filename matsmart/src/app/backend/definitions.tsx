@@ -56,7 +56,7 @@ export type Inventory_items = {
   item_quantity: number;
   item_quantity_type: string;
   item_name: string;
-  item_location: string;
+  location: string;
   expiration_date: Date;
 };
 
