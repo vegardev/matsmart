@@ -21,7 +21,8 @@ export default function NewGroceriesItems({
                 key={i}
                 className={clsx("grid grid-cols-3 items-center py-4", {
                   "border-t": i !== 0,
-                })}>
+                })}
+              >
                 <div className="min-w-0">
                   <Link href={"/inventory/" + item.location}>
                     {" "}

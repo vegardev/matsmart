@@ -1,7 +1,6 @@
 "use client";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
-import { CloseToExpire } from "@/src/app/backend/definitions";
 import Link from "next/link";
 import { Inventory_items } from "@/src/app/backend/definitions";
 
@@ -23,7 +22,8 @@ export default function CloseToExpireItems({
                 key={item.item_id}
                 className={clsx("grid grid-cols-3 items-center py-4", {
                   "border-t": i !== 0,
-                })}>
+                })}
+              >
                 <div className="min-w-0">
                   <Link href={"/inventory/" + item.location}>
                     <p className="normal-font">{item.item_name}</p>{" "}
@@ -38,11 +38,12 @@ export default function CloseToExpireItems({
                         item.expiration_date >= new Date() &&
                         item.expiration_date <
                           new Date(
-                            new Date().getTime() + 1000 * 60 * 60 * 24 * 2
+                            new Date().getTime() + 1000 * 60 * 60 * 24 * 2,
                           ),
                       "text-red-600": item.expiration_date < new Date(),
-                    }
-                  )}>
+                    },
+                  )}
+                >
                   {item.expiration_date.toLocaleString()}
                 </p>
               </div>
