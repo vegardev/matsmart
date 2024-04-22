@@ -1,4 +1,7 @@
-import { QuantityDropdownProps } from "@/src/app/backend/definitions";
+import {
+  QuantityDropdownProps,
+  ingredientTypes,
+} from "@/src/app/backend/definitions";
 
 export default function QuantityDropdown({
   quantity,
@@ -24,12 +27,11 @@ export default function QuantityDropdown({
         value={quantityType}
         onChange={(e) => setQuantityType(e.target.value)}
       >
-        <option value="stk">stk.</option>
-        <option value="liter">L</option>
-        <option value="desiliter">dL</option>
-        <option value="milliliter">mL</option>
-        <option value="kilogram">kg</option>
-        <option value="gram">g</option>
+        {ingredientTypes.map((type) => (
+          <option key={type.name} value={type.name}>
+            {type.abbreviation}
+          </option>
+        ))}
       </select>
     </div>
   );

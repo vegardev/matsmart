@@ -1,29 +1,112 @@
 import clsx from "clsx";
 import { ShoppingCartIcon as ShoppingCartIconSolid } from "@heroicons/react/24/solid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { pantryInventoryDummyData } from "@/src/app/backend/dummyData";
+import {
+  Add_Recipe_Ingredient,
+  ingredientTypes,
+  Inventory_items,
+} from "@/src/app/backend/definitions";
+import {
+  getInventory,
+  addItemToShoppingList,
+} from "@/src/app/backend/uploadData";
 
 export function RecipeTextFields({
   type,
   content,
 }: {
   type: string;
-  content: string | string[];
+  content: string | Add_Recipe_Ingredient[];
 }) {
-  const [clickedIngredients, setClickedIngredients] = useState<string[]>([]);
+  const [clickedIngredients, setClickedIngredients] = useState<
+    Add_Recipe_Ingredient[]
+  >([]);
   const router = useRouter();
+  const [allIngredients, setAllIngredients] = useState<Inventory_items[]>([]);
 
-  const handleBuyAll = () => {
+  const handleBuyAll = async () => {
+    if (Array.isArray(content)) {
+      // Map content array to an array of promises
+      const promises = content.map((ingredient: Add_Recipe_Ingredient) => {
+        console.log(ingredient);
+        const inventoryItem = allIngredients.find(
+          (inventory) => inventory.item_name === ingredient.item_name,
+        );
+
+        if (
+          inventoryItem &&
+          inventoryItem.item_quantity_type === ingredient.item_quantity_type
+        ) {
+          const missingQuantity =
+            ingredient.item_quantity - inventoryItem.item_quantity;
+
+          return addItemToShoppingList({
+            item_id: inventoryItem.item_id,
+            item_quantity: missingQuantity,
+            item_quantity_type: ingredient.item_quantity_type,
+          });
+        } else {
+          return addItemToShoppingList({
+            item_quantity: ingredient.item_quantity,
+            item_quantity_type: ingredient.item_quantity_type,
+            item_name: ingredient.item_name,
+          });
+        }
+      });
+
+      // Wait for all promises to resolve
+      await Promise.all(promises);
+    }
+
     if (window.confirm("Do you want to be redirected to the shopping list?")) {
       router.push("/shoppinglist");
     }
   };
 
-  const handleIconClick = (ingredient: string) => {
-    console.log(`Push ${ingredient} to shoppingcart`);
+  const handleIconClick = (ingredient: Add_Recipe_Ingredient) => {
     setClickedIngredients((prevState) => [...prevState, ingredient]);
+
+    const inventoryItem = allIngredients.find(
+      (inventory) => inventory.item_name === ingredient.item_name,
+    );
+
+    if (
+      inventoryItem &&
+      inventoryItem.item_quantity_type === ingredient.item_quantity_type
+    ) {
+      const missingQuantity =
+        ingredient.item_quantity - inventoryItem.item_quantity;
+
+      if (missingQuantity > 0) {
+        addItemToShoppingList({
+          item_id: inventoryItem.item_id,
+          item_quantity: missingQuantity,
+          item_quantity_type: ingredient.item_quantity_type,
+        });
+      }
+    } else {
+      addItemToShoppingList({
+        item_quantity: ingredient.item_quantity,
+        item_quantity_type: ingredient.item_quantity_type,
+        item_name: ingredient.item_name,
+      });
+    }
   };
+
+  function getAbbreviation(quantityType: string) {
+    const type = ingredientTypes.find((type) => type.name === quantityType);
+    return type ? type.abbreviation : quantityType;
+  }
+
+  useEffect(() => {
+    const fetchInventory = async () => {
+      const inventory = await getInventory();
+      setAllIngredients(inventory);
+    };
+
+    fetchInventory();
+  }, []);
 
   return (
     <div className="flex flex-col justify-between rounded-xl bg-gray-50 p-4">
@@ -31,26 +114,40 @@ export function RecipeTextFields({
       <div className={"bg-white px-6 py-3 rounded-2xl"}>
         {type === "Ingredients" && Array.isArray(content) ? (
           <div className="flex flex-col">
-            {content.map((ingredient, index) => (
-              <div
-                key={index}
-                className={clsx("flex justify-between ", {
-                  "text-red-500": !pantryInventoryDummyData.some(
-                    (item) => item.item_name === ingredient,
-                  ),
-                })}
-              >
-                {ingredient}
-                {!pantryInventoryDummyData.some(
-                  (item) => item.item_name === ingredient,
-                ) && !clickedIngredients.includes(ingredient) ? (
-                  <ShoppingCartIconSolid
-                    className="size-5 text-black hover:cursor-pointer hover:text-blue-400"
-                    onClick={() => handleIconClick(ingredient)}
-                  />
-                ) : null}
-              </div>
-            ))}
+            <ul>
+              {content.map((ingredient, index) => (
+                <li key={index} className="list-disc mb-2">
+                  <div
+                    className={clsx("flex justify-between border-b", {
+                      "text-red-500": !allIngredients.some(
+                        (inventory) =>
+                          inventory.item_name === ingredient.item_name &&
+                          inventory.item_quantity >= ingredient.item_quantity,
+                      ),
+                    })}
+                  >
+                    {ingredient.item_name} {ingredient.item_quantity}{" "}
+                    {getAbbreviation(ingredient.item_quantity_type)}
+                    {!allIngredients.some(
+                      (inventory) =>
+                        inventory.item_name === ingredient.item_name &&
+                        inventory.item_quantity >= ingredient.item_quantity,
+                    ) &&
+                    !clickedIngredients.some(
+                      (clickedIngredient) =>
+                        clickedIngredient.item_name === ingredient.item_name,
+                    ) ? (
+                      <div>
+                        <ShoppingCartIconSolid
+                          className="size-5 text-black hover:cursor-pointer hover:text-blue-400 mt-[2px]"
+                          onClick={() => handleIconClick(ingredient)}
+                        />
+                      </div>
+                    ) : null}
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         ) : (
           <div
@@ -70,22 +167,3 @@ export function RecipeTextFields({
     </div>
   );
 }
-
-/*
-{type === "Ingredients" && (
-        <div className="flex mt-4">
-          <button
-            className=" w-3/5 p-1 bg-blue-600 px-4  text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 rounded-lg"
-            onClick={handleBuyAll}
-          >
-            Add All Missing Ingredients to Cart
-          </button>
-          <Link
-            href="/shoppinglist"
-            className="ml-auto w-1/5 rounded-lg bg-blue-600 px-4 text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-          >
-            <ShoppingCartIconOutline className="size-10 w-full" />
-          </Link>
-        </div>
-      )}
-    */

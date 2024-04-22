@@ -1,14 +1,18 @@
 "use client";
-import { recipesDummyData } from "@/src/app/backend/dummyData"; // Erstatt med database data senere
 import { Recipe_Page } from "@/src/app/backend/definitions";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { IngredientsCheck } from "@/src/app/ui/recipes/recipePage/otherComponents";
+import {
+  IngredientsCheck,
+  MakeRecipeButton,
+} from "@/src/app/ui/recipes/recipePage/otherComponents";
 import { DisplayRecipeTags } from "@/src/app/ui/recipes/sharedComponents";
 import { RecipeTextFields } from "@/src/app/ui/recipes/recipePage/textFields";
+import { getRecipeByIdFetch } from "@/src/app/backend/uploadData";
+import { useEffect, useState } from "react";
 
-function getRecipeById(id: number): Recipe_Page {
-  const recipe = recipesDummyData.find((recipe) => recipe.recipe_id === id);
+async function getRecipeById(id: number): Promise<Recipe_Page> {
+  const recipe = await getRecipeByIdFetch(id);
   if (!recipe) {
     return notFound(); // Kan eventuelt lage en egen 404 side
   }
@@ -16,11 +20,31 @@ function getRecipeById(id: number): Recipe_Page {
 }
 
 export default function Page({ params }: { params: { id: string } }) {
-  const recipe = getRecipeById(Number(params.id));
+  const [recipe, setRecipe] = useState<Recipe_Page | null>(null);
+
+  useEffect(() => {
+    const fetchRecipe = async () => {
+      const result = await getRecipeById(Number(params.id));
+      setRecipe(result);
+    };
+
+    fetchRecipe();
+  }, [params.id]);
+
+  if (!recipe) {
+    return <div>Loading...</div>; // or your custom loading component
+  }
+
   return (
     <>
       <div className="flex justify-between mb-6">
-        <div className="mb-4 text-xl md:text-4xl">{recipe.title}</div>
+        <div className="mb-4 text-xl md:text-4xl flex">
+          <div className="mr-6 pt-2">{recipe.title}</div>
+          <MakeRecipeButton
+            recipe_id={recipe.recipe_id}
+            ingredientsNeeded={recipe.recipe_ingredients}
+          />
+        </div>
         <div className="bg-white rounded-lg p-2 pr-6">
           <div>
             <DisplayRecipeTags tags={recipe.recipe_tags} />
@@ -47,8 +71,8 @@ export default function Page({ params }: { params: { id: string } }) {
             alt={"Image of " + recipe.title}
           />
           <RecipeTextFields
-            type="Nutritions"
-            content={recipe.recipe_nutrition}
+            type="Nutritions/Facts"
+            content={recipe.recipe_nutritions}
           />
         </div>
       </div>
