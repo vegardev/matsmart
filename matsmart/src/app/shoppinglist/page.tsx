@@ -270,6 +270,7 @@ export default function ShoppingList() {
           setQuantityType={setQuantityType}
         />
         <button
+          data-testid="add-to-shopping-list-button"
           className="rounded-md border border-gray-200 bg-gray-50 p-2 text-sm outline-2 text-center"
           onClick={handleAddToShoppingList}
         >
@@ -277,6 +278,7 @@ export default function ShoppingList() {
         </button>
         {checkedStates.some((checked) => checked) && (
           <button
+            data-testid="add-to-inventory-button"
             className="rounded-md border border-gray-200 bg-green-200 p-2 text-sm outline-2 text-center"
             onClick={handleAddBoughtItemsToInventory}
           >

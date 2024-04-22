@@ -14,7 +14,7 @@ import {
 //Posts to console if you have connection with the database
 console.log("MYSQL_HOST:", process.env.MYSQL_HOST);
 
-//test query to see ifthe datase fetching works
+//test query to see if the database fetching works
 export async function fetchDatabaseTest(): Promise<Item_database[]> {
   try {
     const dbquery = await query({
@@ -42,7 +42,7 @@ export async function fetchRecipes(): Promise<Recipes_no_content[]> {
 }
 
 //Fetches a single recipe based on a recipe_id value
-export async function fetchSingelRecipe(recipe_id: number): Promise<Recipe[]> {
+export async function fetchSingleRecipe(recipe_id: number): Promise<Recipe[]> {
   try {
     const dbquery = await query({
       query: "SELECT * FROM recipes WHERE recipe_id = ?",
