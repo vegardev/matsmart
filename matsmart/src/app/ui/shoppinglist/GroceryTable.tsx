@@ -74,6 +74,7 @@ const GroceryTable: React.FC<
               <td className="px-6 py-4 whitespace-nowrap">{item.item_name}</td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <input
+                  data-testid="quantity-input"
                   type="number"
                   step={0.5}
                   min={0.5}
@@ -102,6 +103,7 @@ const GroceryTable: React.FC<
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <input
+                  data-testid="checkbox-input"
                   type="checkbox"
                   checked={checkedStates[index]}
                   onChange={(e) => onCheckboxChange(e, index)}
@@ -112,6 +114,7 @@ const GroceryTable: React.FC<
                   <>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <select
+                        data-testid="location-input"
                         value={locations[index]}
                         onChange={(e) =>
                           onLocationChange(index, e.target.value)
@@ -126,6 +129,7 @@ const GroceryTable: React.FC<
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <input
+                        data-testid="expiry-date-input"
                         type="date"
                         onChange={(e) =>
                           onExpiryDateChange(index, new Date(e.target.value))
@@ -143,6 +147,7 @@ const GroceryTable: React.FC<
               ) : null}
               <td className="px-6 py-4 whitespace-nowrap">
                 <button
+                  data-testid="delete-button"
                   className="p-1 border border-gray-200 bg-red-400 rounded-md"
                   onClick={async () => {
                     await fetch(`/api/shoppinglist/${item.item_id}`, {
