@@ -11,6 +11,12 @@ import { RecipeTextFields } from "@/src/app/ui/recipes/recipePage/textFields";
 import { getRecipeByIdFetch } from "@/src/app/backend/uploadData";
 import { useEffect, useState } from "react";
 
+/**
+ * Retrieves a recipe by its ID.
+ *
+ * @param id - The ID of the recipe to retrieve.
+ * @returns A Promise that resolves to the recipe page if found, otherwise a 404 page.
+ */
 async function getRecipeById(id: number): Promise<Recipe_Page> {
   const recipe = await getRecipeByIdFetch(id);
   if (!recipe) {
@@ -19,6 +25,13 @@ async function getRecipeById(id: number): Promise<Recipe_Page> {
   return recipe;
 }
 
+/**
+ * Renders the page for a specific recipe.
+ * @param {Object} props - The component props.
+ * @param {Object} props.params - The parameters object containing the recipe id.
+ * @param {string} props.params.id - The id of the recipe.
+ * @returns {JSX.Element} The rendered page component.
+ */
 export default function Page({ params }: { params: { id: string } }) {
   const [recipe, setRecipe] = useState<Recipe_Page | null>(null);
 
@@ -32,7 +45,7 @@ export default function Page({ params }: { params: { id: string } }) {
   }, [params.id]);
 
   if (!recipe) {
-    return <div>Loading...</div>; // or your custom loading component
+    return <div>Loading...</div>; // Kan lage egen loading page her
   }
 
   return (

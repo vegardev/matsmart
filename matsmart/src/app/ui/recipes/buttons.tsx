@@ -2,6 +2,10 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
+/**
+ * Renders a search button with a magnifying glass icon.
+ * @returns The rendered search button component.
+ */
 export function SearchButton() {
   return (
     <Link
@@ -13,6 +17,12 @@ export function SearchButton() {
   );
 }
 
+/**
+ * Renders a button that redirects to a random recipe page.
+ *
+ * @param recipes - An array of recipe IDs.
+ * @returns The RandomRecipeButton component.
+ */
 export function RandomRecipeButton({ recipes }: { recipes: number[] }) {
   const [id, setId] = useState(0);
 
@@ -31,6 +41,10 @@ export function RandomRecipeButton({ recipes }: { recipes: number[] }) {
   );
 }
 
+/**
+ * Renders a button component for adding a recipe.
+ * @returns The JSX element representing the add recipe button.
+ */
 export function AddRecipeButton() {
   return (
     <Link

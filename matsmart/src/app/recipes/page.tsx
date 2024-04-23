@@ -9,6 +9,15 @@ import { Recipe } from "@/src/app/ui/recipes/recipePreview";
 import { getRecipeIds } from "@/src/app/backend/uploadData";
 import { useEffect, useState } from "react";
 
+/**
+ * Renders the Recipes page component.
+ *
+ * @param searchParams - The search parameters for filtering recipes.
+ * @param searchParams.query - The query string for searching recipes.
+ * @param searchParams.tags - The tags for filtering recipes.
+ *
+ * @returns The rendered Recipes page component.
+ */
 export default function Recipes({
   searchParams,
 }: {

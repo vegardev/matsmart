@@ -8,11 +8,22 @@ import { getTags } from "@/src/app/backend/uploadData";
 
 const animatedComponents = makeAnimated();
 
+/**
+ * Renders a search bar component.
+ *
+ * @param {string} placeholder - The placeholder text for the search input.
+ * @returns {JSX.Element} The rendered search bar component.
+ */
 export function SearchBar({ placeholder }: { placeholder: string }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
+  /**
+   * Handles the search functionality with debouncing.
+   *
+   * @param {string} term - The search term.
+   */
   const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
     if (term) {
@@ -40,12 +51,20 @@ export function SearchBar({ placeholder }: { placeholder: string }) {
   );
 }
 
+/**
+ * Renders a search component that allows searching recipes by tags.
+ */
 export function SearchByTags() {
   const [tags, setTags] = useState<Tags[]>([]);
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
+  /**
+   * Handles the search functionality with debouncing.
+   *
+   * @param {string} term - The search term.
+   */
   const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
     if (term) {

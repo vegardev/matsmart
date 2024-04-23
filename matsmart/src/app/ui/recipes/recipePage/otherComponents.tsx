@@ -5,6 +5,11 @@ import {
 import { getInventory, makeDish } from "@/src/app/backend/uploadData";
 import { useEffect, useState } from "react";
 
+/**
+ * Renders a component that checks the availability of ingredients needed for a recipe.
+ * @param ingredientsNeeded - An array of ingredients needed for the recipe.
+ * @returns A React component that displays the closest expiration date of the available ingredients.
+ */
 export function IngredientsCheck({
   ingredientsNeeded,
 }: {
@@ -25,6 +30,10 @@ export function IngredientsCheck({
     fetchInventory();
   }, []);
 
+  /**
+   * Finds the closest expiration date among the ingredients needed.
+   * @returns {Date} The closest expiration date.
+   */
   function findClosestExpirationDate() {
     let closestExpirationDate = new Date(8640000000000000);
     ingredientsNeeded.map((ingredientNeeded) => {
@@ -41,6 +50,12 @@ export function IngredientsCheck({
     return closestExpirationDate;
   }
 
+  /**
+   * Filters out the missing ingredients from the list of ingredients needed for a recipe.
+   * @param ingredientsNeeded - The list of ingredients needed for the recipe.
+   * @param ingredients - The list of available ingredients.
+   * @returns The missing ingredients that are not present in the available ingredients list.
+   */
   const missingIngredients = ingredientsNeeded.filter(
     (ingredientNeeded) =>
       !ingredients.some(
@@ -69,6 +84,12 @@ export function IngredientsCheck({
   );
 }
 
+/**
+ * Renders a button to make a recipe if all the required ingredients are available in the inventory.
+ * @param recipe_id - The ID of the recipe.
+ * @param ingredientsNeeded - An array of ingredients needed to make the recipe.
+ * @returns The MakeRecipeButton component.
+ */
 export function MakeRecipeButton({
   recipe_id,
   ingredientsNeeded,
@@ -80,6 +101,9 @@ export function MakeRecipeButton({
   const [ingredients, setIngredients] = useState<Inventory_items[]>([]);
 
   useEffect(() => {
+    /**
+     * Fetches the inventory and sets the ingredients state with the fetched data.
+     */
     const fetchInventory = async () => {
       const inventory = await getInventory();
       const inventoryWithDates = inventory.map((item) => ({
