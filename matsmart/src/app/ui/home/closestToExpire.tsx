@@ -41,10 +41,10 @@ export default function CloseToExpireItems({
                         expirationDate >= new Date() &&
                         expirationDate <
                           new Date(
-                            new Date().getTime() + 1000 * 60 * 60 * 24 * 2
+                            new Date().getTime() + 1000 * 60 * 60 * 24 * 2,
                           ),
                       "text-red-600": expirationDate < new Date(),
-                    }
+                    },
                   )}
                 >
                   {expirationDate.toLocaleDateString()}
