@@ -49,7 +49,15 @@ export default function InventoryPage({
     setCheckedStates(checkedStates.filter((_, index) => !checkedStates[index]));
   };
   const location = decodeURIComponent(params.location);
-  const locationTitle = location.charAt(0).toUpperCase() + location.slice(1);
+  // translate location to English
+  const locationTitle =
+    location === "kjøleskap"
+      ? "Fridge"
+      : location === "fryser"
+        ? "Freezer"
+        : location === "skuff"
+          ? "Pantry"
+          : "Unknown location";
   return (
     <>
       <h1>{locationTitle}</h1>

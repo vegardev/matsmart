@@ -3,15 +3,14 @@ import CloseToExpireItems from "@/src/app/ui/home/closestToExpire";
 import NewGroceriesItems from "@/src/app/ui/home/newGroceryItems";
 import RecommendedItems from "@/src/app/ui/home/recipesRecommended";
 import {
-  CloseToExpire,
-  Inventory_items,
+  Inventory_items_proper_location,
   Recipe,
 } from "@/src/app/backend/definitions";
 import { useState, useEffect } from "react";
 
 interface Data {
-  closeToExpireItems: CloseToExpire[];
-  recentlyAddedItems: Inventory_items[];
+  closeToExpireItems: Inventory_items_proper_location[];
+  recentlyAddedItems: Inventory_items_proper_location[];
   recommendedRecipes: Recipe[];
 }
 
