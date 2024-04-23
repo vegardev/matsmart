@@ -27,6 +27,9 @@ export default function NewGroceriesItems({
                   <Link href={`/inventory/${item.location}`}>
                     {" "}
                     <p className="normal-font">{item.item_name}</p>
+                    <p className="text-sm text-gray-500">
+                      {item.item_quantity} {item.item_quantity_type}
+                    </p>
                   </Link>
                 </div>
               </div>
