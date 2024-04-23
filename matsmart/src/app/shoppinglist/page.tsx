@@ -22,14 +22,14 @@ export default function ShoppingList() {
   const [refreshShoppingList, setRefreshShoppingList] = useState<boolean>(true);
 
   const [checkedStates, setCheckedStates] = useState<boolean[]>(
-    new Array(shoppingItems.length).fill(false)
+    new Array(shoppingItems.length).fill(false),
   );
   const [locations, setLocations] = useState<string[]>(
-    new Array(shoppingItems.length).fill("")
+    new Array(shoppingItems.length).fill(""),
   );
 
   const [expiryDates, setExpiryDates] = useState<(Date | null)[]>(
-    new Array(shoppingItems.length).fill(null)
+    new Array(shoppingItems.length).fill(null),
   );
 
   const anyCheckboxChecked = checkedStates.some((checked) => checked);
@@ -97,7 +97,7 @@ export default function ShoppingList() {
    */
   const handleCheckboxChange = (
     event: React.ChangeEvent<HTMLInputElement>,
-    index: number
+    index: number,
   ) => {
     const newCheckedStates = [...checkedStates];
     newCheckedStates[index] = event.target.checked;
@@ -203,7 +203,7 @@ export default function ShoppingList() {
             newItem.item_quantity_type +
             " " +
             newItem.item_name +
-            " to shopping list!"
+            " to shopping list!",
         );
         setRefreshShoppingList(true);
       })
@@ -218,13 +218,13 @@ export default function ShoppingList() {
   const handleAddBoughtItemsToInventory = async () => {
     console.log("Clicked add bought items to inventory...");
     const boughtItems = shoppingItems.filter(
-      (item, index) => checkedStates[index]
+      (item, index) => checkedStates[index],
     );
     console.log("Bought items: ", boughtItems);
 
     for (const item of boughtItems) {
       const itemIndex = shoppingItems.findIndex(
-        (shoppingItem) => shoppingItem.item_id === item.item_id
+        (shoppingItem) => shoppingItem.item_id === item.item_id,
       );
       const itemLocation = locations[itemIndex];
       let itemExpiryDate = expiryDates[itemIndex];
@@ -286,7 +286,7 @@ export default function ShoppingList() {
     }
 
     setShoppingItems((prevItems) =>
-      prevItems.filter((_, index) => !checkedStates[index])
+      prevItems.filter((_, index) => !checkedStates[index]),
     );
     setCheckedStates((prevStates) => prevStates.filter((state) => !state));
   };

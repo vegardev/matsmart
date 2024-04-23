@@ -55,7 +55,7 @@ export async function fetchSingleRecipe(recipe_id: number): Promise<Recipe[]> {
 }
 
 export async function fetchRecipeItems(
-  recipe_id: number
+  recipe_id: number,
 ): Promise<Recipe_items[]> {
   try {
     const dbquery = await testquery({
@@ -70,7 +70,7 @@ export async function fetchRecipeItems(
 }
 
 export async function fetchInventoryItems(
-  location: string
+  location: string,
 ): Promise<Inventory_items[]> {
   try {
     const dbquery = await testquery({
@@ -129,7 +129,7 @@ export async function fetchGroceryItems(): Promise<Item_database[]> {
 }
 
 export async function fetchGrocerySuggestions(
-  searchQuery: string
+  searchQuery: string,
 ): Promise<Item_database[]> {
   try {
     const dbquery = await testquery({
@@ -155,7 +155,7 @@ export async function fetchRecentlyAddedItems(): Promise<Inventory_items[]> {
   }
 }
 export async function fetchRecipeSuggestions(
-  searchQuery: string
+  searchQuery: string,
 ): Promise<Recipes_no_content[]> {
   try {
     const dbquery = await testquery({
@@ -215,7 +215,7 @@ export async function submitInventoryItem(
   item_quantity: number,
   item_quantity_type: string,
   location: string,
-  expiration_date: Date
+  expiration_date: Date,
 ): Promise<void> {
   try {
     await testquery({
@@ -237,7 +237,7 @@ export async function submitInventoryItem(
 export async function submitShoppingListItem(
   item_id: number,
   item_quantity: number,
-  item_quantity_type: string
+  item_quantity_type: string,
 ): Promise<void> {
   try {
     await testquery({
@@ -251,7 +251,7 @@ export async function submitShoppingListItem(
 }
 export async function updateShoppingListItem(
   item_id: number,
-  itemQuantity: number
+  itemQuantity: number,
 ): Promise<void> {
   try {
     await testquery({
