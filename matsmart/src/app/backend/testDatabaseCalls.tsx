@@ -1,3 +1,9 @@
+/**
+ * This file contains functions for making queries to the test database.
+ * The structure and functionality of these functions are identical to those in the `databaseCalls.tsx` file.
+ * For detailed documentation on how these functions work, please refer to the comments in `databaseCalls.tsx`.
+ */
+
 import { testquery } from "@/src/app/backend/db";
 import {
   Item_database,
@@ -10,10 +16,8 @@ import {
   Tags,
 } from "@/src/app/backend/definitions";
 
-//Posts to console if you have connection with the database
 console.log("MYSQL_HOST:", process.env.MYSQL_HOST);
 
-//test query to see if the database fetching works
 export async function fetchDatabaseTest(): Promise<Item_database[]> {
   try {
     const dbquery = await testquery({
@@ -25,9 +29,7 @@ export async function fetchDatabaseTest(): Promise<Item_database[]> {
     throw Error((error as Error).message);
   }
 }
-//Fetches all data (excluding content) from all recipes in the database
-//  Skal utvidde spørring for å ha tags med
-//  Burde legges til en check for om id er større og mindre en noen verdier for å kun vise et bestemt antall per side
+
 export async function fetchRecipes(): Promise<Recipes_no_content[]> {
   try {
     const dbquery = await testquery({
@@ -40,7 +42,6 @@ export async function fetchRecipes(): Promise<Recipes_no_content[]> {
   }
 }
 
-//Fetches a single recipe based on a recipe_id value
 export async function fetchSingleRecipe(recipe_id: number): Promise<Recipe[]> {
   try {
     const dbquery = await testquery({
@@ -53,9 +54,8 @@ export async function fetchSingleRecipe(recipe_id: number): Promise<Recipe[]> {
   }
 }
 
-//Fetces info about items needed for a recipe based on a recipe_id value
 export async function fetchRecipeItems(
-  recipe_id: number,
+  recipe_id: number
 ): Promise<Recipe_items[]> {
   try {
     const dbquery = await testquery({
@@ -69,10 +69,8 @@ export async function fetchRecipeItems(
   }
 }
 
-//Fetches all items in a inventory based on a location value
-// Gjorde endring slik at navn på item hentes fra item_database
 export async function fetchInventoryItems(
-  location: string,
+  location: string
 ): Promise<Inventory_items[]> {
   try {
     const dbquery = await testquery({
@@ -131,7 +129,7 @@ export async function fetchGroceryItems(): Promise<Item_database[]> {
 }
 
 export async function fetchGrocerySuggestions(
-  searchQuery: string,
+  searchQuery: string
 ): Promise<Item_database[]> {
   try {
     const dbquery = await testquery({
@@ -157,7 +155,7 @@ export async function fetchRecentlyAddedItems(): Promise<Inventory_items[]> {
   }
 }
 export async function fetchRecipeSuggestions(
-  searchQuery: string,
+  searchQuery: string
 ): Promise<Recipes_no_content[]> {
   try {
     const dbquery = await testquery({
@@ -217,7 +215,7 @@ export async function submitInventoryItem(
   item_quantity: number,
   item_quantity_type: string,
   location: string,
-  expiration_date: Date,
+  expiration_date: Date
 ): Promise<void> {
   try {
     await testquery({
@@ -239,7 +237,7 @@ export async function submitInventoryItem(
 export async function submitShoppingListItem(
   item_id: number,
   item_quantity: number,
-  item_quantity_type: string,
+  item_quantity_type: string
 ): Promise<void> {
   try {
     await testquery({
@@ -253,7 +251,7 @@ export async function submitShoppingListItem(
 }
 export async function updateShoppingListItem(
   item_id: number,
-  itemQuantity: number,
+  itemQuantity: number
 ): Promise<void> {
   try {
     await testquery({

@@ -3,6 +3,15 @@ import {
   ingredientTypes,
 } from "@/src/app/backend/definitions";
 
+/**
+ * QuantityDropdown component.
+ * @param {Object} props - The props for the component.
+ * @param {number} props.quantity - The current quantity.
+ * @param {(value: number) => void} props.setQuantity - Function to set the quantity.
+ * @param {string} props.quantityType - The current quantity type.
+ * @param {(value: string) => void} props.setQuantityType - Function to set the quantity type.
+ * @returns The rendered QuantityDropdown component.
+ */
 export default function QuantityDropdown({
   quantity,
   setQuantity,

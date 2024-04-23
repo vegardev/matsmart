@@ -4,6 +4,13 @@ import React, { useState, useEffect } from "react";
 import InventoryTable from "@/src/app/ui/inventory/InventoryTable";
 import { Inventory_items } from "@/src/app/backend/definitions";
 
+/**
+ * Page component for the inventory page.
+ * @param {Object} props - The props for the component.
+ * @param {Object} props.params - The parameters for the page.
+ * @param {string} props.params.location - The location of the inventory.
+ * @returns The rendered InventoryPage component.
+ */
 export default function InventoryPage({
   params,
 }: {
@@ -22,6 +29,10 @@ export default function InventoryPage({
     fetchData();
   }, [params.location]);
 
+  /**
+   * Handle the change of a checkbox.
+   * @param {number} index - The index of the checkbox.
+   */
   const handleCheckboxChange = (index: number) => {
     setCheckedStates((prevCheckedStates) => {
       const newCheckedStates = [...prevCheckedStates];
@@ -30,6 +41,9 @@ export default function InventoryPage({
     });
   };
 
+  /**
+   * Handle the deletion of items.
+   */
   const handleDelete = async () => {
     // Create an array of checked items
     const checkedItems = items.filter((_, index) => checkedStates[index]);
@@ -48,8 +62,10 @@ export default function InventoryPage({
     setItems(items.filter((_, index) => !checkedStates[index]));
     setCheckedStates(checkedStates.filter((_, index) => !checkedStates[index]));
   };
+
   const location = decodeURIComponent(params.location);
   const locationTitle = location.charAt(0).toUpperCase() + location.slice(1);
+
   return (
     <>
       <h1>{locationTitle}</h1>

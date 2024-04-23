@@ -2,6 +2,10 @@ import Link from "next/link";
 import NavLinks from "@/src/app/ui/home/nav-links";
 import Image from "next/image";
 
+/**
+ * SideNav component.
+ * @returns The rendered SideNav component.
+ */
 export default function SideNav() {
   return (
     <div className="flex flex-col px-3 py-4 md:px-2">

@@ -5,6 +5,12 @@ import { Item_database, Shopping_items } from "@/src/app/backend/definitions";
 import { useState, useEffect } from "react";
 import QuantityDropdown from "@/src/app/ui/shoppinglist/QuantityDropdown";
 
+/**
+ * ShoppingList component.
+ *
+ * @returns {JSX.Element} The rendered ShoppingList component.
+ */
+
 export default function ShoppingList() {
   const [shoppingItems, setShoppingItems] = useState<Shopping_items[]>([]);
   const [groceryItems, setGroceryItems] = useState<Item_database[]>([]);
@@ -16,18 +22,24 @@ export default function ShoppingList() {
   const [refreshShoppingList, setRefreshShoppingList] = useState<boolean>(true);
 
   const [checkedStates, setCheckedStates] = useState<boolean[]>(
-    new Array(shoppingItems.length).fill(false),
+    new Array(shoppingItems.length).fill(false)
   );
   const [locations, setLocations] = useState<string[]>(
-    new Array(shoppingItems.length).fill(""),
+    new Array(shoppingItems.length).fill("")
   );
 
   const [expiryDates, setExpiryDates] = useState<(Date | null)[]>(
-    new Array(shoppingItems.length).fill(null),
+    new Array(shoppingItems.length).fill(null)
   );
 
   const anyCheckboxChecked = checkedStates.some((checked) => checked);
 
+  /**
+   * Handles the change of an expiry date.
+   *
+   * @param {number} index - The index of the item.
+   * @param {string | Date} value - The new expiry date.
+   */
   const handleExpiryDateChange = (index: number, value: string | Date) => {
     setExpiryDates((prevDates) => {
       const newDates = [...prevDates];
@@ -36,6 +48,12 @@ export default function ShoppingList() {
     });
   };
 
+  /**
+   * Handles the change of a quantity.
+   *
+   * @param {number} index - The index of the item.
+   * @param {number} newQuantity - The new quantity.
+   */
   const handleQuantityChange = (index: number, newQuantity: number) => {
     if (newQuantity === -1) {
       const newShoppingItems = shoppingItems.filter((_, i) => i !== index);
@@ -47,6 +65,12 @@ export default function ShoppingList() {
     }
   };
 
+  /**
+   * Handles the change of a location.
+   *
+   * @param {number} index - The index of the item.
+   * @param {string} newLocation - The new location.
+   */
   const handleLocationChange = (index: number, newLocation: string) => {
     setLocations((prevLocations) => {
       const newLocations = [...prevLocations];
@@ -55,14 +79,25 @@ export default function ShoppingList() {
     });
   };
 
+  /**
+   * Handles the deletion of an item.
+   *
+   * @param {number} index - The index of the item.
+   */
   const handleDelete = (index: number) => {
     setShoppingItems((prevItems) => prevItems.filter((_, i) => i !== index));
     setCheckedStates((prevStates) => prevStates.filter((_, i) => i !== index));
   };
 
+  /**
+   * Handles the change of a checkbox.
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} event - The change event.
+   * @param {number} index - The index of the checkbox.
+   */
   const handleCheckboxChange = (
     event: React.ChangeEvent<HTMLInputElement>,
-    index: number,
+    index: number
   ) => {
     const newCheckedStates = [...checkedStates];
     newCheckedStates[index] = event.target.checked;
@@ -96,7 +131,9 @@ export default function ShoppingList() {
     setExpiryDates(new Array(shoppingItems.length).fill(null));
   }, [shoppingItems]);
 
-  // Legg til item i shopping list
+  /**
+   * Handles the addition of an item to the shopping list.
+   */
   const handleAddToShoppingList = async () => {
     console.log("Clicked add to shopping list...");
     const item = groceryItems.find((item) => item.item_name === search);
@@ -166,7 +203,7 @@ export default function ShoppingList() {
             newItem.item_quantity_type +
             " " +
             newItem.item_name +
-            " to shopping list!",
+            " to shopping list!"
         );
         setRefreshShoppingList(true);
       })
@@ -175,17 +212,19 @@ export default function ShoppingList() {
       });
   };
 
-  // Send kjøpte items til inventory
+  /**
+   * Handles the addition of bought items to the inventory.
+   */
   const handleAddBoughtItemsToInventory = async () => {
     console.log("Clicked add bought items to inventory...");
     const boughtItems = shoppingItems.filter(
-      (item, index) => checkedStates[index],
+      (item, index) => checkedStates[index]
     );
     console.log("Bought items: ", boughtItems);
 
     for (const item of boughtItems) {
       const itemIndex = shoppingItems.findIndex(
-        (shoppingItem) => shoppingItem.item_id === item.item_id,
+        (shoppingItem) => shoppingItem.item_id === item.item_id
       );
       const itemLocation = locations[itemIndex];
       let itemExpiryDate = expiryDates[itemIndex];
@@ -247,7 +286,7 @@ export default function ShoppingList() {
     }
 
     setShoppingItems((prevItems) =>
-      prevItems.filter((_, index) => !checkedStates[index]),
+      prevItems.filter((_, index) => !checkedStates[index])
     );
     setCheckedStates((prevStates) => prevStates.filter((state) => !state));
   };

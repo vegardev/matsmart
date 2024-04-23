@@ -4,6 +4,16 @@ import React, { useState, useEffect } from "react";
 import { SearchSuggestions } from "@/src/app/ui/components/SearchSuggestions";
 import clsx from "clsx";
 
+/**
+ * SearchBar component.
+ * @param {Object} props - The props for the component.
+ * @param {string} props.databaseTable - The database table to search in.
+ * @param {string} props.placeholder - The placeholder text for the search bar.
+ * @param {string} props.search - The current search text.
+ * @param {(search: string) => void} props.setSearch - The function to update the search text.
+ * @param {Type[]} props.suggestions - The current list of suggestions.
+ * @returns The rendered SearchBar component.
+ */
 export function SearchBar<Type>({
   databaseTable,
   placeholder,
@@ -24,20 +34,24 @@ export function SearchBar<Type>({
   const isActive = search !== "";
 
   useEffect(() => {
-    // Debounce for å redusere database kall før brukeren er ferdig med å søke
+    // Debounce to reduce database calls until the user is done searching
     const delayDebounceFn = setTimeout(() => {
       if (isActive) {
         fetch(`/api/autocomplete/${databaseTable}/${search}`)
           .then((response) => response.json())
           .then((data) => setItems(data))
           .catch((error) =>
-            console.error("Error fetching suggestion data:", error),
+            console.error("Error fetching suggestion data:", error)
           );
       }
     }, 500);
     return () => clearTimeout(delayDebounceFn);
   }, [search, isActive, databaseTable]);
 
+  /**
+   * Handles the key down event.
+   * @param {React.KeyboardEvent} event - The key down event.
+   */
   function handleKeyDown(event: React.KeyboardEvent) {
     if (event.key === "Tab" && items.length > 0) {
       setSelected((selected + 1) % items.length);

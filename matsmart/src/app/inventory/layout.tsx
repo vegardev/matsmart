@@ -1,11 +1,20 @@
 import Link from "next/link";
 
+/**
+ * Array of links to be displayed in the inventory layout.
+ */
 const links: any[] = [
   { name: "Pantry", href: "skuff" },
   { name: "Fridge", href: "kjøleskap" },
   { name: "Freezer", href: "fryser" },
 ];
 
+/**
+ * Layout component for the inventory page.
+ * @param {Object} props - The props for the component.
+ * @param {React.ReactNode} props.children - The child components to be rendered within the layout.
+ * @returns The rendered InventoryLayout component.
+ */
 export default function InventoryLayout({
   children,
 }: {

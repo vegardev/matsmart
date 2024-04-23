@@ -4,6 +4,12 @@ import clsx from "clsx";
 import { Recipe } from "@/src/app/backend/definitions";
 import Link from "next/link";
 
+/**
+ * RecommendedItems component.
+ * @param {Object} props - The props for the component.
+ * @param {Recipe[]} props.RecommendedItems - The recommended recipes based on the user's inventory.
+ * @returns The rendered RecommendedItems component.
+ */
 export default function RecommendedItems({
   RecommendedItems,
 }: {

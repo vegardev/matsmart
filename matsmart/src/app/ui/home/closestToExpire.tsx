@@ -3,6 +3,12 @@ import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { CloseToExpire } from "@/src/app/backend/definitions";
 
+/**
+ * CloseToExpireItems component.
+ * @param {Object} props - The props for the component.
+ * @param {CloseToExpire[]} props.CloseToExpireItems - The items that are close to their expiration date.
+ * @returns The rendered CloseToExpireItems component.
+ */
 export default function CloseToExpireItems({
   CloseToExpireItems,
 }: {
@@ -36,10 +42,10 @@ export default function CloseToExpireItems({
                         item.expiration_date >= new Date() &&
                         item.expiration_date <
                           new Date(
-                            new Date().getTime() + 1000 * 60 * 60 * 24 * 2,
+                            new Date().getTime() + 1000 * 60 * 60 * 24 * 2
                           ),
                       "text-red-600": item.expiration_date < new Date(),
-                    },
+                    }
                   )}
                 >
                   {item.expiration_date.toLocaleString()}
