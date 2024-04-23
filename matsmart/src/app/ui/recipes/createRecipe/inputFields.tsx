@@ -10,6 +10,17 @@ import {
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
+/**
+ * TextInputFields component.
+ * This component renders input fields for creating a recipe.
+ * It renders the input fields conditionally based on the category prop.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {string} props.catagory - The category of the input fields.
+ * @param {React.Ref} ref - The ref object used to access the component's methods.
+ * @returns {JSX.Element} The rendered component.
+ */
 const TextInputFields = forwardRef(
   ({ catagory }: { catagory: string }, ref) => {
     const [value, setValue] = useState("");
@@ -18,10 +29,24 @@ const TextInputFields = forwardRef(
     const [ingredients, setIngredients] = useState<Add_Recipe_Ingredient[]>([]);
 
     useImperativeHandle(ref, () => ({
+      /**
+       * Get the current value of the input field.
+       *
+       * @returns {string} The current value of the input field.
+       */
       getValue: () => value,
+      /**
+       * Get the list of ingredients.
+       *
+       * @returns {Add_Recipe_Ingredient[]} The list of ingredients.
+       */
       getIngredients: () => ingredients,
     }));
 
+    /**
+     * Handle the add button click event.
+     * Adds the current input values to the list of ingredients.
+     */
     const handleAdd = () => {
       const formattedValue =
         value.charAt(0).toUpperCase() + value.slice(1).toLowerCase().trimEnd();
@@ -101,14 +126,26 @@ const TextInputFields = forwardRef(
   },
 );
 
+/**
+ * Component for adding an image with an input field for the image URL.
+ *
+ * @component
+ * @param {object} props - The component props.
+ * @param {React.Ref} ref - The ref object used to access the component's methods.
+ * @returns {JSX.Element} The rendered AddImage component.
+ */
 const AddImage = forwardRef((props, ref) => {
   const [inputImageUrl, setImageUrl] = useState(
     "https://ralfvanveen.com/wp-content/uploads//2021/06/Placeholder-_-Begrippenlijst.svg",
   );
 
   useImperativeHandle(ref, () => ({
+    /**
+     * Gets the current image URL.
+     *
+     * @returns {string} The current image URL.
+     */
     getImage: () => inputImageUrl,
-    // other methods...
   }));
 
   return (
@@ -130,14 +167,34 @@ const AddImage = forwardRef((props, ref) => {
   );
 });
 
+/**
+ * AddTags component.
+ *
+ * This component allows users to add tags to a recipe.
+ *
+ * @component
+ * @param {object} props - The component props.
+ * @param {React.Ref} ref - The ref object used to expose a getTags function.
+ * @returns {JSX.Element} The rendered AddTags component.
+ */
 const AddTags = forwardRef((props, ref) => {
   const [tags, setTags] = useState<string[]>([]);
   const [value, setValue] = useState("");
 
   useImperativeHandle(ref, () => ({
+    /**
+     * Get the current tags.
+     *
+     * @returns {string[]} The current tags.
+     */
     getTags: () => tags,
   }));
 
+  /**
+   * Handle the add button click event.
+   *
+   * This function adds the current value to the tags array and clears the input field.
+   */
   const handleAdd = () => {
     const formattedValue =
       value.charAt(0).toUpperCase() + value.slice(1).toLowerCase().trimEnd();

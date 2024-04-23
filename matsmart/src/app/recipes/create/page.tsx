@@ -25,6 +25,9 @@ interface TagsFieldsHandle {
   getTags: () => string[];
 }
 
+/**
+ * Renders the page for creating a recipe.
+ */
 export default function Page() {
   const router = useRouter();
   const [timeRequirement, setTimeRequirement] = useState("");
@@ -37,6 +40,9 @@ export default function Page() {
   const imageRef = useRef<ImageFieldsHandle | null>(null);
   const tagsRef = useRef<TagsFieldsHandle | null>(null);
 
+  /**
+   * Handles the upload of a recipe.
+   */
   const handleUpload = () => {
     const method = methodRef.current?.getValue() || "";
     const ingredients = ingredientsRef.current?.getIngredients() || [];
@@ -53,10 +59,15 @@ export default function Page() {
       recipe_ingredients: ingredients,
       recipe_tags: tags,
     });
+
+    /**
+     * Retrieves the recipe ID and navigates to the recipe page.
+     */
     async function getRecipeId() {
       const value = await recipe_id;
       router.push(`/recipes/${value}`);
     }
+
     getRecipeId();
   };
   return (
