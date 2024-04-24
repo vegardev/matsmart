@@ -33,7 +33,6 @@ const Recipe_Create = z.object({
  * @throws Error if there is an error creating the recipe.
  */
 export async function createRecipe(recipeContent: Recipe_CreateType) {
-  // Parse the recipe content into a Recipe_Create object.
   const recipe = Recipe_Create.parse(recipeContent);
   try {
     // Insert the new recipe into the 'recipes' table in the database.
@@ -154,7 +153,6 @@ export async function createRecipe(recipeContent: Recipe_CreateType) {
     // Return the ID of the newly created recipe.
     return recipe_id_packet[0].recipe_id;
   } catch (error) {
-    // If there is an error, throw it.
     throw Error((error as Error).message);
   }
 }
@@ -206,10 +204,8 @@ export async function getRecipes(queryFetch: string, tagsFetch: string) {
       );
     }
 
-    // Return the recipes
     return recipes;
   } catch (error) {
-    // If there's an error, throw it
     throw Error((error as Error).message);
   }
 }
@@ -317,7 +313,7 @@ export async function dishUsesIngredients(
       // If the ingredient is not completely used up, the quantity is updated instead
       await query({
         query: "UPDATE inventory SET item_quantity = ? WHERE item_id = ?",
-        values: [inventory_item.item_quantity, inventory_item.item_id], // Corrected order
+        values: [inventory_item.item_quantity, inventory_item.item_id],
       });
       console.log("updated item");
 
@@ -348,7 +344,7 @@ export async function getRecipeByIdFetch(recipe_id: number) {
       values: [recipe_id],
     })) as Recipe_Page[];
 
-    // If no recipe is found, throw an error
+    // If the recipe is not found, throw an error
     if (recipe.length === 0) {
       throw new Error("Recipe not found");
     }
@@ -379,10 +375,8 @@ export async function getRecipeByIdFetch(recipe_id: number) {
       };
     });
 
-    // Return the recipe object
     return recipe[0];
   } catch (error) {
-    // If an error occurs, throw it
     throw Error((error as Error).message);
   }
 }
@@ -434,7 +428,6 @@ export async function addItemToShoppingList({
       if (result.length > 0) {
         item_id = result[0].item_id;
       } else {
-        // If the item is not found in the database, it throws an error.
         throw new Error(`Item with name ${item_name} not found in database`);
       }
     }
@@ -469,7 +462,6 @@ export async function addItemToShoppingList({
       });
     }
   } catch (error) {
-    // If any error occurs during the process, it throws the error.
     throw Error((error as Error).message);
   }
 }
