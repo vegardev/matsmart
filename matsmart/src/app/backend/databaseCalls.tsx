@@ -11,9 +11,6 @@ import {
   CloseToExpire,
 } from "@/src/app/backend/definitions";
 
-//Posts to console if you have connection with the database
-console.log("MYSQL_HOST:", process.env.MYSQL_HOST);
-
 /**
  * Fetches all recipes from the recipes table in the database.
  * @returns {Promise<Recipes_no_content[]>} A promise that resolves to an array of recipes without content from the database.
