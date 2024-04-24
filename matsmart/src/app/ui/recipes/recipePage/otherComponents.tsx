@@ -70,8 +70,11 @@ export function IngredientsCheck({
     <div className="ps-4">
       Can be made until:{" "}
       {missingIngredients.length > 0 ? (
+        // If there are missing ingredients, display a message.
         <span className="text-red-600">Missing ingredients</span>
       ) : (
+        // If there are no missing ingredients, display the closest expiration date
+        // if it is expired then display text in red
         <span className={isExpired ? "text-red-600" : ""}>
           {closestExpirationDate.toLocaleDateString("en-GB", {
             day: "2-digit",
@@ -116,6 +119,8 @@ export function MakeRecipeButton({
     fetchInventory();
   }, []);
 
+  // Calls this function if button is clicked
+  // It show visually that it is loading/making, makes the dish, and then reloads the page
   const handleMake = async () => {
     setIsMaking(true);
     await makeDish(recipe_id);
@@ -123,6 +128,7 @@ export function MakeRecipeButton({
     window.location.reload();
   };
 
+  // Filter the ingredientsNeeded to find any that are not in the inventory
   const missingIngredients = ingredientsNeeded.filter(
     (ingredientNeeded) =>
       !ingredients.some(
@@ -130,6 +136,7 @@ export function MakeRecipeButton({
       ),
   );
 
+  // If there are missing ingredients, don't render the button
   if (missingIngredients.length > 0) {
     return null;
   }

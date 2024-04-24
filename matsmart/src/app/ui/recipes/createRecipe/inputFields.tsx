@@ -28,6 +28,7 @@ const TextInputFields = forwardRef(
     const [quantityType, setQuantityType] = useState("stk");
     const [ingredients, setIngredients] = useState<Add_Recipe_Ingredient[]>([]);
 
+    // Using the useImperativeHandle hook to expose component methods to the parent
     useImperativeHandle(ref, () => ({
       /**
        * Get the current value of the input field.
@@ -117,6 +118,7 @@ const TextInputFields = forwardRef(
             </div>
           </div>
         ) : (
+          // If the category is not 'Ingredients', render a ReactQuill component for rich text editing
           <div className="bg-white px-6 py-3 rounded-2xl">
             <ReactQuill value={value} onChange={setValue} />
           </div>
@@ -135,10 +137,12 @@ const TextInputFields = forwardRef(
  * @returns {JSX.Element} The rendered AddImage component.
  */
 const AddImage = forwardRef((props, ref) => {
+  // The state variable is initialized with a placeholder image URL as the render for recipe page breaks without an image.
   const [inputImageUrl, setImageUrl] = useState(
     "https://ralfvanveen.com/wp-content/uploads//2021/06/Placeholder-_-Begrippenlijst.svg",
   );
 
+  // This hook is used to expose the getImage function to the parent component.
   useImperativeHandle(ref, () => ({
     /**
      * Gets the current image URL.
@@ -181,6 +185,7 @@ const AddTags = forwardRef((props, ref) => {
   const [tags, setTags] = useState<string[]>([]);
   const [value, setValue] = useState("");
 
+  // This hook allows the parent component to get the current tags.
   useImperativeHandle(ref, () => ({
     /**
      * Get the current tags.
@@ -196,6 +201,7 @@ const AddTags = forwardRef((props, ref) => {
    * This function adds the current value to the tags array and clears the input field.
    */
   const handleAdd = () => {
+    // Format the value: first letter uppercase, the rest lowercase, and trim the end.
     const formattedValue =
       value.charAt(0).toUpperCase() + value.slice(1).toLowerCase().trimEnd();
     setTags((prevTags) => [...prevTags, formattedValue]);

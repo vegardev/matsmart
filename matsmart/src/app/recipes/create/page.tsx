@@ -33,7 +33,9 @@ export default function Page() {
   const [timeRequirement, setTimeRequirement] = useState("");
   const [title, setTitle] = useState("");
 
-  /* All ref greiene ble anbefalt av AI(CoPilot) for å hente data fra alle komponentene*/
+  // Using the useRef hook from React to create references to various components
+  // These references will be used to get data from the components
+  // The useRef function were recommended by AI (CoPilot) as a way to retrive data from the components
   const methodRef = useRef<InputFieldsHandle | null>(null);
   const ingredientsRef = useRef<IngredientsFieldsHandle | null>(null);
   const nutritionsRef = useRef<InputFieldsHandle | null>(null);
@@ -44,12 +46,14 @@ export default function Page() {
    * Handles the upload of a recipe.
    */
   const handleUpload = () => {
+    // Getting the values from the referenced components
     const method = methodRef.current?.getValue() || "";
     const ingredients = ingredientsRef.current?.getIngredients() || [];
     const nutritions = nutritionsRef.current?.getValue() || "";
     const image = imageRef.current?.getImage() || "";
     const tags = tagsRef.current?.getTags() || [];
 
+    // Creating a new recipe and getting its ID to be used to navigate to the recipe page
     let recipe_id = createRecipe({
       title: title,
       recipe_method: method,

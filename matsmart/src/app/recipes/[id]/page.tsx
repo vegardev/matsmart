@@ -35,6 +35,7 @@ async function getRecipeById(id: number): Promise<Recipe_Page> {
 export default function Page({ params }: { params: { id: string } }) {
   const [recipe, setRecipe] = useState<Recipe_Page | null>(null);
 
+  // This is a useEffect hook that runs when the component mounts and whenever params.id changes
   useEffect(() => {
     const fetchRecipe = async () => {
       const result = await getRecipeById(Number(params.id));
@@ -44,10 +45,12 @@ export default function Page({ params }: { params: { id: string } }) {
     fetchRecipe();
   }, [params.id]);
 
+  // If the recipe data is not yet loaded, show a loading message
   if (!recipe) {
     return <div>Loading...</div>; // Kan lage egen loading page her
   }
 
+  // If the recipe data is loaded, display the recipe details
   return (
     <>
       <div className="flex justify-between mb-6">

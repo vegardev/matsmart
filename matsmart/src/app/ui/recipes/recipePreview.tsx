@@ -32,6 +32,7 @@ export function Recipe({
   return (
     <>
       {recipes.map((recipe) => (
+        //Links the recipe preview to the recipe page
         <Link
           key={recipe.recipe_id}
           href={"/recipes/" + recipe.recipe_id}
