@@ -49,7 +49,6 @@ export function RecipeTextFields({
        * @returns {Promise[]} - An array of promises representing the asynchronous operations.
        */
       const promises = content.map((ingredient: Add_Recipe_Ingredient) => {
-        console.log(ingredient);
         const inventoryItem = allIngredients.find(
           (inventory) => inventory.item_name === ingredient.item_name,
         );
