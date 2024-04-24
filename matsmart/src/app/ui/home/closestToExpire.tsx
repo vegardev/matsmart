@@ -4,6 +4,12 @@ import clsx from "clsx";
 import { Inventory_items_proper_location } from "@/src/app/backend/definitions";
 import Link from "next/link";
 
+/**
+ * CloseToExpireItems component.
+ * @param {Object} props - The props for the component.
+ * @param {CloseToExpire[]} props.CloseToExpireItems - The items that are close to their expiration date.
+ * @returns The rendered CloseToExpireItems component.
+ */
 export default function CloseToExpireItems({
   CloseToExpireItems,
 }: {

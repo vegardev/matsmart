@@ -12,6 +12,12 @@ import {
   addItemToShoppingList,
 } from "@/src/app/backend/uploadData";
 
+/**
+ * Renders the RecipeTextFields component.
+ *
+ * @param type - The type of the text field.
+ * @param content - The content of the text field.
+ */
 export function RecipeTextFields({
   type,
   content,
@@ -25,11 +31,24 @@ export function RecipeTextFields({
   const router = useRouter();
   const [allIngredients, setAllIngredients] = useState<Inventory_items[]>([]);
 
+  /**
+   * Handles the "Buy All" action for the recipe page.
+   * If the content is an array, it maps the content array to an array of promises.
+   * It checks if each ingredient is already in the inventory.
+   * If the ingredient is in the inventory and has the same quantity type, it calculates the missing quantity and adds it to the shopping list.
+   * If the ingredient is not in the inventory, it adds it to the shopping list.
+   * After all promises are resolved, it asks the user if they want to be redirected to the shopping list.
+   * If the user confirms, it redirects them to the shopping list page.
+   */
   const handleBuyAll = async () => {
     if (Array.isArray(content)) {
-      // Map content array to an array of promises
+      /**
+       * Adds ingredients to the shopping list based on the provided content.
+       * @param {Add_Recipe_Ingredient[]} content - The list of ingredients to add.
+       * @param {InventoryItem[]} allIngredients - The list of all available ingredients.
+       * @returns {Promise[]} - An array of promises representing the asynchronous operations.
+       */
       const promises = content.map((ingredient: Add_Recipe_Ingredient) => {
-        console.log(ingredient);
         const inventoryItem = allIngredients.find(
           (inventory) => inventory.item_name === ingredient.item_name,
         );
@@ -64,6 +83,16 @@ export function RecipeTextFields({
     }
   };
 
+  /**
+   * Handles the click event on an ingredient icon.
+   * Adds the clicked ingredient to the clickedIngredients state.
+   * Checks if the ingredient is already in the inventory.
+   * If it is, checks if the quantities match.
+   * If the quantities don't match, adds the missing quantity to the shopping list.
+   * If the ingredient is not in the inventory, adds it to the shopping list.
+   *
+   * @param ingredient - The ingredient object that was clicked.
+   */
   const handleIconClick = (ingredient: Add_Recipe_Ingredient) => {
     setClickedIngredients((prevState) => [...prevState, ingredient]);
 
@@ -94,6 +123,11 @@ export function RecipeTextFields({
     }
   };
 
+  /**
+   * Retrieves the abbreviation for a given quantity type.
+   * @param quantityType - The quantity type for which to retrieve the abbreviation.
+   * @returns The abbreviation for the given quantity type, or the quantity type itself if no abbreviation is found.
+   */
   function getAbbreviation(quantityType: string) {
     const type = ingredientTypes.find((type) => type.name === quantityType);
     return type ? type.abbreviation : quantityType;

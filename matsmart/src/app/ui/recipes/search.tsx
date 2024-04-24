@@ -8,11 +8,25 @@ import { getTags } from "@/src/app/backend/uploadData";
 
 const animatedComponents = makeAnimated();
 
+/**
+ * Renders a search bar component.
+ *
+ * @param {string} placeholder - The placeholder text for the search input.
+ * @returns {JSX.Element} The rendered search bar component.
+ */
 export function SearchBar({ placeholder }: { placeholder: string }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  // useRouter is a hook that provides router object. replace is a method to replace the current URL
   const { replace } = useRouter();
 
+  /**
+   * Handles the search functionality with debouncing.
+   *
+   * @param {string} term - The search term.
+   */
+  // useDebouncedCallback is a hook that debounces/sets delay on the provided function
+  // This is to not overload the database with requests each letter typed
   const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
     if (term) {
@@ -40,12 +54,20 @@ export function SearchBar({ placeholder }: { placeholder: string }) {
   );
 }
 
+/**
+ * Renders a search component that allows searching recipes by tags.
+ */
 export function SearchByTags() {
   const [tags, setTags] = useState<Tags[]>([]);
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
+  /**
+   * Handles the search functionality with debouncing.
+   *
+   * @param {string} term - The search term.
+   */
   const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
     if (term) {
@@ -72,6 +94,7 @@ export function SearchByTags() {
         components={animatedComponents}
         isMulti
         options={tags.map((tag) => ({
+          // Map each tag to an option with a value and label
           value: tag.tag_id,
           label: tag.tag_name,
         }))}

@@ -10,6 +10,17 @@ import {
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
+/**
+ * TextInputFields component.
+ * This component renders input fields for creating a recipe.
+ * It renders the input fields conditionally based on the category prop.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {string} props.catagory - The category of the input fields.
+ * @param {React.Ref} ref - The ref object used to access the component's methods.
+ * @returns {JSX.Element} The rendered component.
+ */
 const TextInputFields = forwardRef(
   ({ catagory }: { catagory: string }, ref) => {
     const [value, setValue] = useState("");
@@ -17,11 +28,26 @@ const TextInputFields = forwardRef(
     const [quantityType, setQuantityType] = useState("stk");
     const [ingredients, setIngredients] = useState<Add_Recipe_Ingredient[]>([]);
 
+    // Using the useImperativeHandle hook to expose component methods to the parent
     useImperativeHandle(ref, () => ({
+      /**
+       * Get the current value of the input field.
+       *
+       * @returns {string} The current value of the input field.
+       */
       getValue: () => value,
+      /**
+       * Get the list of ingredients.
+       *
+       * @returns {Add_Recipe_Ingredient[]} The list of ingredients.
+       */
       getIngredients: () => ingredients,
     }));
 
+    /**
+     * Handle the add button click event.
+     * Adds the current input values to the list of ingredients.
+     */
     const handleAdd = () => {
       const formattedValue =
         value.charAt(0).toUpperCase() + value.slice(1).toLowerCase().trimEnd();
@@ -92,6 +118,7 @@ const TextInputFields = forwardRef(
             </div>
           </div>
         ) : (
+          // If the category is not 'Ingredients', render a ReactQuill component for rich text editing
           <div className="bg-white px-6 py-3 rounded-2xl">
             <ReactQuill value={value} onChange={setValue} />
           </div>
@@ -101,14 +128,28 @@ const TextInputFields = forwardRef(
   },
 );
 
+/**
+ * Component for adding an image with an input field for the image URL.
+ *
+ * @component
+ * @param {object} props - The component props.
+ * @param {React.Ref} ref - The ref object used to access the component's methods.
+ * @returns {JSX.Element} The rendered AddImage component.
+ */
 const AddImage = forwardRef((props, ref) => {
+  // The state variable is initialized with a placeholder image URL as the render for recipe page breaks without an image.
   const [inputImageUrl, setImageUrl] = useState(
     "https://ralfvanveen.com/wp-content/uploads//2021/06/Placeholder-_-Begrippenlijst.svg",
   );
 
+  // This hook is used to expose the getImage function to the parent component.
   useImperativeHandle(ref, () => ({
+    /**
+     * Gets the current image URL.
+     *
+     * @returns {string} The current image URL.
+     */
     getImage: () => inputImageUrl,
-    // other methods...
   }));
 
   return (
@@ -130,15 +171,37 @@ const AddImage = forwardRef((props, ref) => {
   );
 });
 
+/**
+ * AddTags component.
+ *
+ * This component allows users to add tags to a recipe.
+ *
+ * @component
+ * @param {object} props - The component props.
+ * @param {React.Ref} ref - The ref object used to expose a getTags function.
+ * @returns {JSX.Element} The rendered AddTags component.
+ */
 const AddTags = forwardRef((props, ref) => {
   const [tags, setTags] = useState<string[]>([]);
   const [value, setValue] = useState("");
 
+  // This hook allows the parent component to get the current tags.
   useImperativeHandle(ref, () => ({
+    /**
+     * Get the current tags.
+     *
+     * @returns {string[]} The current tags.
+     */
     getTags: () => tags,
   }));
 
+  /**
+   * Handle the add button click event.
+   *
+   * This function adds the current value to the tags array and clears the input field.
+   */
   const handleAdd = () => {
+    // Format the value: first letter uppercase, the rest lowercase, and trim the end.
     const formattedValue =
       value.charAt(0).toUpperCase() + value.slice(1).toLowerCase().trimEnd();
     setTags((prevTags) => [...prevTags, formattedValue]);

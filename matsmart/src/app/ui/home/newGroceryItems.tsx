@@ -4,6 +4,12 @@ import clsx from "clsx";
 import { Inventory_items_proper_location } from "@/src/app/backend/definitions";
 import Link from "next/link";
 
+/**
+ * NewGroceriesItems component.
+ * @param {Object} props - The props for the component.
+ * @param {Inventory_items[]} props.NewGroceriesItems - The new grocery items to be displayed.
+ * @returns The rendered NewGroceriesItems component.
+ */
 export default function NewGroceriesItems({
   NewGroceriesItems,
 }: {

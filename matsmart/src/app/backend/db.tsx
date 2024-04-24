@@ -1,5 +1,13 @@
 import mysql from "mysql2/promise";
 
+/**
+ * Executes a query on the production database.
+ * @param {Object} param0 - An object containing the SQL query string and an optional array of values to be inserted into the query.
+ * @param {string} param0.query - The SQL query string.
+ * @param {any[]} [param0.values] - An array of values to be inserted into the query.
+ * @returns {Promise<any>} A promise that resolves to the results of the query.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function query({
   query,
   values = [],
@@ -23,6 +31,14 @@ export async function query({
   }
 }
 
+/**
+ * Executes a query on the test database.
+ * @param {Object} param0 - An object containing the SQL query string and an optional array of values to be inserted into the query.
+ * @param {string} param0.query - The SQL query string.
+ * @param {any[]} [param0.values] - An array of values to be inserted into the query.
+ * @returns {Promise<any>} A promise that resolves to the results of the query.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function testquery({
   query,
   values = [],

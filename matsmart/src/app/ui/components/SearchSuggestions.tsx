@@ -1,6 +1,15 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useRef } from "react";
 
-/* eslint-disable no-unused-vars */
+/**
+ * SearchSuggestions component.
+ * @param {Object} props - The props for the component.
+ * @param {(search: string) => void} props.setSearch - The function to update the search text.
+ * @param {Type[]} props.suggestions - The current list of suggestions.
+ * @param {number} props.selected - The index of the selected suggestion.
+ * @param {string} props.databaseTable - The database table to search in.
+ * @returns The rendered SearchSuggestions component.
+ */
 export function SearchSuggestions<Type>({
   setSearch,
   suggestions,
@@ -12,11 +21,20 @@ export function SearchSuggestions<Type>({
   selected: number;
   databaseTable: string;
 }) {
+  /**
+   * Handles the click event on an item.
+   * @param {string} name - The name of the item.
+   */
   const handleItemClick = (name: string) => {
     console.log("Clicked on: ", name);
     setSearch(name);
   };
 
+  /**
+   * Handles the key down event on an item.
+   * @param {string} name - The name of the item.
+   * @returns {(event: React.KeyboardEvent) => void} The function to handle the key down event.
+   */
   const handleKeyDown = (name: string) => (event: React.KeyboardEvent) => {
     if (event.key === "Enter" || event.key === " ") {
       setSearch(name);

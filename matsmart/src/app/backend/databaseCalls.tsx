@@ -11,24 +11,11 @@ import {
   CloseToExpire,
 } from "@/src/app/backend/definitions";
 
-//Posts to console if you have connection with the database
-console.log("MYSQL_HOST:", process.env.MYSQL_HOST);
-
-//test query to see if the database fetching works
-export async function fetchDatabaseTest(): Promise<Item_database[]> {
-  try {
-    const dbquery = await query({
-      query: "SELECT * FROM item_database",
-      values: [],
-    });
-    return dbquery as Item_database[];
-  } catch (error) {
-    throw Error((error as Error).message);
-  }
-}
-//Fetches all data (excluding content) from all recipes in the database
-//  Skal utvidde spørring for å ha tags med
-//  Burde legges til en check for om id er større og mindre en noen verdier for å kun vise et bestemt antall per side
+/**
+ * Fetches all recipes from the recipes table in the database.
+ * @returns {Promise<Recipes_no_content[]>} A promise that resolves to an array of recipes without content from the database.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function fetchRecipes(): Promise<Recipes_no_content[]> {
   try {
     const dbquery = await query({
@@ -41,7 +28,12 @@ export async function fetchRecipes(): Promise<Recipes_no_content[]> {
   }
 }
 
-//Fetches a single recipe based on a recipe_id value
+/**
+ * Fetches a single recipe from the recipes table in the database.
+ * @param {number} recipe_id - The ID of the recipe to fetch.
+ * @returns {Promise<Recipe[]>} A promise that resolves to an array containing the fetched recipe.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function fetchSingleRecipe(recipe_id: number): Promise<Recipe[]> {
   try {
     const dbquery = await query({
@@ -54,7 +46,12 @@ export async function fetchSingleRecipe(recipe_id: number): Promise<Recipe[]> {
   }
 }
 
-//Fetces info about items needed for a recipe based on a recipe_id value
+/**
+ * Fetches all items for a specific recipe from the recipe_items table in the database.
+ * @param {number} recipe_id - The ID of the recipe to fetch items for.
+ * @returns {Promise<Recipe_items[]>} A promise that resolves to an array of items for the specified recipe.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function fetchRecipeItems(
   recipe_id: number,
 ): Promise<Recipe_items[]> {
@@ -70,8 +67,12 @@ export async function fetchRecipeItems(
   }
 }
 
-//Fetches all items in a inventory based on a location value
-// Gjorde endring slik at navn på item hentes fra item_database
+/**
+ * Fetches all inventory items for a specific location from the inventory and item_database tables in the database.
+ * @param {string} location - The location to fetch inventory items for.
+ * @returns {Promise<Inventory_items[]>} A promise that resolves to an array of inventory items for the specified location.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function fetchInventoryItems(
   location: string,
 ): Promise<Inventory_items[]> {
@@ -87,7 +88,16 @@ export async function fetchInventoryItems(
   }
 }
 
-// Submitter en ny item til inventory
+/**
+ * Submits a new inventory item to the inventory table in the database.
+ * @param {number} item_id - The ID of the item.
+ * @param {number} item_quantity - The quantity of the item.
+ * @param {string} item_quantity_type - The type of the item quantity (e.g., "kg", "lb", "pcs").
+ * @param {string} location - The location of the item.
+ * @param {Date} expiration_date - The expiration date of the item.
+ * @returns {Promise<void>} A promise that resolves when the item has been successfully submitted.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function submitInventoryItem(
   item_id: number,
   item_quantity: number,
@@ -111,7 +121,13 @@ export async function submitInventoryItem(
     throw Error((error as Error).message);
   }
 }
-// Sletter item fra inventory
+
+/**
+ * Deletes an inventory item from the inventory table in the database.
+ * @param {number} item_id - The ID of the item to delete.
+ * @returns {Promise<void>} A promise that resolves when the item has been successfully deleted.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function deleteInventoryItem(item_id: number): Promise<void> {
   try {
     await query({
@@ -122,7 +138,13 @@ export async function deleteInventoryItem(item_id: number): Promise<void> {
     throw Error((error as Error).message);
   }
 }
-// Gjør full text search på recipe titles i databasen, og returnerer en liste med oppskrifter som matcher
+
+/**
+ * Fetches recipe suggestions based on a search query from the recipes table in the database.
+ * @param {string} searchQuery - The search query to fetch recipe suggestions for.
+ * @returns {Promise<Recipes_no_content[]>} A promise that resolves to an array of recipe suggestions.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function fetchRecipeSuggestions(
   searchQuery: string,
 ): Promise<Recipes_no_content[]> {
@@ -138,7 +160,12 @@ export async function fetchRecipeSuggestions(
   }
 }
 
-// Gjør full text search på item names i databasen, og returnerer en liste med items som matcher
+/**
+ * Fetches grocery item suggestions based on a search query from the item_database table in the database.
+ * @param {string} searchQuery - The search query to fetch grocery item suggestions for.
+ * @returns {Promise<Item_database[]>} A promise that resolves to an array of grocery item suggestions.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function fetchGrocerySuggestions(
   searchQuery: string,
 ): Promise<Item_database[]> {
@@ -154,7 +181,12 @@ export async function fetchGrocerySuggestions(
   }
 }
 
-// Gjør full text search på item names i databasen, og returnerer en liste med items som matcher
+/**
+ * Fetches tags based on a search query from the tags table in the database.
+ * @param {string} searchQuery - The search query to fetch tags for.
+ * @returns {Promise<Tags[]>} A promise that resolves to an array of tags.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function sortByTag(searchQuery: string): Promise<Tags[]> {
   try {
     const dbquery = await query({
@@ -167,8 +199,11 @@ export async function sortByTag(searchQuery: string): Promise<Tags[]> {
   }
 }
 
-// Fetcher alle items i shopping_list
-// Gjorde endring slik at navn på shopping list items hentes fra item_database
+/**
+ * Fetches all items from the shopping list in the database.
+ * @returns {Promise<Shopping_items[]>} A promise that resolves to an array of shopping list items.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function fetchShoppingList(): Promise<Shopping_items[]> {
   try {
     const dbquery = await query({
@@ -182,9 +217,13 @@ export async function fetchShoppingList(): Promise<Shopping_items[]> {
   }
 }
 
-// Submitter ny item til item_database
-// Oppretter en ny connection som støtter transaksjoner
-// LAST_INSERT_ID() fungerer ikke uten
+/**
+ * Submits a new grocery item to the item_database table in the database.
+ * @param {string} item_name - The name of the item.
+ * @param {string} item_quantity_type - The type of the item quantity (e.g., "kg", "gram", "stk.").
+ * @returns {Promise<number>} A promise that resolves to the ID of the newly inserted item.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function submitGroceryItem(
   item_name: string,
   item_quantity_type: string,
@@ -219,7 +258,14 @@ export async function submitGroceryItem(
   }
 }
 
-// Submitter ny item til shopping_list
+/**
+ * Submits a new item to the shopping list in the database.
+ * @param {number} item_id - The ID of the item.
+ * @param {number} item_quantity - The quantity of the item.
+ * @param {string} item_quantity_type - The type of the item quantity (e.g., "kg", "lb", "pcs").
+ * @returns {Promise<void>} A promise that resolves when the item has been successfully submitted.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function submitShoppingListItem(
   item_id: number,
   item_quantity: number,
@@ -236,7 +282,13 @@ export async function submitShoppingListItem(
   }
 }
 
-// Updater item i shopping_list
+/**
+ * Updates the quantity of an item in the shopping list in the database.
+ * @param {number} item_id - The ID of the item to update.
+ * @param {number} itemQuantity - The new quantity of the item.
+ * @returns {Promise<void>} A promise that resolves when the item quantity has been successfully updated.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function updateShoppingListItem(
   item_id: number,
   itemQuantity: number,
@@ -251,7 +303,12 @@ export async function updateShoppingListItem(
   }
 }
 
-// Sletter item fra shopping_list
+/**
+ * Deletes an item from the shopping list in the database.
+ * @param {number} item_id - The ID of the item to delete.
+ * @returns {Promise<void>} A promise that resolves when the item has been successfully deleted.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function deleteShoppingListItem(item_id: number): Promise<void> {
   try {
     await query({
@@ -263,7 +320,11 @@ export async function deleteShoppingListItem(item_id: number): Promise<void> {
   }
 }
 
-// Fetcher alle grocery items fra item_database
+/**
+ * Fetches all items from the item_database table in the database.
+ * @returns {Promise<Item_database[]>} A promise that resolves to an array of grocery items.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function fetchGroceryItems(): Promise<Item_database[]> {
   try {
     const dbquery = await query({
@@ -276,7 +337,12 @@ export async function fetchGroceryItems(): Promise<Item_database[]> {
   }
 }
 
-// Fetcher anbefalte recipes basert på tilgjengelige ingredienser
+/**
+ * Fetches recommended recipes from the recipes table in the database.
+ * A recipe is recommended if all its ingredients are present in the inventory.
+ * @returns {Promise<Recipe[]>} A promise that resolves to an array of recommended recipes.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function fetchRecommendedRecipes(): Promise<Recipe[]> {
   try {
     const dbquery = await query({
@@ -296,7 +362,13 @@ export async function fetchRecommendedRecipes(): Promise<Recipe[]> {
   }
 }
 
-// Fetcher ingredients/items som holder på å gå ut på dato
+/**
+ * Fetches items from the inventory that are close to their expiration date.
+ * An item is considered close to expire if its expiration date is within the next 5 days.
+ * The function returns the 5 items that will expire the soonest.
+ * @returns {Promise<CloseToExpire[]>} A promise that resolves to an array of items close to expire.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function fetchCloseToExpireItems(): Promise<CloseToExpire[]> {
   try {
     const dbquery = await query({
@@ -310,7 +382,11 @@ export async function fetchCloseToExpireItems(): Promise<CloseToExpire[]> {
   }
 }
 
-// Fetcher nylig lagt til items/ingredients til inventory
+/**
+ * Fetches the 5 most recently added items from the inventory in the database.
+ * @returns {Promise<Inventory_items[]>} A promise that resolves to an array of recently added items.
+ * @throws {Error} When there is an error executing the database query.
+ */
 export async function fetchRecentlyAddedItems(): Promise<Inventory_items[]> {
   try {
     const dbquery = await query({

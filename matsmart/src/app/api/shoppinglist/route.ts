@@ -5,11 +5,23 @@ import {
 import { NextResponse } from "next/server";
 import { Shopping_items } from "@/src/app/backend/definitions";
 
+/**
+ * Handles GET requests to fetch all items in the shopping list.
+ *
+ * @returns {Promise<NextResponse>} A promise that resolves to a NextResponse object. The response body contains a JSON string with all items in the shopping list if the request was successful, or an error message if the request failed.
+ */
 export async function GET() {
   const items = await fetchShoppingList();
   return new NextResponse(JSON.stringify(items));
 }
 
+/**
+ * Handles POST requests to submit a new item to the shopping list.
+ *
+ * @param {Request} request - The incoming request object. The body of the request should be a JSON string that represents the new shopping list item.
+ *
+ * @returns {Promise<NextResponse>} A promise that resolves to a NextResponse object. The response body contains a JSON string with the submitted shopping list item if the request was successful, or an error message if the request failed.
+ */
 export async function POST(request: Request) {
   const item: Shopping_items = await request.json();
 

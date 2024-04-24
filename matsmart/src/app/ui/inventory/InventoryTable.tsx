@@ -1,14 +1,26 @@
+/* eslint-disable no-unused-vars */
 "use client";
 import React from "react";
 import { Inventory_items } from "@/src/app/backend/definitions";
 import clsx from "clsx";
 
+/**
+ * Props for the InventoryTable component.
+ */
 type TableProps = {
+  /** The data to be displayed in the table. */
   data: Inventory_items[];
-  // eslint-disable-next-line no-unused-vars
+  /** Callback function to be called when a checkbox in the table is changed. */
   onCheckboxChange: (index: number) => void;
 };
 
+/**
+ * InventoryTable component.
+ * @param {Object} props - The props for the component.
+ * @param {Inventory_items[]} props.data - The data to be displayed in the table.
+ * @param {(index: number) => void} props.onCheckboxChange - Callback function to be called when a checkbox in the table is changed.
+ * @returns The rendered InventoryTable component.
+ */
 const InventoryTable: React.FC<TableProps> = ({ data, onCheckboxChange }) => {
   return (
     <>

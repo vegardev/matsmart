@@ -5,6 +5,16 @@ type Params = {
   tag: string;
 };
 
+/**
+ * Handles GET requests to sort items by a specific tag.
+ *
+ * @param {Request} request - The incoming request object.
+ * @param {Object} context - An object containing the request context.
+ * @param {Params} context.params - An object containing the request parameters.
+ * @param {string} context.params.tag - The tag to sort items by.
+ *
+ * @returns {Promise<NextResponse>} A promise that resolves to a NextResponse object. The response body contains a JSON string of sorted items if the request was successful, or an error message if the request failed.
+ */
 export async function GET(request: Request, context: { params: Params }) {
   try {
     const partialQuery = context.params.tag;
@@ -15,7 +25,6 @@ export async function GET(request: Request, context: { params: Params }) {
 
     const queryResult = await sortByTag(partialQuery);
     const suggestions = queryResult;
-    console.log(suggestions);
     return new NextResponse(JSON.stringify(suggestions));
   } catch (error) {
     console.error(error);

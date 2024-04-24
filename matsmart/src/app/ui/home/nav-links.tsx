@@ -30,6 +30,10 @@ const links = [
   },
 ];
 
+/**
+ * NavLinks component.
+ * @returns The rendered NavLinks component.
+ */
 export default function NavLinks() {
   const pathname = usePathname();
   return (

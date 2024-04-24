@@ -4,6 +4,14 @@ import Link from "next/link";
 import { getRecipes } from "@/src/app/backend/uploadData";
 import { useEffect, useState } from "react";
 
+/**
+ * Renders a list of recipe previews based on the provided query and tags.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.queryfetch - The query to fetch recipes.
+ * @param {string} props.tagsFetch - The tags to fetch recipes.
+ * @returns {JSX.Element} The rendered recipe previews.
+ */
 export function Recipe({
   queryfetch,
   tagsFetch,
@@ -24,6 +32,7 @@ export function Recipe({
   return (
     <>
       {recipes.map((recipe) => (
+        //Links the recipe preview to the recipe page
         <Link
           key={recipe.recipe_id}
           href={"/recipes/" + recipe.recipe_id}
