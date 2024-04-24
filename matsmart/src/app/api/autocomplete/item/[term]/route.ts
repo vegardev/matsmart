@@ -5,6 +5,16 @@ type Params = {
   term: string;
 };
 
+/**
+ * Handles GET requests to fetch grocery suggestions based on a search term.
+ *
+ * @param {Request} request - The incoming request object.
+ * @param {Object} context - An object containing the request context.
+ * @param {Params} context.params - An object containing the request parameters.
+ * @param {string} context.params.term - The search term to fetch grocery suggestions for.
+ *
+ * @returns {Promise<NextResponse>} A promise that resolves to a NextResponse object. The response body contains a JSON string of grocery suggestions if the request was successful, or an error message if the request failed.
+ */
 export async function GET(request: Request, context: { params: Params }) {
   try {
     const partialQuery = context.params.term;
@@ -15,7 +25,6 @@ export async function GET(request: Request, context: { params: Params }) {
 
     const queryResult = await fetchGrocerySuggestions(partialQuery);
     const suggestions = queryResult;
-    console.log(suggestions);
     return new NextResponse(JSON.stringify(suggestions));
   } catch (error) {
     console.error(error);
