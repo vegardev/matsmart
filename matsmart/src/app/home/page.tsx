@@ -5,8 +5,7 @@ import CloseToExpireItems from "@/src/app/ui/home/closestToExpire";
 import NewGroceriesItems from "@/src/app/ui/home/newGroceryItems";
 import RecommendedItems from "@/src/app/ui/home/recipesRecommended";
 import {
-  CloseToExpire,
-  Inventory_items,
+  Inventory_items_proper_location,
   Recipe,
 } from "@/src/app/backend/definitions";
 import { useState, useEffect } from "react";
@@ -18,12 +17,12 @@ interface Data {
   /**
    * Items that are close to their expiration date.
    */
-  closeToExpireItems: CloseToExpire[];
+  closeToExpireItems: Inventory_items_proper_location[];
 
   /**
    * Items that were recently added to the inventory.
    */
-  recentlyAddedItems: Inventory_items[];
+  recentlyAddedItems: Inventory_items_proper_location[];
 
   /**
    * Recipes that are recommended to the user.

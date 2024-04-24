@@ -30,7 +30,7 @@ export default function RecommendedItems({
                 })}
               >
                 <div className="min-w-0">
-                  <Link href="/shoppinglist">
+                  <Link href={`/recipes/${item.recipe_id}`}>
                     <p className="normal-font">{item.title}</p>
                   </Link>
                 </div>

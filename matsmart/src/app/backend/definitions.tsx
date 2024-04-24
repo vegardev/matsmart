@@ -85,6 +85,16 @@ export type Inventory_items = {
   expiration_date: Date; // The expiration date of the item.
 };
 
+export type Inventory_items_proper_location = {
+  inventory_id: number;
+  item_id: number;
+  item_quantity: number;
+  item_quantity_type: string;
+  item_name: string;
+  location: string;
+  expiration_date: Date;
+};
+
 /**
  * Represents the properties of a quantity dropdown component.
  */
