@@ -89,6 +89,11 @@
               ></a>
             </li>
             <li class="tsd-description">
+              <div class="tsd-comment tsd-typography">
+                <p>
+                  Handles GET requests to fetch all items in the shopping list.
+                </p>
+              </div>
               <h4 class="tsd-returns-title">
                 Returns <span class="tsd-signature-type">Promise</span
                 ><span class="tsd-signature-symbol">&lt;</span
@@ -98,9 +103,16 @@
                 ><span class="tsd-signature-symbol">&gt;</span
                 ><span class="tsd-signature-symbol">&gt;</span>
               </h4>
+              <p>
+                A promise that resolves to a NextResponse object. The response
+                body contains a JSON string with all items in the shopping list
+                if the request was successful, or an error message if the
+                request failed.
+              </p>
+              <div class="tsd-comment tsd-typography"></div>
               <aside class="tsd-sources">
                 <ul>
-                  <li>Defined in src/app/api/shoppinglist/route.ts:8</li>
+                  <li>Defined in src/app/api/shoppinglist/route.ts:13</li>
                 </ul>
               </aside>
             </li>

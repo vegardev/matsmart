@@ -90,6 +90,12 @@
               ></a>
             </li>
             <li class="tsd-description">
+              <div class="tsd-comment tsd-typography">
+                <p>
+                  Handles PUT requests to update a specific item in the shopping
+                  list.
+                </p>
+              </div>
               <div class="tsd-parameters">
                 <h4 class="tsd-parameters-title">Parameters</h4>
                 <ul class="tsd-parameter-list">
@@ -98,6 +104,14 @@
                       ><span class="tsd-kind-parameter">request</span>:
                       <span class="tsd-signature-type">Request</span></span
                     >
+                    <div class="tsd-comment tsd-typography">
+                      <p>
+                        The incoming request object. The body of the request
+                        should be a JSON string that represents the shopping
+                        list item to update.
+                      </p>
+                    </div>
+                    <div class="tsd-comment tsd-typography"></div>
                   </li>
                 </ul>
               </div>
@@ -110,10 +124,17 @@
                 ><span class="tsd-signature-symbol">&gt;</span
                 ><span class="tsd-signature-symbol">&gt;</span>
               </h4>
+              <p>
+                A promise that resolves to a NextResponse object. The response
+                body contains a JSON string with the updated shopping list item
+                if the request was successful, or an error message if the
+                request failed.
+              </p>
+              <div class="tsd-comment tsd-typography"></div>
               <aside class="tsd-sources">
                 <ul>
                   <li>
-                    Defined in src/app/api/shoppinglist/[item_id]/route.ts:8
+                    Defined in src/app/api/shoppinglist/[item_id]/route.ts:15
                   </li>
                 </ul>
               </aside>

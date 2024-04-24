@@ -90,6 +90,11 @@
               ></a>
             </li>
             <li class="tsd-description">
+              <div class="tsd-comment tsd-typography">
+                <p>
+                  Handles DELETE requests to delete a specific inventory item.
+                </p>
+              </div>
               <div class="tsd-parameters">
                 <h4 class="tsd-parameters-title">Parameters</h4>
                 <ul class="tsd-parameter-list">
@@ -98,6 +103,14 @@
                       ><span class="tsd-kind-parameter">request</span>:
                       <span class="tsd-signature-type">Request</span></span
                     >
+                    <div class="tsd-comment tsd-typography">
+                      <p>
+                        The incoming request object. The body of the request
+                        should be a JSON string that represents the inventory
+                        item to delete.
+                      </p>
+                    </div>
+                    <div class="tsd-comment tsd-typography"></div>
                   </li>
                 </ul>
               </div>
@@ -110,9 +123,16 @@
                 ><span class="tsd-signature-symbol">&gt;</span
                 ><span class="tsd-signature-symbol">&gt;</span>
               </h4>
+              <p>
+                A promise that resolves to a NextResponse object. The response
+                body contains a JSON string with the deleted inventory item if
+                the request was successful, or an error message if the request
+                failed.
+              </p>
+              <div class="tsd-comment tsd-typography"></div>
               <aside class="tsd-sources">
                 <ul>
-                  <li>Defined in src/app/api/inventory/[id]/route.ts:15</li>
+                  <li>Defined in src/app/api/inventory/[id]/route.ts:34</li>
                 </ul>
               </aside>
             </li>

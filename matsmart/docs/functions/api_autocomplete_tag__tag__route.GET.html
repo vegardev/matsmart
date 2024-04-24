@@ -91,6 +91,9 @@
               ></a>
             </li>
             <li class="tsd-description">
+              <div class="tsd-comment tsd-typography">
+                <p>Handles GET requests to sort items by a specific tag.</p>
+              </div>
               <div class="tsd-parameters">
                 <h4 class="tsd-parameters-title">Parameters</h4>
                 <ul class="tsd-parameter-list">
@@ -99,6 +102,10 @@
                       ><span class="tsd-kind-parameter">request</span>:
                       <span class="tsd-signature-type">Request</span></span
                     >
+                    <div class="tsd-comment tsd-typography">
+                      <p>The incoming request object.</p>
+                    </div>
+                    <div class="tsd-comment tsd-typography"></div>
                   </li>
                   <li>
                     <span
@@ -113,6 +120,10 @@
                         >}</span
                       ></span
                     >
+                    <div class="tsd-comment tsd-typography">
+                      <p>An object containing the request context.</p>
+                    </div>
+                    <div class="tsd-comment tsd-typography"></div>
                     <ul class="tsd-parameters">
                       <li class="tsd-parameter">
                         <h5>
@@ -120,6 +131,10 @@
                           ><span class="tsd-signature-symbol">: </span
                           ><span class="tsd-signature-type">Params</span>
                         </h5>
+                        <div class="tsd-comment tsd-typography">
+                          <p>An object containing the request parameters.</p>
+                        </div>
+                        <div class="tsd-comment tsd-typography"></div>
                       </li>
                     </ul>
                   </li>
@@ -134,10 +149,16 @@
                 ><span class="tsd-signature-symbol">&gt;</span
                 ><span class="tsd-signature-symbol">&gt;</span>
               </h4>
+              <p>
+                A promise that resolves to a NextResponse object. The response
+                body contains a JSON string of sorted items if the request was
+                successful, or an error message if the request failed.
+              </p>
+              <div class="tsd-comment tsd-typography"></div>
               <aside class="tsd-sources">
                 <ul>
                   <li>
-                    Defined in src/app/api/autocomplete/tag/[tag]/route.ts:8
+                    Defined in src/app/api/autocomplete/tag/[tag]/route.ts:18
                   </li>
                 </ul>
               </aside>
