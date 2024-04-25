@@ -27,6 +27,7 @@ export default function QuantityDropdown({
         onChange={(e) => setQuantity(Number(e.target.value))}
       />
       <select
+        data-testid="measure"
         id="measure"
         name="measure"
         className="rounded-r-md border border-gray-200 bg-gray-50 py-[9px] text-sm outline-2"
