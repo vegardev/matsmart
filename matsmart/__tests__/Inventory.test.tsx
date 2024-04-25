@@ -13,7 +13,7 @@ jest.mock("next/router", () => ({
   useRouter: jest.fn(),
 }));
 
-describe("InventoryPage", () => {
+describe("Inventory page", () => {
   it("renders Freezer correctly", async () => {
     (useRouter as jest.Mock).mockImplementation(() => ({
       route: "/inventory/[location]",
@@ -102,10 +102,8 @@ describe("InventoryPage", () => {
       const { getAllByRole } = render(<TestComponent />);
       const checkboxes = getAllByRole("checkbox");
 
-      // Simulate a click on the second checkbox
       fireEvent.click(checkboxes[1]);
 
-      // Check that the second checkbox is now checked
       expect(checkboxes[1]).toBeChecked();
     });
   });

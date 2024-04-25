@@ -4,12 +4,9 @@ import {
 } from "@/src/app/backend/definitions";
 
 /**
- * QuantityDropdown component.
- * @param {Object} props - The props for the component.
- * @param {number} props.quantity - The current quantity.
- * @param {(value: number) => void} props.setQuantity - Function to set the quantity.
- * @param {string} props.quantityType - The current quantity type.
- * @param {(value: string) => void} props.setQuantityType - Function to set the quantity type.
+ * QuantityDropdown component for selecting the quantity and measurement unit of a grocery item.
+ *
+ * @param {QuantityDropdownProps} props The props passed to the component.
  * @returns The rendered QuantityDropdown component.
  */
 export default function QuantityDropdown({
@@ -30,6 +27,7 @@ export default function QuantityDropdown({
         onChange={(e) => setQuantity(Number(e.target.value))}
       />
       <select
+        data-testid="measure"
         id="measure"
         name="measure"
         className="rounded-r-md border border-gray-200 bg-gray-50 py-[9px] text-sm outline-2"

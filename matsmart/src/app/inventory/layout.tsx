@@ -2,6 +2,7 @@ import Link from "next/link";
 
 /**
  * Array of links to be displayed in the inventory layout.
+ * These links represent the available locations in the inventory.
  */
 const links: any[] = [
   { name: "Pantry", href: "skuff" },
@@ -11,6 +12,7 @@ const links: any[] = [
 
 /**
  * Layout component for the inventory page.
+ * This component is rendered regardless of location inside the inventory.
  * @param {Object} props - The props for the component.
  * @param {React.ReactNode} props.children - The child components to be rendered within the layout.
  * @returns The rendered InventoryLayout component.

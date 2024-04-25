@@ -5,7 +5,7 @@ jest.mock("../src/app/backend/db", () => ({
   query: jest.fn(),
 }));
 
-describe("createRecipe", () => {
+describe("createRecipe function", () => {
   it("creates a recipe correctly", async () => {
     const mockRecipe = {
       title: "recipe1",
@@ -20,7 +20,7 @@ describe("createRecipe", () => {
         insertId: mockRecipeId,
       })
       .mockResolvedValueOnce([{ recipe_id: mockRecipeId }])
-      .mockResolvedValue([{ insertId: 1 }]); // Mock response for all other queries
+      .mockResolvedValue([{ insertId: 1 }]);
 
     const uploadData = {
       createRecipe: jest.fn(async (recipe) => {
@@ -43,7 +43,7 @@ describe("createRecipe", () => {
   });
 });
 
-describe("getRecipes", () => {
+describe("getRecipes function", () => {
   it("fetches all recipes when no query is provided", async () => {
     const mockRecipes = [
       { recipe_id: 1, title: "Recipe 1", recipe_tags: ["tag1", "tag2"] },
@@ -107,7 +107,7 @@ describe("getRecipes", () => {
   });
 });
 
-describe("getTags", () => {
+describe("getTags function", () => {
   it("gets tags correctly", async () => {
     const mockTags = [
       {
@@ -131,7 +131,7 @@ describe("getTags", () => {
   });
 });
 
-describe("makeDish", () => {
+describe("makeDish function", () => {
   it("makes a dish correctly", async () => {
     const mockRecipeId = 1;
     const mockRecipeItems = [
@@ -174,7 +174,7 @@ describe("makeDish", () => {
   });
 });
 
-describe("dishUsesIngredients", () => {
+describe("dishUsesIngredients function", () => {
   it("uses ingredients correctly", async () => {
     const mockItemId = 1;
     const mockRequiredQuantity = 5;
@@ -220,7 +220,7 @@ describe("dishUsesIngredients", () => {
   });
 });
 
-describe("getRecipeByIdFetch", () => {
+describe("getRecipeByIdFetch function", () => {
   it("fetches a recipe by id correctly", async () => {
     const mockRecipeId = 1;
     const mockRecipe = [
@@ -283,7 +283,7 @@ describe("getRecipeByIdFetch", () => {
   });
 });
 
-describe("getInventory", () => {
+describe("getInventory function", () => {
   it("fetches the inventory correctly", async () => {
     const mockInventoryItems = [
       {
@@ -323,7 +323,7 @@ describe("getInventory", () => {
   });
 });
 
-describe("addItemToShoppingList", () => {
+describe("addItemToShoppingList function", () => {
   it("adds an item to the shopping list correctly", async () => {
     const mockItem = {
       item_id: 1,

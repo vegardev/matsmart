@@ -2,11 +2,11 @@
 import { useEffect, useRef } from "react";
 
 /**
- * SearchSuggestions component.
+ * Generic SearchSuggestions component.
  * @param {Object} props - The props for the component.
  * @param {(search: string) => void} props.setSearch - The function to update the search text.
  * @param {Type[]} props.suggestions - The current list of suggestions.
- * @param {number} props.selected - The index of the selected suggestion.
+ * @param {number} props.selected - The index of the selected suggestion based on the search query.
  * @param {string} props.databaseTable - The database table to search in.
  * @returns The rendered SearchSuggestions component.
  */
@@ -22,16 +22,15 @@ export function SearchSuggestions<Type>({
   databaseTable: string;
 }) {
   /**
-   * Handles the click event on an item.
+   * A handler to select a given suggestion based on the click event.
    * @param {string} name - The name of the item.
    */
   const handleItemClick = (name: string) => {
-    console.log("Clicked on: ", name);
     setSearch(name);
   };
 
   /**
-   * Handles the key down event on an item.
+   * A handler that selects a suggestion based on the key down event.
    * @param {string} name - The name of the item.
    * @returns {(event: React.KeyboardEvent) => void} The function to handle the key down event.
    */
@@ -41,16 +40,16 @@ export function SearchSuggestions<Type>({
     }
   };
 
-  // Use this to debug the suggestions
-  // You want an array of objects with the keys ..._id and ..._name
-  console.log(suggestions);
-
+  // Ref to hold references to each suggestion list item
+  // The following variable and useEffect hooks were suggested by GitHub Copilot
   const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
 
+  // Updates the itemRefs array to match the number of suggestions
   useEffect(() => {
     itemRefs.current = itemRefs.current.slice(0, suggestions.length);
   }, [suggestions]);
 
+  // Smoothly scrolls the selected suggestion into view
   useEffect(() => {
     if (selected !== null && itemRefs.current[selected]) {
       itemRefs.current[selected]?.scrollIntoView({

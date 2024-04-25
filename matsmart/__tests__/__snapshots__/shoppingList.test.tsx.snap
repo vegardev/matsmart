@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Shopping List renders correctly 1`] = `
+exports[`Shopping List page renders correctly 1`] = `
 <DocumentFragment>
   <div
     class="flex flex-col"
@@ -47,6 +47,7 @@ exports[`Shopping List renders correctly 1`] = `
         />
         <select
           class="rounded-r-md border border-gray-200 bg-gray-50 py-[9px] text-sm outline-2"
+          data-testid="measure"
           id="measure"
           name="measure"
         >
