@@ -7,8 +7,8 @@
 * **Operating System:** Any modern OS
 * **Web browser:** Google Chrome, Firefox
 * **Processor:** Modern CPU
-* **RAM:** 8GB minimum
-* **Disk Space:** 8GB minimum
+* **RAM:** 2GB minimum
+* **Disk Space:** 1GB minimum
 
 ## Installation
 
