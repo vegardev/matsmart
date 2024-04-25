@@ -12,22 +12,24 @@ import QuantityDropdown from "@/src/app/ui/shoppinglist/QuantityDropdown";
  */
 
 export default function ShoppingList() {
+  // State hooks to keep track of items fetched from the database
   const [shoppingItems, setShoppingItems] = useState<Shopping_items[]>([]);
   const [groceryItems, setGroceryItems] = useState<Item_database[]>([]);
-  // search er til enhver tid input i søkefeltet, og er en query til databasen
-  // search er også navnet på item som skal legges til i shopping list
+
+  // State hooks to keep track of search input, quantity, quantity type,
+  // and whether the shopping list should be refreshed
   const [search, setSearch] = useState("");
   const [quantity, setQuantity] = useState<number>(1);
   const [quantityType, setQuantityType] = useState<string>("stk.");
   const [refreshShoppingList, setRefreshShoppingList] = useState<boolean>(true);
 
+  // State hooks to keep track of checked states, locations, and expiry dates for items
   const [checkedStates, setCheckedStates] = useState<boolean[]>(
     new Array(shoppingItems.length).fill(false),
   );
   const [locations, setLocations] = useState<string[]>(
     new Array(shoppingItems.length).fill(""),
   );
-
   const [expiryDates, setExpiryDates] = useState<(Date | null)[]>(
     new Array(shoppingItems.length).fill(null),
   );
@@ -35,7 +37,10 @@ export default function ShoppingList() {
   const anyCheckboxChecked = checkedStates.some((checked) => checked);
 
   /**
-   * Handles the change of an expiry date.
+   * A handler that changes the expiry date of one or more items.
+   *
+   * A non-empty string or Date object is converted to a Date object.
+   * An empty string sets the expiry date to null, signifying no expiry date.
    *
    * @param {number} index - The index of the item.
    * @param {string | Date} value - The new expiry date.
@@ -49,8 +54,9 @@ export default function ShoppingList() {
   };
 
   /**
-   * Handles the change of a quantity.
+   * A handler that changes the quantity of one or more items.
    *
+   * If the new quantity is -1, the item at the index is removed from the shopping list.
    * @param {number} index - The index of the item.
    * @param {number} newQuantity - The new quantity.
    */
@@ -66,7 +72,7 @@ export default function ShoppingList() {
   };
 
   /**
-   * Handles the change of a location.
+   * A handler that changes the location of one or more items.
    *
    * @param {number} index - The index of the item.
    * @param {string} newLocation - The new location.
@@ -80,7 +86,7 @@ export default function ShoppingList() {
   };
 
   /**
-   * Handles the deletion of an item.
+   * A handler that deletes one or more checked items.
    *
    * @param {number} index - The index of the item.
    */
@@ -90,7 +96,7 @@ export default function ShoppingList() {
   };
 
   /**
-   * Handles the change of a checkbox.
+   * A handler that changes the state of checkboxes.
    *
    * @param {React.ChangeEvent<HTMLInputElement>} event - The change event.
    * @param {number} index - The index of the checkbox.
@@ -108,7 +114,7 @@ export default function ShoppingList() {
     if (!refreshShoppingList) return;
 
     fetch("/api/shoppinglist")
-      .then((response) => response.json()) // Extract JSON data from the response
+      .then((response) => response.json())
       .then((data) => {
         setShoppingItems(data);
         setCheckedStates(new Array(data.length).fill(false));
@@ -116,6 +122,7 @@ export default function ShoppingList() {
       }); // Pass the data to setItems
   }, [refreshShoppingList]);
 
+  // Fetches grocery items when the page renders
   useEffect(() => {
     fetch("/api/items")
       .then((response) => response.json())
@@ -126,20 +133,20 @@ export default function ShoppingList() {
     setCheckedStates(new Array(shoppingItems.length).fill(false));
   }, [shoppingItems]);
 
-  // Update expiryDates array length when shoppingItems changes
+  // Updates expiryDates array length when shoppingItems changes, and sets all values to null
   useEffect(() => {
     setExpiryDates(new Array(shoppingItems.length).fill(null));
   }, [shoppingItems]);
 
   /**
-   * Handles the addition of an item to the shopping list.
+   * A handler that handles the addition of an item to the shopping list.
+   * If the item does not exist in the 'item_database' table, it first registers the item,
+   * and then added to the shopping list.
    */
   const handleAddToShoppingList = async () => {
     console.log("Clicked add to shopping list...");
     const item = groceryItems.find((item) => item.item_name === search);
     let itemId = item?.item_id;
-
-    console.log("Adding item... ", item);
 
     if (!item) {
       const response = await fetch("/api/items", {
@@ -153,15 +160,14 @@ export default function ShoppingList() {
         }),
       });
 
-      console.log("Response: ", response);
-
       if (response.ok) {
         const newItem = await response.json();
         itemId = newItem.item_id;
-        console.log("New item: ", newItem);
-        console.log("New item id: ", itemId);
+        setGroceryItems((prevItems) => [...prevItems, newItem]);
       } else {
-        throw new Error("Server response wasn't OK");
+        const error = await response.json();
+        alert("Item already exists: " + error.message);
+        throw new Error("Server was unable to register the new item.");
       }
     }
 
@@ -171,8 +177,6 @@ export default function ShoppingList() {
       item_quantity_type: quantityType,
     });
 
-    console.log("Body: ", body);
-
     await fetch("/api/shoppinglist", {
       method: "POST",
       headers: {
@@ -181,16 +185,15 @@ export default function ShoppingList() {
       body: body,
     })
       .then((response) => {
-        console.log("Response: ", response);
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error("Server response wasn't OK");
+          throw new Error(
+            "Server was unable to add the item to the shopping list.",
+          );
         }
       })
       .then((newItem) => {
-        console.log(newItem);
-
         newItem.item_name = search;
         newItem.item_quantity_type = quantityType;
         newItem.item_quantity = quantity;
@@ -213,14 +216,13 @@ export default function ShoppingList() {
   };
 
   /**
-   * Handles the addition of bought items to the inventory.
+   * A handler that sends one or more items marked 'Bought?' to their respective inventory locations.
    */
   const handleAddBoughtItemsToInventory = async () => {
     console.log("Clicked add bought items to inventory...");
     const boughtItems = shoppingItems.filter(
       (item, index) => checkedStates[index],
     );
-    console.log("Bought items: ", boughtItems);
 
     for (const item of boughtItems) {
       const itemIndex = shoppingItems.findIndex(
@@ -229,7 +231,7 @@ export default function ShoppingList() {
       const itemLocation = locations[itemIndex];
       let itemExpiryDate = expiryDates[itemIndex];
       if (!itemLocation || itemLocation === "") {
-        alert("Please select location for all bought items");
+        alert("Please select a location for all bought items!");
         return;
       }
       await fetch("/api/inventory/", {
@@ -248,11 +250,12 @@ export default function ShoppingList() {
         }),
       })
         .then((response) => {
-          console.log("Response: ", response);
           if (response.ok) {
             return response.json();
           } else {
-            throw new Error("Server response wasn't OK");
+            throw new Error(
+              "Server was unable to add the item to the inventory.",
+            );
           }
         })
         .then(() => {
@@ -266,22 +269,23 @@ export default function ShoppingList() {
             }),
           })
             .then((response) => {
-              console.log("Response: ", response);
               if (response.ok) {
                 return response.json();
               } else {
-                throw new Error("Server response wasn't OK");
+                throw new Error(
+                  "Server was unable to remove the item from the shopping list.",
+                );
               }
             })
             .then(() => {
               console.log("Deleted item from shopping list");
             })
             .catch((error) => {
-              alert("Error deleting item from shopping list:" + error);
+              alert("Error deleting item from shopping list: " + error);
             });
         })
         .catch((error) => {
-          alert("Error adding item to inventory:" + error);
+          alert("Error adding item to inventory: " + error);
         });
     }
 

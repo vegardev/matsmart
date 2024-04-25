@@ -19,7 +19,6 @@ export async function PUT(request: Request) {
   const itemQuantity = item.item_quantity;
   await updateShoppingListItem(item.item_id, itemQuantity);
 
-  console.log(item);
   return new NextResponse(JSON.stringify({ item }));
 }
 
@@ -34,7 +33,6 @@ export async function DELETE(request: Request) {
   const item: Shopping_items = await request.json();
 
   await deleteShoppingListItem(item.item_id);
-  console.log(item);
 
   return new NextResponse(JSON.stringify({ item }));
 }

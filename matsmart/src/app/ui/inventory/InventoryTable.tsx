@@ -8,9 +8,8 @@ import clsx from "clsx";
  * Props for the InventoryTable component.
  */
 type TableProps = {
-  /** The data to be displayed in the table. */
   data: Inventory_items[];
-  /** Callback function to be called when a checkbox in the table is changed. */
+  /** Handler to be called when a checkbox in the table is changed. */
   onCheckboxChange: (index: number) => void;
 };
 
@@ -18,7 +17,7 @@ type TableProps = {
  * InventoryTable component.
  * @param {Object} props - The props for the component.
  * @param {Inventory_items[]} props.data - The data to be displayed in the table.
- * @param {(index: number) => void} props.onCheckboxChange - Callback function to be called when a checkbox in the table is changed.
+ * @param {(index: number) => void} props.onCheckboxChange - Handler to be called when a checkbox in the table is changed.
  * @returns The rendered InventoryTable component.
  */
 const InventoryTable: React.FC<TableProps> = ({ data, onCheckboxChange }) => {

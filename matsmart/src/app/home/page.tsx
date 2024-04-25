@@ -14,19 +14,8 @@ import { useState, useEffect } from "react";
  * Interface for the data fetched from the home API.
  */
 interface Data {
-  /**
-   * Items that are close to their expiration date.
-   */
   closeToExpireItems: Inventory_items_proper_location[];
-
-  /**
-   * Items that were recently added to the inventory.
-   */
   recentlyAddedItems: Inventory_items_proper_location[];
-
-  /**
-   * Recipes that are recommended to the user.
-   */
   recommendedRecipes: Recipe[];
 }
 
@@ -38,7 +27,7 @@ export default function Page() {
   // State for storing the fetched items
   const [items, setItems] = useState<Data | null>(null);
 
-  // Fetch items from the home API when the component mounts
+  // Fetch items from the home API when the page first renders
   useEffect(() => {
     fetch("/api/home")
       .then((response) => response.json())
@@ -50,9 +39,6 @@ export default function Page() {
     return <div>Loading...</div>;
   }
 
-  console.log("All home data: ", items);
-
-  // Render the fetched items
   return (
     <>
       <main className="light-background">

@@ -16,7 +16,6 @@ jest.mock("../src/app/backend/testDatabaseCalls");
 describe("Database GET tests", () => {
   describe("Successful GET requests", () => {
     beforeAll(() => {
-      // loop through all functions in testDatabaseCalls and mock them
       for (const key of Object.keys(testDatabaseCalls)) {
         if (typeof (testDatabaseCalls as any)[key] === "function") {
           jest
@@ -29,7 +28,6 @@ describe("Database GET tests", () => {
     });
 
     afterAll(() => {
-      // loop through all functions in testDatabaseCalls and restore them
       for (const key of Object.keys(testDatabaseCalls)) {
         if (typeof (testDatabaseCalls as any)[key] === "function") {
           jest
@@ -76,7 +74,7 @@ describe("Database GET tests", () => {
     });
 
     test("Fetch single recipe", async () => {
-      const recipeId = 1; // Replace with a valid recipe ID
+      const recipeId = 1;
       const result: Recipe[] =
         await testDatabaseCalls.fetchSingleRecipe(recipeId);
       expect(result).toEqual([
@@ -93,7 +91,7 @@ describe("Database GET tests", () => {
     });
 
     test("Fetch recipe items", async () => {
-      const recipeId = 1; // Replace with a valid recipe ID
+      const recipeId = 1;
       const result: Recipe_items[] =
         await testDatabaseCalls.fetchRecipeItems(recipeId);
       expect(result).toEqual([
@@ -115,7 +113,7 @@ describe("Database GET tests", () => {
     });
 
     test("Fetch inventory items", async () => {
-      const location = "kjøleskap"; // Replace with a valid location
+      const location = "kjøleskap";
       const result: Inventory_items[] =
         await testDatabaseCalls.fetchInventoryItems(location);
       expect(result).toEqual([
@@ -465,7 +463,6 @@ describe("Database GET tests", () => {
   });
 });
 
-// Mocker databasekall for POST, DELETE og PUT fordi ønsker ikke å endre på testdataen
 describe("Database POST tests", () => {
   beforeEach(() => {
     jest.clearAllMocks();

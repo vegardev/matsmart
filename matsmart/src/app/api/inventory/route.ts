@@ -11,7 +11,6 @@ import { NextResponse } from "next/server";
  */
 export async function POST(request: Request) {
   const item: Inventory_items = await request.json();
-  console.log(item);
   await submitInventoryItem(
     item.item_id,
     item.item_quantity,

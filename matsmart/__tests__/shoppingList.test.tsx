@@ -4,7 +4,7 @@ import { shoppingListDummyData } from "@/src/app/backend/dummyData";
 import { render, waitFor, fireEvent } from "@testing-library/react";
 import fetch from "jest-fetch-mock";
 
-describe("Shopping List", () => {
+describe("Shopping List page", () => {
   beforeEach(() => {
     fetch.resetMocks();
     fetch.mockResponse(JSON.stringify(shoppingListDummyData));

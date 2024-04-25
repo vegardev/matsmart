@@ -7,7 +7,7 @@ import Link from "next/link";
 /**
  * NewGroceriesItems component.
  * @param {Object} props - The props for the component.
- * @param {Inventory_items[]} props.NewGroceriesItems - The new grocery items to be displayed.
+ * @param {Inventory_items_proper_location[]} props.NewGroceriesItems - The new inventory items to be displayed.
  * @returns The rendered NewGroceriesItems component.
  */
 export default function NewGroceriesItems({

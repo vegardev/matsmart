@@ -1,52 +1,12 @@
 /* eslint-disable no-unused-vars */
 "use client";
 import React from "react";
-import { Shopping_items } from "@/src/app/backend/definitions";
+import { TableProps } from "@/src/app/backend/definitions";
 
 /**
- * Props for the GroceryTable component.
+ * A table for displaying grocery items and their details.
  */
-type TableProps = {
-  /** The data to be displayed in the table. */
-  data: Shopping_items[];
-  /** Optional CSS classes to be applied to the table. */
-  className?: string;
-};
-
-/**
- * GroceryTable component.
- * @param {Object} props - The props for the component.
- * @param {Shopping_items[]} props.data - The data to be displayed in the table.
- * @param {string} [props.className] - Optional CSS classes to be applied to the table.
- * @param {(index: number, newQuantity: number) => void} onQuantityChange - Callback function to be called when the quantity of an item is changed.
- * @param {(index: number) => void} onDelete - Callback function to be called when an item is deleted.
- * @param {boolean[]} checkedStates - The checked states of the checkboxes in the table.
- * @param {(event: React.ChangeEvent<HTMLInputElement>, index: number) => void} onCheckboxChange - Callback function to be called when a checkbox in the table is changed.
- * @param {string[]} locations - The locations of the items in the table.
- * @param {React.Dispatch<React.SetStateAction<string[]>>} setLocations - Function to set the locations of the items in the table.
- * @param {(index: number, newLocation: string) => void} onLocationChange - Callback function to be called when the location of an item is changed.
- * @param {(Date | null)[]} expiryDates - The expiry dates of the items in the table.
- * @param {(index: number, newDate: Date) => void} onExpiryDateChange - Callback function to be called when the expiry date of an item is changed.
- * @param {boolean} anyCheckboxChecked - Whether any checkbox in the table is checked.
- * @returns The rendered GroceryTable component.
- */
-const GroceryTable: React.FC<
-  TableProps & {
-    onQuantityChange: (index: number, newQuantity: number) => void;
-    onDelete: (index: number) => void;
-    checkedStates: boolean[];
-    onCheckboxChange: (
-      event: React.ChangeEvent<HTMLInputElement>,
-      index: number,
-    ) => void;
-    locations: string[];
-    setLocations: React.Dispatch<React.SetStateAction<string[]>>;
-    onLocationChange: (index: number, newLocation: string) => void;
-    expiryDates: (Date | null)[];
-    onExpiryDateChange: (index: number, newDate: Date) => void;
-    anyCheckboxChecked: boolean;
-  }
-> = ({
+const GroceryTable: React.FC<TableProps> = ({
   data,
   className,
   onQuantityChange,

@@ -54,11 +54,9 @@ describe("SearchBar component", () => {
       />,
     );
 
-    // Simulate a user typing in the search bar to trigger the fetch
     const searchBar = getByPlaceholderText("Search for items...");
     fireEvent.change(searchBar, { target: { value: "test" } });
 
-    // Wait for any asynchronous actions to complete
     await waitFor(() => {
       expect(consoleSpy).toHaveBeenCalledWith(
         "Error fetching suggestion data:",
@@ -66,7 +64,6 @@ describe("SearchBar component", () => {
       );
     });
 
-    // Clean up the spy
     consoleSpy.mockRestore();
   });
 

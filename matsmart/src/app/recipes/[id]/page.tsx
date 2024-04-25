@@ -20,7 +20,7 @@ import { useEffect, useState } from "react";
 async function getRecipeById(id: number): Promise<Recipe_Page> {
   const recipe = await getRecipeByIdFetch(id);
   if (!recipe) {
-    return notFound(); // Kan eventuelt lage en egen 404 side
+    return notFound();
   }
   return recipe;
 }

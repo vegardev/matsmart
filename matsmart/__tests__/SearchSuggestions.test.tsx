@@ -66,7 +66,7 @@ describe("SearchSuggestions component", () => {
     fireEvent.keyDown(suggestion, { key: "Enter", code: "Enter" });
     expect(setSearch).toHaveBeenCalledWith("Test 2");
 
-    setSearch.mockClear(); // Clear the mock calls
+    setSearch.mockClear();
 
     fireEvent.keyDown(suggestion, { key: " ", code: "Space" });
     expect(setSearch).toHaveBeenCalledWith("Test 2");

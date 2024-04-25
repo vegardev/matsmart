@@ -1,4 +1,3 @@
-// app/inventory/[location]/page.tsx
 "use client";
 import React, { useState, useEffect } from "react";
 import InventoryTable from "@/src/app/ui/inventory/InventoryTable";
@@ -16,10 +15,11 @@ export default function InventoryPage({
 }: {
   params: { location: string };
 }) {
+  // State variables for storing the items and checked states
   const [items, setItems] = useState<Inventory_items[]>([]);
   const [checkedStates, setCheckedStates] = useState<boolean[]>([]);
 
-  // Fetch data based on location
+  // Fetches the correct inventory items when params.location changes
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(`/api/inventory/${params.location}`);
@@ -31,6 +31,8 @@ export default function InventoryPage({
 
   /**
    * Handle the change of a checkbox.
+   * This function is used to track which items are checked.
+   * The state of checked items is used by the handleDelete function to delete the checked items.
    * @param {number} index - The index of the checkbox.
    */
   const handleCheckboxChange = (index: number) => {
@@ -43,6 +45,7 @@ export default function InventoryPage({
 
   /**
    * Handle the deletion of items.
+   * This function uses the state of checked items (managed by handleCheckboxChange function) to delete the checked items.
    */
   const handleDelete = async () => {
     // Create an array of checked items
@@ -65,7 +68,7 @@ export default function InventoryPage({
 
   const location = decodeURIComponent(params.location);
 
-  // translate location to English
+  // Translate possible locations to English
   const locationTitle =
     location === "kjøleskap"
       ? "Fridge"

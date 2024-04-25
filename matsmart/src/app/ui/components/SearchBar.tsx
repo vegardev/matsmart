@@ -10,7 +10,7 @@ import clsx from "clsx";
  * @param {string} props.databaseTable - The database table to search in.
  * @param {string} props.placeholder - The placeholder text for the search bar.
  * @param {string} props.search - The current search text.
- * @param {(search: string) => void} props.setSearch - The function to update the search text.
+ * @param {(search: string) => void} props.setSearch - The state hook to update the search text.
  * @param {Type[]} props.suggestions - The current list of suggestions.
  * @returns The rendered SearchBar component.
  */
@@ -27,6 +27,7 @@ export function SearchBar<Type>({
   setSearch: (search: string) => void;
   suggestions: Type[];
 }) {
+  // State hooks for populating the search suggestions, the selected suggestion, and whether a suggestion is selected
   const [items, setItems] = useState<Type[]>([]);
   const [selected, setSelected] = useState(0);
   const [isSuggestionSelected, setIsSuggestionSelected] = useState(false);
@@ -44,12 +45,15 @@ export function SearchBar<Type>({
             console.error("Error fetching suggestion data:", error),
           );
       }
-    }, 500);
+    }, 250);
     return () => clearTimeout(delayDebounceFn);
   }, [search, isActive, databaseTable]);
 
   /**
-   * Handles the key down event.
+   * A handler to change the selected suggestion based on the key down event.
+   * Pressing 'tab' will cycle through the suggestions.
+   * Pressing 'enter' will select the current suggestion.
+   *
    * @param {React.KeyboardEvent} event - The key down event.
    */
   function handleKeyDown(event: React.KeyboardEvent) {
@@ -61,7 +65,6 @@ export function SearchBar<Type>({
         const selectedName = (items[selected] as any)[`${databaseTable}_name`];
         setSearch(selectedName);
         setItems([]);
-        console.log("Currently selected: ", selectedName);
         setIsSuggestionSelected(true);
       } else {
         setSearch(search);

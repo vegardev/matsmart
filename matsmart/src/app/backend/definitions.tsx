@@ -12,7 +12,9 @@ export type CloseToExpire = {
 };
 
 /**
- * Represents an item in the database.
+ * Represents a record from the 'item_database' table.
+ * Each property corresponds to a column in the table.
+ * Useful for fetching existing items from the database with search queries.
  */
 export type Item_database = {
   item_id: number;
@@ -21,7 +23,8 @@ export type Item_database = {
 };
 
 /**
- * Represents a tag that can be associated with a recipe.
+ * Represents a record from the 'tags' table.
+ * Each property corresponds to a column in the table.
  */
 export type Tags = {
   tag_id: number;
@@ -29,7 +32,8 @@ export type Tags = {
 };
 
 /**
- * Represents a preview of a recipe. This is used when listing multiple recipes.
+ * Represents a preview of a recipe.
+ * This is used when listing multiple recipes.
  */
 export type Recipe_Preview = {
   recipe_id: number;
@@ -40,7 +44,8 @@ export type Recipe_Preview = {
 };
 
 /**
- * Represents a full recipe. This is used when viewing the details of a single recipe.
+ * Represents a record from the 'recipes' table.
+ * Each property corresponds to a column in the table.
  */
 export type Recipe = {
   recipe_id: number;
@@ -62,7 +67,9 @@ export type Recipes_no_content = {
 };
 
 /**
- * Represents an item that is part of a recipe.
+ * Represents a record from the 'item_database' table.
+ * Each property corresponds to a column in the table.
+ * This type includes item_name, expecting a query to join the 'recipe_items' and 'item_database' tables.
  */
 export type Recipe_items = {
   item_id: number;
@@ -85,6 +92,11 @@ export type Inventory_items = {
   expiration_date: Date;
 };
 
+/**
+ * Represents a record from the 'inventory' table.
+ * Each property corresponds to a column in the table.
+ * This type includes item_name, expecting a query to join the 'inventory' and 'item_database' tables.
+ */
 export type Inventory_items_proper_location = {
   inventory_id: number;
   item_id: number;
@@ -96,7 +108,14 @@ export type Inventory_items_proper_location = {
 };
 
 /**
- * Represents the properties of a quantity dropdown component.
+ * Represents the properties of the QuantityDropdown component.
+ *
+ * @property {Object} props - The props for the component.
+ * @property {number} props.quantity - The current quantity.
+ * @property {(value: number) => void} props.setQuantity - Function to set the quantity.
+ * @property {string} props.quantityType - The current quantity type.
+ * @property {(value: string) => void} props.setQuantityType - Function to set the quantity type.
+ * @returns The rendered QuantityDropdown component.
  */
 export type QuantityDropdownProps = {
   quantity: number;
@@ -106,7 +125,44 @@ export type QuantityDropdownProps = {
 };
 
 /**
- * Represents an item in the shopping list.
+ * Represents the properties of the GroceryTable component.
+ * @property {Shopping_items[]} data - The data to be displayed in the table.
+ * @property {string} [className] - Optional CSS classes to be applied to the table.
+ * @property {(index: number, newQuantity: number) => void} onQuantityChange - Function to handle changes in quantity.
+ * @property {(index: number) => void} onDelete - Function to handle deletion of items.
+ * @property {boolean[]} checkedStates - Array representing the checked state of each item.
+ * @property {(event: React.ChangeEvent<HTMLInputElement>, index: number) => void} onCheckboxChange - Function to handle checkbox changes.
+ * @property {string[]} locations - Array representing the location of each item.
+ * @property {React.Dispatch<React.SetStateAction<string[]>>} setLocations - Function to set the locations of the items.
+ * @property {(index: number, newLocation: string) => void} onLocationChange - Function to handle changes in location.
+ * @property {(Date | null)[]} expiryDates - Array representing the expiry dates of each item.
+ * @property {(index: number, newDate: Date) => void} onExpiryDateChange - Function to handle changes in expiry date.
+ * @property {boolean} anyCheckboxChecked - Boolean indicating if any checkbox is checked.
+ */
+export type TableProps = {
+  /** The data to be displayed in the table. */
+  data: Shopping_items[];
+  /** Optional CSS classes to be applied to the table. */
+  className?: string;
+  onQuantityChange: (index: number, newQuantity: number) => void;
+  onDelete: (index: number) => void;
+  checkedStates: boolean[];
+  onCheckboxChange: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => void;
+  locations: string[];
+  setLocations: React.Dispatch<React.SetStateAction<string[]>>;
+  onLocationChange: (index: number, newLocation: string) => void;
+  expiryDates: (Date | null)[];
+  onExpiryDateChange: (index: number, newDate: Date) => void;
+  anyCheckboxChecked: boolean;
+};
+
+/**
+ * Represents a record from the 'shopping_list' table.
+ * Each property corresponds to a column in the table.
+ * This type includes item_id and item_name, expecting a query to join the 'shopping_list' and 'item_database' tables.
  */
 export type Shopping_items = {
   item_id: number;
@@ -153,7 +209,7 @@ export type Recipe_Page = {
 };
 
 /**
- * Represents the different types of ingredients that can be used in a recipe.
+ * Represents the different types of measurement units an item or ingredient may have.
  */
 export const ingredientTypes = [
   { name: "stk", abbreviation: "stk." },
