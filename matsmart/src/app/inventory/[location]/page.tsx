@@ -6,8 +6,7 @@ import { Inventory_items } from "@/src/app/backend/definitions";
 /**
  * Page component for the inventory page.
  * @param {Object} props - The props for the component.
- * @param {Object} props.params - The parameters for the page.
- * @param {string} props.params.location - The location of the inventory.
+ * @param {Object} props.params - The location parameter for the page, determining which location to render.
  * @returns The rendered InventoryPage component.
  */
 export default function InventoryPage({
@@ -30,9 +29,8 @@ export default function InventoryPage({
   }, [params.location]);
 
   /**
-   * Handle the change of a checkbox.
-   * This function is used to track which items are checked.
-   * The state of checked items is used by the handleDelete function to delete the checked items.
+   * A handler that is used to track which items are checked.
+   * The state of checked items is used by the handleDelete handler to delete the checked items.
    * @param {number} index - The index of the checkbox.
    */
   const handleCheckboxChange = (index: number) => {
@@ -44,8 +42,8 @@ export default function InventoryPage({
   };
 
   /**
-   * Handle the deletion of items.
-   * This function uses the state of checked items (managed by handleCheckboxChange function) to delete the checked items.
+   * A handler that is used for deletion of items.
+   * This function uses the state of checked items (managed by handleCheckboxChange handler) to delete the checked items.
    */
   const handleDelete = async () => {
     // Create an array of checked items

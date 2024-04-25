@@ -7,7 +7,7 @@ import Link from "next/link";
 /**
  * RecommendedItems component.
  * @param {Object} props - The props for the component.
- * @param {Recipe[]} props.RecommendedItems - The recommended recipes based on the availability of ingredients.
+ * @param {Recipe[]} props.RecommendedItems - The recommended recipes based on the availability of their required ingredients.
  * @returns The rendered RecommendedItems component.
  */
 export default function RecommendedItems({

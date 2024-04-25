@@ -5,13 +5,13 @@ import { SearchSuggestions } from "@/src/app/ui/components/SearchSuggestions";
 import clsx from "clsx";
 
 /**
- * SearchBar component.
+ * Generic SearchBar component.
  * @param {Object} props - The props for the component.
  * @param {string} props.databaseTable - The database table to search in.
  * @param {string} props.placeholder - The placeholder text for the search bar.
- * @param {string} props.search - The current search text.
+ * @param {string} props.search - The current search text or query.
  * @param {(search: string) => void} props.setSearch - The state hook to update the search text.
- * @param {Type[]} props.suggestions - The current list of suggestions.
+ * @param {Type[]} props.suggestions - The current list of suggestions based on the search query.
  * @returns The rendered SearchBar component.
  */
 export function SearchBar<Type>({

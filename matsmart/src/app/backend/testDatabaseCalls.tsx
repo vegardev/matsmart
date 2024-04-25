@@ -1,7 +1,7 @@
 /**
  * This file contains functions for making queries to the test database.
  * The structure and functionality of these functions are identical to those in the `databaseCalls.tsx` file.
- * For detailed documentation on how these functions work, please refer to the comments in `databaseCalls.tsx`.
+ * For detailed documentation on how these functions work, please refer to the corresponding functions in [[databaseCalls]].
  */
 
 import { testquery } from "@/src/app/backend/db";

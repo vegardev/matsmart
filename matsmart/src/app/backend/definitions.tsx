@@ -1,7 +1,13 @@
 /* eslint-disable no-unused-vars */
 
 /**
- * Represents an item that is close to its expiration date.
+ * Note: Most of the type definitions in this file directly reflect the tables and columns in the database.
+ * For example, the 'Item_database' type represents a record from the 'item_database' table, with each property corresponding to a column in the table.
+ * This pattern is followed for most types in this file, making it easier to understand the structure of the database and the data it contains.
+ */
+
+/**
+ * Represents an inventory item that is close to its expiry date.
  */
 export type CloseToExpire = {
   item_id: number;
@@ -12,7 +18,7 @@ export type CloseToExpire = {
 };
 
 /**
- * Represents a record from the 'item_database' table.
+ * Represents an item, a record from the 'item_database' table.
  * Each property corresponds to a column in the table.
  * Useful for fetching existing items from the database with search queries.
  */
@@ -67,7 +73,7 @@ export type Recipes_no_content = {
 };
 
 /**
- * Represents a record from the 'item_database' table.
+ * Represents an ingredient, a record from the 'recipe_items' table.
  * Each property corresponds to a column in the table.
  * This type includes item_name, expecting a query to join the 'recipe_items' and 'item_database' tables.
  */
@@ -80,7 +86,7 @@ export type Recipe_items = {
 };
 
 /**
- * Represents an item in the inventory.
+ * Represents an inventory item.
  */
 export type Inventory_items = {
   inventory_id?: number;
@@ -93,7 +99,7 @@ export type Inventory_items = {
 };
 
 /**
- * Represents a record from the 'inventory' table.
+ * Represents an inventory item, a record from the 'inventory' table.
  * Each property corresponds to a column in the table.
  * This type includes item_name, expecting a query to join the 'inventory' and 'item_database' tables.
  */
@@ -160,7 +166,7 @@ export type TableProps = {
 };
 
 /**
- * Represents a record from the 'shopping_list' table.
+ * Represents a grocery item, a record from the 'shopping_list' table.
  * Each property corresponds to a column in the table.
  * This type includes item_id and item_name, expecting a query to join the 'shopping_list' and 'item_database' tables.
  */
@@ -195,7 +201,7 @@ export type Recipe_CreateType = {
 };
 
 /**
- * Represents the data of a recipe page.
+ * Represents the data needed to show a specific recipe page.
  */
 export type Recipe_Page = {
   recipe_id: number;

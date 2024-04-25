@@ -9,14 +9,14 @@ import clsx from "clsx";
  */
 type TableProps = {
   data: Inventory_items[];
-  /** Handler to be called when a checkbox in the table is changed. */
+  /** A handler to be called when a checkbox in the table is changed. */
   onCheckboxChange: (index: number) => void;
 };
 
 /**
- * InventoryTable component.
+ * InventoryTable component for displaying inventory items and their details.
  * @param {Object} props - The props for the component.
- * @param {Inventory_items[]} props.data - The data to be displayed in the table.
+ * @param {Inventory_items[]} props.data - The inventory items to be displayed in the table.
  * @param {(index: number) => void} props.onCheckboxChange - Handler to be called when a checkbox in the table is changed.
  * @returns The rendered InventoryTable component.
  */

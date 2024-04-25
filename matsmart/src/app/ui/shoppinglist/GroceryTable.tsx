@@ -4,7 +4,10 @@ import React from "react";
 import { TableProps } from "@/src/app/backend/definitions";
 
 /**
- * A table for displaying grocery items and their details.
+ * GroceryTable component for displaying grocery items and their details.
+ *
+ * @param {TableProps} props The props passed to the component.
+ * @returns The rendered GroceryTable component.
  */
 const GroceryTable: React.FC<TableProps> = ({
   data,

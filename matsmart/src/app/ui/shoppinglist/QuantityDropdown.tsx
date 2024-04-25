@@ -3,6 +3,12 @@ import {
   ingredientTypes,
 } from "@/src/app/backend/definitions";
 
+/**
+ * QuantityDropdown component for selecting the quantity and measurement unit of a grocery item.
+ *
+ * @param {QuantityDropdownProps} props The props passed to the component.
+ * @returns The rendered QuantityDropdown component.
+ */
 export default function QuantityDropdown({
   quantity,
   setQuantity,

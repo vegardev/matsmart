@@ -20,8 +20,11 @@ interface Data {
 }
 
 /**
- * Page component that fetches and displays items from the home API.
- * @returns The rendered Page component
+ * Home page component that fetches and displays items from the home API.
+ *
+ * Fetches necessary data when the home page first renders.
+ * The fetched data includes inventory items that are close to their expiration date, recently added inventory items, and recommended recipes.
+ * @returns The rendered home page component
  */
 export default function Page() {
   // State for storing the fetched items

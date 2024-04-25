@@ -2,11 +2,11 @@
 import { useEffect, useRef } from "react";
 
 /**
- * SearchSuggestions component.
+ * Generic SearchSuggestions component.
  * @param {Object} props - The props for the component.
  * @param {(search: string) => void} props.setSearch - The function to update the search text.
  * @param {Type[]} props.suggestions - The current list of suggestions.
- * @param {number} props.selected - The index of the selected suggestion.
+ * @param {number} props.selected - The index of the selected suggestion based on the search query.
  * @param {string} props.databaseTable - The database table to search in.
  * @returns The rendered SearchSuggestions component.
  */

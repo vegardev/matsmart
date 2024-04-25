@@ -7,7 +7,7 @@ import Link from "next/link";
 /**
  * CloseToExpireItems component.
  * @param {Object} props - The props for the component.
- * @param {Inventory_items_proper_location[]} props.CloseToExpireItems - The items that are close to their expiration date.
+ * @param {Inventory_items_proper_location[]} props.CloseToExpireItems - The inventory items that are close to expiry.
  * @returns The rendered CloseToExpireItems component.
  */
 export default function CloseToExpireItems({

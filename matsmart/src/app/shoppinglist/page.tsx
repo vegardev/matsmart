@@ -23,7 +23,7 @@ export default function ShoppingList() {
   const [quantityType, setQuantityType] = useState<string>("stk.");
   const [refreshShoppingList, setRefreshShoppingList] = useState<boolean>(true);
 
-  // State hooks to keep track of checked states, locations, and expiry dates for items
+  // State hooks to keep track of checked states, locations, and expiry dates for grocery items
   const [checkedStates, setCheckedStates] = useState<boolean[]>(
     new Array(shoppingItems.length).fill(false),
   );
@@ -37,7 +37,7 @@ export default function ShoppingList() {
   const anyCheckboxChecked = checkedStates.some((checked) => checked);
 
   /**
-   * A handler that changes the expiry date of one or more items.
+   * A handler that changes the expiry date of one or more grocery items.
    *
    * A non-empty string or Date object is converted to a Date object.
    * An empty string sets the expiry date to null, signifying no expiry date.
@@ -54,7 +54,7 @@ export default function ShoppingList() {
   };
 
   /**
-   * A handler that changes the quantity of one or more items.
+   * A handler that changes the quantity of one or more grocery items.
    *
    * If the new quantity is -1, the item at the index is removed from the shopping list.
    * @param {number} index - The index of the item.
@@ -72,7 +72,7 @@ export default function ShoppingList() {
   };
 
   /**
-   * A handler that changes the location of one or more items.
+   * A handler that changes the location of one or more grocery items.
    *
    * @param {number} index - The index of the item.
    * @param {string} newLocation - The new location.
@@ -86,7 +86,7 @@ export default function ShoppingList() {
   };
 
   /**
-   * A handler that deletes one or more checked items.
+   * A handler that deletes one or more checked grocery items.
    *
    * @param {number} index - The index of the item.
    */
@@ -119,7 +119,7 @@ export default function ShoppingList() {
         setShoppingItems(data);
         setCheckedStates(new Array(data.length).fill(false));
         setRefreshShoppingList(false);
-      }); // Pass the data to setItems
+      });
   }, [refreshShoppingList]);
 
   // Fetches grocery items when the page renders
@@ -139,9 +139,9 @@ export default function ShoppingList() {
   }, [shoppingItems]);
 
   /**
-   * A handler that handles the addition of an item to the shopping list.
+   * A handler that handles the addition of an grocery item to the shopping list.
    * If the item does not exist in the 'item_database' table, it first registers the item,
-   * and then added to the shopping list.
+   * and then adds it to the shopping list.
    */
   const handleAddToShoppingList = async () => {
     console.log("Clicked add to shopping list...");
@@ -216,7 +216,7 @@ export default function ShoppingList() {
   };
 
   /**
-   * A handler that sends one or more items marked 'Bought?' to their respective inventory locations.
+   * A handler that sends one or more grocery items marked 'Bought?' to their respective inventory locations.
    */
   const handleAddBoughtItemsToInventory = async () => {
     console.log("Clicked add bought items to inventory...");
