@@ -112,7 +112,7 @@ export default function Page() {
             value={timeRequirement}
             onChange={(e) => setTimeRequirement(e.target.value)}
           />
-          <TextInputFields ref={nutritionsRef} catagory="Nutritions" />
+          <TextInputFields ref={nutritionsRef} catagory="Nutritions/Facts" />
         </div>
       </div>
     </>
