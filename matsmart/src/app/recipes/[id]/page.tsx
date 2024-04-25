@@ -15,12 +15,12 @@ import { useEffect, useState } from "react";
  * Retrieves a recipe by its ID.
  *
  * @param id - The ID of the recipe to retrieve.
- * @returns A Promise that resolves to the recipe page if found, otherwise a 404 page.
+ * @returns A Promise that resolves to the recipe page if found, otherwise a shows 404 page.
  */
 async function getRecipeById(id: number): Promise<Recipe_Page> {
   const recipe = await getRecipeByIdFetch(id);
   if (!recipe) {
-    return notFound(); // Kan eventuelt lage en egen 404 side
+    return notFound();
   }
   return recipe;
 }
@@ -47,7 +47,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   // If the recipe data is not yet loaded, show a loading message
   if (!recipe) {
-    return <div>Loading...</div>; // Kan lage egen loading page her
+    return <div>Loading...</div>;
   }
 
   // If the recipe data is loaded, display the recipe details

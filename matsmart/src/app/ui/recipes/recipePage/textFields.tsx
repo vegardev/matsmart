@@ -73,8 +73,6 @@ export function RecipeTextFields({
           });
         }
       });
-
-      // Wait for all promises to resolve
       await Promise.all(promises);
     }
 

@@ -17,7 +17,6 @@ const animatedComponents = makeAnimated();
 export function SearchBar({ placeholder }: { placeholder: string }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  // useRouter is a hook that provides router object. replace is a method to replace the current URL
   const { replace } = useRouter();
 
   /**
@@ -94,7 +93,6 @@ export function SearchByTags() {
         components={animatedComponents}
         isMulti
         options={tags.map((tag) => ({
-          // Map each tag to an option with a value and label
           value: tag.tag_id,
           label: tag.tag_name,
         }))}

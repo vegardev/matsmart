@@ -120,7 +120,7 @@ export function MakeRecipeButton({
   }, []);
 
   // Calls this function if button is clicked
-  // It show visually that it is loading/making, makes the dish, and then reloads the page
+  // It show visually that it is loading/making the dish, makes the dish, and then reloads the page
   const handleMake = async () => {
     setIsMaking(true);
     await makeDish(recipe_id);
