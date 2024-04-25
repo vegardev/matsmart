@@ -1,7 +1,6 @@
 "use client";
 import { SearchBar, SearchByTags } from "@/src/app/ui/recipes/search";
 import {
-  SearchButton,
   RandomRecipeButton,
   AddRecipeButton,
 } from "@/src/app/ui/recipes/buttons";
@@ -43,18 +42,17 @@ export default function Recipes({
     <div>
       <div className="flex">
         <h1 className="mb-4 text-xl md:text-2xl">Recipes</h1>
-        <RandomRecipeButton recipes={recipeIds} />
-        <AddRecipeButton />
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8 max-w-3xl ">
         <SearchBar placeholder="Search recipes..." />
-        <SearchButton />
+        <RandomRecipeButton recipes={recipeIds} />
+        <AddRecipeButton />
       </div>
       <div className="flex">
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           <Recipe queryfetch={query} tagsFetch={tags} />
         </div>
-        <div className="lg:ml-10 md:ml-6 sm:ml-3">
+        <div className="lg:ml-10 md:ml-6 sm:ml-3 mt-6">
           <SearchByTags />
         </div>
       </div>
