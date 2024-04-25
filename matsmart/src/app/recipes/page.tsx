@@ -49,7 +49,7 @@ export default function Recipes({
         <AddRecipeButton />
       </div>
       <div className="flex">
-        <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 w-4/6">
           <Recipe queryfetch={query} tagsFetch={tags} />
         </div>
         <div className="lg:ml-10 md:ml-6 sm:ml-3 mt-6">
