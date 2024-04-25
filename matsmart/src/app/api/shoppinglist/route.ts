@@ -20,7 +20,7 @@ export async function GET() {
 /**
  * Handles POST requests to submit a new item to the shopping list.
  *
- * @param {Request} request - The incoming request object. The body of the request should be a JSON string that represents the new shopping list item.
+ * @param {Request} request - The incoming request object. The body of the request should be a JSON object that represents the new shopping list item.
  *
  * @returns {Promise<NextResponse>} A promise that resolves to a NextResponse object.
  * On a successful request, the response body contains a JSON string with the submitted shopping list item.

@@ -17,7 +17,7 @@ type Params = {
  * @param {string} context.params.id - The ID of the location to fetch inventory items for.
  *
  * @returns {Promise<NextResponse>} A promise that resolves to a NextResponse object.
- * On a successful request, the response body contains a JSON object with all inventory items for the specified location.
+ * On a successful request, the response body contains a JSON string with all inventory items for the specified location.
  * On a failed request, the response body contains an error message.
  */
 export async function GET(request: Request, context: { params: Params }) {
@@ -29,10 +29,10 @@ export async function GET(request: Request, context: { params: Params }) {
 /**
  * Handles DELETE requests to delete a specific inventory item.
  *
- * @param {Request} request - The incoming request object. The body of the request should be a JSON string that represents the inventory item to delete.
+ * @param {Request} request - The incoming request object. The body of the request should be a JSON object that represents the inventory item to delete.
  *
  * @returns {Promise<NextResponse>} A promise that resolves to a NextResponse object.
- * On a successful request, the response body contains a JSON object with the deleted inventory item.
+ * On a successful request, the response body contains a JSON string with the deleted inventory item.
  * On a failed request, the response body contains an error message.
  */
 export async function DELETE(request: Request) {

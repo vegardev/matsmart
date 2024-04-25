@@ -14,7 +14,7 @@ type Params = {
  * @param {string} context.params.tag - The tag to sort items by.
  *
  * @returns {Promise<NextResponse>} A promise that resolves to a NextResponse object.
- * On a successful request, the response body contains a JSON object with sorted items.
+ * On a successful request, the response body contains a JSON string with sorted items.
  * On a failed request, the response body contains an error message.
  */
 export async function GET(request: Request, context: { params: Params }) {

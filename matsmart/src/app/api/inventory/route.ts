@@ -8,7 +8,7 @@ import { NextResponse } from "next/server";
  * @param {Request} request - The incoming request object. The body of the request should be a JSON object that represents the new inventory item.
  *
  * @returns {Promise<NextResponse>} A promise that resolves to a NextResponse object.
- * On a successful request, the response body contains a JSON object with the submitted inventory item.
+ * On a successful request, the response body contains a JSON string with the submitted inventory item.
  * On a failed request, the response body contains an error message.
  */
 export async function POST(request: Request) {

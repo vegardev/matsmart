@@ -14,7 +14,7 @@ type Params = {
  * @param {string} context.params.term - The search term to fetch grocery suggestions for.
  *
  * @returns {Promise<NextResponse>} A promise that resolves to a NextResponse object.
- * On a successful request, the response body contains a JSON object with grocery suggestions.
+ * On a successful request, the response body contains a JSON string with grocery suggestions.
  * On a failed request, the response body contains an error message.
  */
 export async function GET(request: Request, context: { params: Params }) {

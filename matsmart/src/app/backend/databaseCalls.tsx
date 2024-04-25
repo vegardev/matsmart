@@ -101,7 +101,7 @@ export async function fetchInventoryItems(
  * Submits a new inventory item to the 'inventory' table in the database.
  * @param {number} item_id - The ID of the item.
  * @param {number} item_quantity - The quantity of the item.
- * @param {string} item_quantity_type - The unit of the item quantity (e.g., "kilogram", "gram", "stk.").
+ * @param {string} item_quantity_type - The unit of the item quantity (e.g., "kilogram", "gram", "stk").
  * @param {string} location - The location of the item.
  * @param {Date} expiration_date - The expiry date of the item.
  * @returns {Promise<void>} A promise that resolves when the item has been successfully submitted.
@@ -150,18 +150,18 @@ export async function deleteInventoryItem(item_id: number): Promise<void> {
 
 /**
  * Fetches recipe suggestions based on a full-text search query on the 'title' column from the 'recipes' table in the database.
- * @param {string} searchTerm - The search query to fetch approximately matching recipe suggestions of.
+ * @param {string} searchQuery - The search query that fetches approximately matching recipe suggestions.
  * @returns {Promise<Recipes_no_content[]>} A promise that resolves to an array of recipe suggestions.
- * @throws {Error} When there is an issue executing the database query.
+ * @throws {Error} When there is an error executing the database query.
  */
 export async function fetchRecipeSuggestions(
-  searchTerm: string,
+  searchQuery: string,
 ): Promise<Recipes_no_content[]> {
   try {
     const dbquery = await query({
       query:
         "SELECT recipe_id, title, image FROM recipes WHERE title LIKE CONCAT('%', ?, '%')",
-      values: [searchTerm],
+      values: [searchQuery],
     });
     return dbquery as Recipes_no_content[];
   } catch (error) {
@@ -171,7 +171,7 @@ export async function fetchRecipeSuggestions(
 
 /**
  * Fetches grocery item suggestions based on a full-text search query on the 'item_name' column from the 'item_database' table in the database.
- * @param {string} searchQuery - The search query to fetch approximately matching grocery item suggestions of.
+ * @param {string} searchQuery - The search query that fetches approximately matching grocery item suggestions.
  * @returns {Promise<Item_database[]>} A promise that resolves to an array of grocery item suggestions.
  * @throws {Error} When there is an error executing the database query.
  */
@@ -191,8 +191,8 @@ export async function fetchGrocerySuggestions(
 }
 
 /**
- * Fetches tag suggestions based on a full-text search query on the 'tags_name' column from the 'tags' table in the database.
- * @param {string} searchQuery - The search query to fetch approximately matching tag suggestions of.
+ * Fetches tag suggestions based on a full-text search query on the 'tag_name' column from the 'tags' table in the database.
+ * @param {string} searchQuery - The search query that fetches approximately matching tag suggestions.
  * @returns {Promise<Tags[]>} A promise that resolves to an array of tags.
  * @throws {Error} When there is an error executing the database query.
  */
@@ -230,7 +230,7 @@ export async function fetchShoppingList(): Promise<Shopping_items[]> {
 /**
  * Submits a new item to the 'item_database' table in the database.
  * @param {string} item_name - The name of the item.
- * @param {string} item_quantity_type - The unit of the item quantity (e.g., "kilogram", "gram", "stk.").
+ * @param {string} item_quantity_type - The unit of the item quantity (e.g., "kilogram", "gram", "stk").
  * @returns {Promise<number>} A promise that resolves to the ID of the newly inserted item.
  * @throws {Error} When there is an error executing the database query.
  */
@@ -272,7 +272,7 @@ export async function submitGroceryItem(
  * Submits a new grocery item to the 'shopping_list' table in the database.
  * @param {number} item_id - The ID of the item.
  * @param {number} item_quantity - The quantity of the item.
- * @param {string} item_quantity_type - The unit of the item quantity (e.g., "kilogram", "gram", "stk.").
+ * @param {string} item_quantity_type - The unit of the item quantity (e.g., "kilogram", "gram", "stk").
  * @returns {Promise<void>} A promise that resolves when the item has been successfully submitted.
  * @throws {Error} When there is an error executing the database query.
  */
@@ -293,7 +293,7 @@ export async function submitShoppingListItem(
 }
 
 /**
- * Updates the quantity of an item in the 'shopping_list' table in the database.
+ * Updates the quantity of a grocery item in the 'shopping_list' table in the database.
  * @param {number} item_id - The ID of the item to update.
  * @param {number} itemQuantity - The new quantity of the item.
  * @returns {Promise<void>} A promise that resolves when the item quantity has been successfully updated.
@@ -375,7 +375,7 @@ export async function fetchRecommendedRecipes(): Promise<Recipe[]> {
 /**
  * Fetches inventory items from the 'inventory' table in the database that are close to their expiry date.
  * An item is considered close to expiry if its expiry date is within the next 5 days.
- * The query returns the 5 items closest to their expiry date.
+ * The query returns the 5 items closest to expiry.
  * @returns {Promise<CloseToExpire[]>} A promise that resolves to an array of items close to expiry.
  * @throws {Error} When there is an error executing the database query.
  */
