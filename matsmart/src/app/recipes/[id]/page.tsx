@@ -1,102 +1,82 @@
 "use client";
-import { recipesDummyData } from "@/src/app/backend/dummyData"; // Erstatt med database data senere
-import { Recipe_Preview } from "@/src/app/backend/definitions";
+import { Recipe_Page } from "@/src/app/backend/definitions";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { DisplayRecipeTags } from "@/src/app/ui/recipes/recipePage/otherComponents";
+import {
+  IngredientsCheck,
+  MakeRecipeButton,
+} from "@/src/app/ui/recipes/recipePage/otherComponents";
+import { DisplayRecipeTags } from "@/src/app/ui/recipes/sharedComponents";
+import { RecipeTextFields } from "@/src/app/ui/recipes/recipePage/textFields";
+import { getRecipeByIdFetch } from "@/src/app/backend/uploadData";
+import { useEffect, useState } from "react";
 
-function getRecipeById(id: number): Recipe_Preview {
-  const recipe = recipesDummyData.find((recipe) => recipe.recipe_id === id);
+/**
+ * Retrieves a recipe by its ID.
+ *
+ * @param id - The ID of the recipe to retrieve.
+ * @returns A Promise that resolves to the recipe page if found, otherwise a shows 404 page.
+ */
+async function getRecipeById(id: number): Promise<Recipe_Page> {
+  const recipe = await getRecipeByIdFetch(id);
   if (!recipe) {
-    return notFound(); // Kan eventuelt lage en egen 404 side
+    return notFound();
   }
   return recipe;
 }
 
+/**
+ * Renders the page for a specific recipe.
+ * @param {Object} props - The component props.
+ * @param {Object} props.params - The parameters object containing the recipe id.
+ * @param {string} props.params.id - The id of the recipe.
+ * @returns {JSX.Element} The rendered page component.
+ */
 export default function Page({ params }: { params: { id: string } }) {
-  const recipe = getRecipeById(Number(params.id));
+  const [recipe, setRecipe] = useState<Recipe_Page | null>(null);
+
+  // This is a useEffect hook that runs when the component mounts and whenever params.id changes
+  useEffect(() => {
+    const fetchRecipe = async () => {
+      const result = await getRecipeById(Number(params.id));
+      setRecipe(result);
+    };
+
+    fetchRecipe();
+  }, [params.id]);
+
+  // If the recipe data is not yet loaded, show a loading message
+  if (!recipe) {
+    return <div>Loading...</div>;
+  }
+
+  // If the recipe data is loaded, display the recipe details
   return (
     <>
-      <div className="flex justify-between mb-10">
-        <div className="mb-4 text-xl md:text-4xl">{recipe.recipe_name}</div>
-        <div className="">
+      <div className="flex justify-between mb-6">
+        <div className="mb-4 text-xl md:text-4xl flex">
+          <div className="mr-6 pt-2">{recipe.title}</div>
+          <MakeRecipeButton
+            recipe_id={recipe.recipe_id}
+            ingredientsNeeded={recipe.recipe_ingredients}
+          />
+        </div>
+        <div className="bg-white rounded-lg p-2 pr-6">
           <div>
             <DisplayRecipeTags tags={recipe.recipe_tags} />
           </div>
-          <div className="ps-4">Can be made until: 12.03.2024</div>{" "}
-          {/* Legg til etter MVP */}
+          <IngredientsCheck ingredientsNeeded={recipe.recipe_ingredients} />
         </div>
       </div>
       <div className="grid grid-cols-11">
-        {/* Alt nedover her endres senere. Dette er bare for MVP */}
         <div className="col-span-5 mr-4">
-          <div className="flex flex-col justify-between rounded-xl bg-gray-50 p-4">
-            <h2 className="py-4 mx-3 text-2xl font-bold">Method:</h2>
-            <div className="bg-white px-6 rounded-2xl">
-              <p className="">
-                of gfahg saopiu gaiushg iuguhasuh fhassfiug 9ash ghhi hhfgi ashu
-                haiughaiuhguiehuuhiuhahdgdshg fhgfuyagf ayofhg oiyagfouyasg
-                fuygafu ygasufyg sywoyf gewauioygfo8 iuyewqgofuy gewuoygfoewuy
-                gfousdhyghfoui sdhfpoufopieugpiuyrehg iurfoøiqeuro ielifjuhh
-                diulf sdygfhisudy g fuhylksdgf uiysdgf uiysdgfu fusdg
-                fiudsgfoiuysdgh fo8iuyeghfoiweu y <br /> øifaf agfly aut
-                aukufueyqt <br /> <br /> fuays fiyasilufyi asf ai fuøoiau f ywiu
-                ladguyaeg fgk sadyf safasjfg sa-fusa fiuakuy qt <br /> <br />{" "}
-                fuays fiyasilufyi asf ai fuøoiau f ywiu ladguyaeg fgk sadyf
-                safasjfg sa-fusa fiuakuyqt <br /> <br /> fuays fiyasilufyi asf
-                ai fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg sa-fusa fiuakuyqt{" "}
-                <br /> <br /> fuays fiyasilufyi asf ai fuøoiau f ywiu ladguyaeg
-                fgk sadyf safasjfg sa-fusa fiuakuy qt <br /> <br /> fuays
-                fiyasilufyi asf ai fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg
-                sa-fusa fiuakuy qt <br /> <br /> fuays fiyasilufyi asf ai
-                fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg sa-fusa fiuakuy qt{" "}
-                <br /> <br /> fuays fiyasilufyi asf ai fuøoiau f ywiu ladguyaeg
-                fgk sadyf safasjfg sa-fusa fiuakuy qt <br /> <br /> fuays
-                fiyasilufyi asf ai fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg
-                sa-fusa fiuakuy qt <br /> <br /> fuays fiyasilufyi asf ai
-                fuøoiau f ywiu ladguyaeg fgk sadyf safasjfg sa-fusa fiuakuy qt{" "}
-              </p>
-            </div>
-          </div>
+          <RecipeTextFields type="Method" content={recipe.recipe_method} />
         </div>
         <div className="col-span-3 mr-4">
-          <div className="flex flex-col justify-between rounded-xl bg-gray-50 p-4">
-            <h2 className="py-4 mx-3 text-2xl font-bold">Ingredients:</h2>
-            <div className="bg-white px-6 rounded-2xl">
-              <h3 className="font-bold text-lg">Pizza sauce</h3>
-              <ul>
-                <li>1 can of tomatoes</li>
-                <li>1 onion</li>
-                <li>1 garlic clove</li>
-                <li>1 tbsp of olive oil</li>
-                <li>1 tsp of salt</li>
-                <li>1 tsp of sugar</li>
-                <li>1 tsp of oregano</li>
-              </ul>
-              <br />
-              <h3 className="font-bold text-lg">Pizza dough</h3>
-              <ul>
-                <li>25 g of yeast</li>
-                <li>2.5 dl of water</li>
-                <li>1 tbsp of olive oil</li>
-                <li>1 tsp of salt</li>
-                <li>7 dl of flour</li>
-              </ul>
-              <br />
-              <h3 className="font-bold text-lg">
-                {"Topping (copilot pizza xdd)"}
-              </h3>
-              <ul>
-                <li>1 mozzarella</li>
-                <li>1 tomato</li>
-                <li>1 red onion</li>
-                <li>1 bell pepper</li>
-                <li>1 can of corn</li>
-                <li>1 can of olives</li>
-                <li>1 can of pineapple</li>
-              </ul>
-            </div>
-          </div>
+          <RecipeTextFields
+            type="Ingredients"
+            content={recipe.recipe_ingredients}
+          />
         </div>
         <div className="flex flex-col col-span-3">
           <Image
@@ -104,26 +84,12 @@ export default function Page({ params }: { params: { id: string } }) {
             width={320}
             height={208}
             src={recipe.recipe_image}
-            alt={"Image of " + recipe.recipe_name}
+            alt={"Image of " + recipe.title}
           />
-          <div className="flex flex-col justify-between rounded-xl bg-gray-50 p-4">
-            <h2 className="py-4 text-2xl font-bold">Nutritions:</h2>
-            <div className="rounded-2xl">
-              <p>
-                <b>Energy:</b> 1000 kcal
-                <br />
-                <b>Protein:</b> 50 g
-                <br />
-                <b>Fat:</b> 30 g
-                <br />
-                <b>Carbohydrates:</b> 100 g
-                <br />
-                <b>Fiber:</b> 10 g
-                <br />
-                <b>Salt:</b> 5 g
-              </p>
-            </div>
-          </div>
+          <RecipeTextFields
+            type="Nutritions/Facts"
+            content={recipe.recipe_nutritions}
+          />
         </div>
       </div>
     </>

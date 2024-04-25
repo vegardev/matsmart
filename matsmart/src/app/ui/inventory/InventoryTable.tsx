@@ -1,25 +1,26 @@
+/* eslint-disable no-unused-vars */
 "use client";
-import React, { useState } from "react";
-import { InventoryItem } from "@/src/app/backend/definitions";
+import React from "react";
+import { Inventory_items } from "@/src/app/backend/definitions";
+import clsx from "clsx";
 
+/**
+ * Props for the InventoryTable component.
+ */
 type TableProps = {
-  data: InventoryItem[];
+  data: Inventory_items[];
+  /** A handler to be called when a checkbox in the table is changed. */
+  onCheckboxChange: (index: number) => void;
 };
 
-const InventoryTable: React.FC<TableProps> = ({ data }) => {
-  const [checkedStates, setCheckedStates] = useState(
-    new Array(data.length).fill(false),
-  );
-  const handleCheckboxChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
-    // Update the specific checkbox's checked state in the array
-    const newCheckedStates = [...checkedStates];
-    newCheckedStates[index] = event.target.checked;
-    setCheckedStates(newCheckedStates);
-  };
-
+/**
+ * InventoryTable component for displaying inventory items and their details.
+ * @param {Object} props - The props for the component.
+ * @param {Inventory_items[]} props.data - The inventory items to be displayed in the table.
+ * @param {(index: number) => void} props.onCheckboxChange - Handler to be called when a checkbox in the table is changed.
+ * @returns The rendered InventoryTable component.
+ */
+const InventoryTable: React.FC<TableProps> = ({ data, onCheckboxChange }) => {
   return (
     <>
       <table className="min-w-full divide-y divide-gray-200">
@@ -40,39 +41,38 @@ const InventoryTable: React.FC<TableProps> = ({ data }) => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {data.map((item, index) => (
-            <tr key={index}>
-              <td className="px-6 py-4 whitespace-nowrap">{item.name}</td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                {item.quantity + item.quantityType}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                {item.expirationDate}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <input
-                  type="checkbox"
-                  checked={checkedStates[index]}
-                  onChange={(e) => handleCheckboxChange(e, index)}
-                />
-              </td>
-            </tr>
-          ))}
+          {data.map((item, index) => {
+            const expirationDate = new Date(item.expiration_date);
+            return (
+              <tr key={index}>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {item.item_name}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {item.item_quantity + " " + item.item_quantity_type}
+                </td>
+                <td
+                  className={clsx("px-6 py-4 whitespace-nowrap", {
+                    " text-red-600": expirationDate < new Date(),
+                  })}
+                >
+                  {item.expiration_date
+                    ? typeof item.expiration_date === "string"
+                      ? item.expiration_date
+                      : item.expiration_date.toDateString()
+                    : "No expiration date"}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <input
+                    type="checkbox"
+                    onChange={() => onCheckboxChange(index)}
+                  />
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
-      {checkedStates.some((checked) => checked) && (
-        <button
-          style={{
-            position: "fixed",
-            bottom: "20px",
-            right: "20px",
-            zIndex: 1000,
-          }}
-          onClick={() => alert("Removed items to inventory!")}
-        >
-          Remove from inventory
-        </button>
-      )}
     </>
   );
 };

@@ -1,60 +1,118 @@
 "use client";
-import Image from "next/image";
-import { SearchByTags } from "@/src/app/ui/recipes/search";
-import { tagsDummyData } from "@/src/app/backend/dummyData";
-import Link from "next/link";
+import {
+  TextInputFields,
+  AddImage,
+  AddTags,
+} from "@/src/app/ui/recipes/createRecipe/inputFields";
+import { useRef, useState } from "react";
+import { createRecipe } from "@/src/app/backend/uploadData";
+import { useRouter } from "next/navigation";
+import { Add_Recipe_Ingredient } from "@/src/app/backend/definitions";
 
+interface InputFieldsHandle {
+  getValue: () => string;
+}
+
+interface IngredientsFieldsHandle {
+  getIngredients: () => Add_Recipe_Ingredient[];
+}
+
+interface ImageFieldsHandle {
+  getImage: () => string;
+}
+
+interface TagsFieldsHandle {
+  getTags: () => string[];
+}
+
+/**
+ * Renders the page for creating a recipe.
+ */
 export default function Page() {
+  const router = useRouter();
+  const [timeRequirement, setTimeRequirement] = useState("");
+  const [title, setTitle] = useState("");
+
+  // Using the useRef hook from React to create references to various components
+  // These references will be used to get data from the components
+  // The useRef function were recommended by AI (CoPilot) as a way to retrive data from the components
+  const methodRef = useRef<InputFieldsHandle | null>(null);
+  const ingredientsRef = useRef<IngredientsFieldsHandle | null>(null);
+  const nutritionsRef = useRef<InputFieldsHandle | null>(null);
+  const imageRef = useRef<ImageFieldsHandle | null>(null);
+  const tagsRef = useRef<TagsFieldsHandle | null>(null);
+
+  /**
+   * Handles the upload of a recipe.
+   */
+  const handleUpload = () => {
+    // Getting the values from the referenced components
+    const method = methodRef.current?.getValue() || "";
+    const ingredients = ingredientsRef.current?.getIngredients() || [];
+    const nutritions = nutritionsRef.current?.getValue() || "";
+    const image = imageRef.current?.getImage() || "";
+    const tags = tagsRef.current?.getTags() || [];
+
+    // Creating a new recipe and getting its ID to be used to navigate to the recipe page
+    let recipe_id = createRecipe({
+      title: title,
+      recipe_method: method,
+      recipe_nutritions: nutritions,
+      recipe_image: image,
+      recipe_time: timeRequirement,
+      recipe_ingredients: ingredients,
+      recipe_tags: tags,
+    });
+
+    /**
+     * Retrieves the recipe ID and navigates to the recipe page.
+     */
+    async function getRecipeId() {
+      const value = await recipe_id;
+      router.push(`/recipes/${value}`);
+    }
+
+    getRecipeId();
+  };
   return (
     <>
       <div className="flex justify-between mb-10">
         <div className="mb-4 text-xl md:text-4xl">
-          <input type="text" placeholder="Write recipe title..." />
-          <Link
-            href="/recipes/1"
-            className="text-center bg-gray-50 px-3 rounded-lg ml-2"
+          <input
+            className="bg-white px-4 rounded-2xl py-1"
+            type="text"
+            placeholder="Write recipe title..."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <button
+            onClick={handleUpload}
+            className="text-center bg-blue-600 text-white px-3 rounded-2xl ml-2 py-2 transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
           >
             Upload recipe
-          </Link>
+          </button>
         </div>
         <div className="flex justify-end">
-          <SearchByTags tags={tagsDummyData} displayText="Add tags" />
+          <AddTags ref={tagsRef} />
         </div>
       </div>
-      <div className="grid grid-cols-5">
-        {/* Alt nedover her endres senere. Dette er bare for MVP */}
-        <div className="col-span-2">
-          <h2 className=" text-2xl font-bold">Method:</h2>
-          <textarea placeholder="Write recipe method..." rows={30} cols={50} />
+      <div className="grid grid-cols-11">
+        <div className="col-span-5 mr-4">
+          <TextInputFields ref={methodRef} catagory="Method" />
         </div>
-        <div className="col-span-2">
-          <h2 className=" text-2xl font-bold">Ingredients:</h2>
-          <textarea
-            placeholder="Write recipe ingredients..."
-            rows={30}
-            cols={50}
-          />
+        <div className="col-span-3 mr-4">
+          <TextInputFields ref={ingredientsRef} catagory="Ingredients" />
         </div>
-        <div className="flex flex-col">
-          <Image
-            className="lg:h-52 md:h-48 sm:h-44 phone:h-40 object-cover mb-5"
-            width={320}
-            height={208}
-            src={"https://via.placeholder.com/320x208"}
-            alt={"Image placeholder"}
+        <div className="col-span-3 mr-4">
+          <AddImage ref={imageRef} />
+          <input
+            className="bg-white px-6 rounded-2xl w-full py-2 mb-4"
+            type="text"
+            placeholder="Write time requirement"
+            value={timeRequirement}
+            onChange={(e) => setTimeRequirement(e.target.value)}
           />
-          <input type="text" placeholder="Insert image URL..." />
-          <button className="text-center bg-gray-50 mb-4 px-3 rounded-lg mt-2">
-            Upload image
-          </button>
-          <div className="">
-            <h2 className=" text-2xl font-bold">Nutrition:</h2>
-            <textarea
-              placeholder="Write recipe nutritions..."
-              rows={15}
-              cols={32}
-            />
-          </div>
+          <TextInputFields ref={nutritionsRef} catagory="Nutritions" />
         </div>
       </div>
     </>

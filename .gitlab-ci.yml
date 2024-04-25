@@ -6,28 +6,40 @@ cache:
 
 lint:
   stage: .pre
-  script:
+  before_script:
     - cd matsmart
     - npm install
+  script:
     - npm run lint
 
 build:
   stage: build
-  script:
+  before_script:
     - cd matsmart
     - npm install
+  script:
     - npm run build
 
 prettier:
   stage: test
-  script:
+  before_script:
     - cd matsmart
     - npm install prettier
+  script:
     - npx prettier --check ./src
 
 typescript:
   stage: test
-  script:
+  before_script:
     - cd matsmart
-    - npm install typescript
+    - npm install
+  script:
     - npx tsc --noEmit
+
+unit_test:
+  stage: test
+  before_script:
+    - cd matsmart
+    - npm install
+  script:
+    - npm test

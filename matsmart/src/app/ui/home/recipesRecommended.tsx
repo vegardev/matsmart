@@ -1,9 +1,16 @@
+"use client";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { Recipe } from "@/src/app/backend/definitions";
 import Link from "next/link";
 
-export default async function RecommendedItems({
+/**
+ * RecommendedItems component.
+ * @param {Object} props - The props for the component.
+ * @param {Recipe[]} props.RecommendedItems - The recommended recipes based on the availability of their required ingredients.
+ * @returns The rendered RecommendedItems component.
+ */
+export default function RecommendedItems({
   RecommendedItems,
 }: {
   RecommendedItems: Recipe[];
@@ -23,7 +30,7 @@ export default async function RecommendedItems({
                 })}
               >
                 <div className="min-w-0">
-                  <Link href="/shoppinglist">
+                  <Link href={`/recipes/${item.recipe_id}`}>
                     <p className="normal-font">{item.title}</p>
                   </Link>
                 </div>

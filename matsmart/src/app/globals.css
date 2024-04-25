@@ -97,3 +97,33 @@ body {
   flex: 1;
   margin: 0 10px;
 }
+
+.ql-container {
+  resize: vertical;
+  overflow: auto;
+}
+
+.ql-editor {
+  min-height: 18em;
+}
+
+/* Width */
+.custom-scrollbar::-webkit-scrollbar {
+  border-radius: 0.5em;
+  width: 0.5em;
+}
+
+/* Track */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
