@@ -59,8 +59,8 @@ export function IngredientsCheck({
   const missingIngredients = ingredientsNeeded.filter(
     (ingredientNeeded) =>
       !ingredients.some(
-        (ingredient) => ingredient.item_name === ingredientNeeded.item_name,
-      ),
+        (ingredient) => ingredient.item_name === ingredientNeeded.item_name
+      )
   );
 
   const closestExpirationDate = findClosestExpirationDate();
@@ -120,7 +120,7 @@ export function MakeRecipeButton({
   }, []);
 
   // Calls this function if button is clicked
-  // It show visually that it is loading/making, makes the dish, and then reloads the page
+  // It show visually that it is loading/making the dish, makes the dish, and then reloads the page
   const handleMake = async () => {
     setIsMaking(true);
     await makeDish(recipe_id);
@@ -132,8 +132,8 @@ export function MakeRecipeButton({
   const missingIngredients = ingredientsNeeded.filter(
     (ingredientNeeded) =>
       !ingredients.some(
-        (ingredient) => ingredient.item_name === ingredientNeeded.item_name,
-      ),
+        (ingredient) => ingredient.item_name === ingredientNeeded.item_name
+      )
   );
 
   // If there are missing ingredients, don't render the button
