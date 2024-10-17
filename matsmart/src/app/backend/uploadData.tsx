@@ -141,9 +141,11 @@ export async function createRecipe(recipeContent: Recipe_CreateType) {
         });
       } else {
         // If the tag already exists, just insert it into the 'recipe_tags' table.
+        let tag_id_packet: RowDataPacket[] = tag_id as RowDataPacket[];
+
         await query({
-          query: "INSERT INTO recipe_tags (recipe_id, tag) VALUES (?, ?)",
-          values: [recipe_id_packet[0].recipe_id, tag_id],
+          query: "INSERT INTO recipe_tags (recipe_id, tag_id) VALUES (?, ?)",
+          values: [recipe_id_packet[0].recipe_id, tag_id_packet[0].tag_id],
         });
       }
     }

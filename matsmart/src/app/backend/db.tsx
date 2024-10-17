@@ -23,7 +23,7 @@ export async function query({
   });
 
   try {
-    const [results] = await dbconnection.execute(query, values);
+    const [results] = await dbconnection.query(query, values);
     dbconnection.end();
     return results;
   } catch (error) {
