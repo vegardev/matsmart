@@ -1,6 +1,9 @@
 # Getting Started with MatSmart
 
-[[_TOC_]]
+- [Getting Started with MatSmart](#getting-started-with-matsmart)
+  - [System Requirements](#system-requirements)
+  - [Installation](#installation)
+  - [Additional Notes](#additional-notes)
 
 ## System Requirements
 
@@ -20,6 +23,6 @@ To get started it is assumed that the MatSmart repository has been forked and is
 
 ## Additional Notes
 
-Refer to the [User Manual](https://gitlab.stud.idi.ntnu.no/idatt1005_2024_group4/idatt-1005-2024-group-4-project/-/wikis/System/User-Manual-for-MatSmart) for an in-depth explanation of [MatSmart](https://gitlab.stud.idi.ntnu.no/idatt1005_2024_group4/idatt-1005-2024-group-4-project/-/wikis/home).
+Refer to the [User Manual](https://github.com/vegardev/matsmart/wiki/User-Manual-for-MatSmart) for an in-depth explanation of [MatSmart](https://github.com/vegardev/matsmart/wiki).
 
 You are now good to go!
